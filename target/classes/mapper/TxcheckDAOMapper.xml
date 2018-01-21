@@ -1,0 +1,50 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="top.zzh.dao.TxcheckDAO">
+
+    <insert id="save" parameterType="txcheck">
+    <![CDATA[
+          insert into t_txcheck(txid, huid, isok, excute, date_time)
+          values(#{txid},#{huid},#{isok},#{excute},CURRENT_TIMESTAMP)
+        ]]>
+</insert>
+    <update id="update" parameterType="txcheck">
+        <![CDATA[
+        update t_txcheck
+        ]]>
+        <set>
+            <if test="query.isok!=null">
+                isok=#{query.isok},
+            </if>
+            <if test="query.excute!=null">
+                excute=#{query.excute},
+            </if>
+        </set>
+        where id=#{query.id}
+    </update>
+
+    <sql id="query_criteria">
+        <if test="query != null and query.money != null and query.money !='' ">
+            and  lg.money <![CDATA[<=]]> #{query.money}
+        </if>
+        <if test="query != null and query.rname != null and query.rname != ''">
+            and u.rname like concat('%', #{query.rname}, '%')
+        </if>
+    </sql>
+
+    <select id="listPagerCriteria" resultType="top.zzh.vo.TxCheckVO">
+        select u.rname,lg.bankcard,lg.banktype,lg.money,um.kymoney,tx.id,u.uid as txid,tx.huid,tx.isok,tx.excute,tx.date_time
+        from t_txcheck as tx ,t_logtx as lg,t_user as u,t_usermoney as um
+        where tx.txid =lg.id and lg.uid =u.uid and  lg.uid=um.uid and tx.isok=2
+        <include refid="query_criteria"/>
+        limit #{pager.beginIndex}, #{pager.pageSize}
+    </select>
+    
+    <select id="countCriteria" resultType="long">
+        select count(lg.id) from t_txcheck as tx ,t_logtx as lg,t_user as u,t_usermoney as um
+        where tx.txid =lg.id and lg.uid =u.uid and  lg.uid=um.uid and tx.isok=2
+        <include refid="query_criteria"/>
+    </select>
+</mapper>

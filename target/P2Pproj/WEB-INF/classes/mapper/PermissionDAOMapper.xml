@@ -1,0 +1,64 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="top.zzh.dao.PermissionDAO">
+
+    <resultMap id="permissionMap" type="permission"></resultMap>
+
+    <!--条件查询【权限描述】-->
+    <sql id="cash_query_criteria">
+        <if test="query != null and query.desZh != null and query.desZh != ''">
+            and des_zh like concat('%', #{query.desZh}, '%')
+        </if>
+    </sql>
+
+    <select id="permissionListPagerCriteria" resultType="permission">
+        select id,url,des_zh,status from t_permission where 1=1
+        <include refid="cash_query_criteria"/>
+        order by id DESC limit #{pager.beginIndex}, #{pager.pageSize}
+    </select>
+
+    <select id="permissionCountCriteria" resultType="long">
+        select count(id) from t_permission where 1=1
+        <include refid="cash_query_criteria"/>
+    </select>
+
+    <insert id="addPermission" parameterType="top.zzh.bean.Permission">
+        <![CDATA[
+          insert into t_permission(url, des_zh,status) values (#{url},#{desZh},1);
+        ]]>
+    </insert>
+
+    <update id="updatePermission" parameterType="permission">
+        <![CDATA[
+          update t_permission
+        ]]>
+        <set>
+            <if test="url != null and  url != ''">
+                url = #{url},
+            </if>
+            <if test="desZh != null and desZh != '' ">
+                des_zh = #{desZh},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <update id="updateStatus">
+        <![CDATA[
+            update t_permission set status = #{status} where id = #{permissionId}
+        ]]>
+    </update>
+
+    <select id="listByAccount" parameterType="string" resultMap="permissionMap">
+        <![CDATA[
+            select p.* from t_permission p where p.`status` = 1 and p.id in (
+                select rp.permission_id from t_role_permission rp where rp.role_id in (
+                    select hr.role_id from t_huser h,t_huser_role hr where h.huid = hr.huser_id and h.phone = #{phone}
+                )
+            )
+        ]]>
+    </select>
+
+</mapper>

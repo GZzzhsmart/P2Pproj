@@ -1,0 +1,108 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="top.zzh.dao.YdateDAO">
+    <select id="getByMaxDate" resultType="top.zzh.vo.YdateVo">
+        select yid,date,tmoney,mmoney,tuser,muser,ttzno,mtzno,tdkno,mdkno,tdkbno,mdkbno from t_ydate where date in (select max(date) from t_ydate);
+    </select>
+    <select id="getById" parameterType="long" resultType="top.zzh.vo.YdateVo">
+        select yid,date,tmoney,mmoney,tuser,muser,ttzno,mtzno,tdkno,mdkno,tdkbno,mdkbno from t_ydate where yid=#{yid}
+    </select>
+    <select id="listAll" resultType="top.zzh.vo.YdateVo">
+        select yid,date,tmoney,mmoney,tuser,muser,ttzno,mtzno,tdkno,mdkno,tdkbno,mdkbno from t_ydate order by date desc
+    </select>
+    <select id="selectIdAndDate" resultType="top.zzh.vo.YdateVo">
+        select yid,date from t_ydate order by date desc
+    </select>
+    <insert id="save" parameterType="yDate">
+        <![CDATA[
+			insert into t_ydate(date,tmoney,mmoney,tuser,muser,ttzno,mtzno,tdkno,mdkno,tdkbno,mdkbno)
+			 values(#{date},#{tmoney},#{mmoney},#{tuser},#{muser},#{ttzno},#{mtzno},#{tdkno},#{mdkno},#{tdkbno},#{mdkbno})
+		]]>
+    </insert>
+    <!--总投资额-->
+    <select id="countTzbMoney" resultType="java.math.BigDecimal">
+        select sum(money) from t_tzb
+    </select>
+    <!--月投资额-->
+    <select id="countMtzbMoney" resultType="java.math.BigDecimal">
+        select sum(money) from t_tzb where time between date_add(
+        date_add(
+            last_day(now()),
+            interval 1 day
+        ),
+        interval - 1 month
+    )
+    and last_day(NOW());
+    </select>
+    <!--总用户注册数-->
+    <select id="countUserUid" resultType="int">
+        select count(uid) from t_user
+    </select>
+    <!--月用户注册数-->
+    <select id="countMuserUid" resultType="int">
+        select count(uid) from t_user where create_time between date_add(
+        date_add(
+            last_day(now()),
+            interval 1 day
+        ),
+        interval - 1 month
+    )
+    and last_day(NOW());
+    </select>
+
+    <!--总投资人数-->
+    <select id="countTzbTzid" resultType="int">
+        select count(distinct uid) from t_tzb
+    </select>
+
+    <!--月投资人数-->
+    <select id="countMtzbTzid" resultType="int">
+        select count(distinct uid) from t_tzb where time between date_add(
+        date_add(
+            last_day(now()),
+            interval 1 day
+        ),
+        interval - 1 month
+    )
+    and last_day(NOW());
+    </select>
+
+
+    <!--总贷款人数-->
+    <select id="countBApplyConBaid" resultType="int">
+        select count(distinct uid) from t_borrowapply where state=1
+    </select>
+
+    <!--月贷款人数-->
+    <select id="countMbApplyConBaid" resultType="int">
+        select count(distinct uid) from t_borrowapply where state=1 and time between date_add(
+        date_add(
+            last_day(now()),
+            interval 1 day
+        ),
+        interval - 1 month
+    )
+    and last_day(NOW());
+    </select>
+
+
+    <!--总贷款笔数-->
+    <select id="countBApplyBaid" resultType="int">
+        select count(baid) from t_borrowapply where state=1
+    </select>
+
+    <!--月贷款笔数-->
+    <select id="countMbApplyBaid" resultType="int">
+        select count(baid) from t_borrowapply where state=1 and time between date_add(
+        date_add(
+        last_day(now()),
+        interval 1 day
+        ),
+        interval - 1 month
+        )
+        and last_day(NOW());
+    </select>
+
+</mapper>

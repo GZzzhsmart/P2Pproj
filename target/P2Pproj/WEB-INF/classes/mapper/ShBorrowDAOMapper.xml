@@ -1,0 +1,65 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="top.zzh.dao.ShBorrowDAO">
+
+
+    <update id="update" parameterType="top.zzh.bean.ShBorrow">
+        <![CDATA[
+          update t_shborrow set huid = #{huid},isok = 1,excute = #{excute},
+          date = CURRENT_TIME,baid = #{baid} where shid = #{shid}
+        ]]>
+    </update>
+
+    <delete id="removeById" parameterType="top.zzh.bean.ShBorrow">
+        <![CDATA[
+          delete from t_shborrow where shid = #{shid}
+        ]]>
+    </delete>
+
+    <!-- 审核理由，借款人-->
+    <sql id="cash_query_criteria">
+        <if test="query != null and query.excute != null and query.excute!=''">
+            and s.excute like concat('%', #{query.excute}, '%')
+        </if>
+        <if test="query != null and query.nickname != null and query.nickname!=''">
+            and nickname like concat('%', #{query.rname}, '%')
+        </if>
+    </sql>
+
+    <select id="listPager" resultType="top.zzh.vo.ShBorrowVO">
+        <![CDATA[
+           select s.shid,h.rname,s.isok,s.excute,s.date,b.rname as nickname from t_shborrow s,t_huser h,t_borrowapply b
+        where s.huid = h.huid and s.baid = b.baid
+            limit #{pager.beginIndex}, #{pager.pageSize}
+        ]]>
+    </select>
+
+    <select id="listPagerCriteria" resultType="top.zzh.vo.ShBorrowVO">
+        select s.shid,h.rname,s.isok,s.excute,s.date,b.rname as nickname from t_shborrow s,t_huser h,t_borrowapply b
+        where s.huid = h.huid and s.baid = b.baid
+        <include refid="cash_query_criteria"/>
+        limit #{pager.beginIndex}, #{pager.pageSize}
+    </select>
+
+    <select id="listAll" resultType="top.zzh.vo.ShBorrowVO">
+        <![CDATA[
+          select s.shid,h.rname,s.isok,s.excute,s.date,b.rname as nickname from t_shborrow s,t_huser h,t_borrowapply b
+        where s.huid = h.huid and s.baid = b.baid
+        ]]>
+    </select>
+
+    <select id="countCriteria" resultType="long">
+        <![CDATA[
+            select count(shid) from t_shborrow s,t_huser h,t_borrowapply b
+        where s.huid = h.huid and s.baid = b.baid
+        ]]>
+    </select>
+
+    <select id="count" resultType="top.zzh.vo.ShBorrowVO">
+        select count(shid) from t_shborrow
+    </select>
+
+
+</mapper>

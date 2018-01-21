@@ -1,0 +1,56 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="top.zzh.dao.NoticeDAO">
+
+    <select id="count" resultType="long">
+        <![CDATA[
+		select count(*) from t_notice
+		]]>
+    </select>
+
+    <insert id="save" parameterType="top.zzh.bean.Notice">
+        <![CDATA[
+          insert into t_notice(nid,content,title,date) values(#{nid},#{content},#{title},CURRENT_TIMESTAMP)
+        ]]>
+    </insert>
+
+    <update id="update" parameterType="top.zzh.bean.Notice">
+        <![CDATA[
+            update t_notice set content = #{content},title = #{title} where nid = #{nid}
+        ]]>
+    </update>
+
+
+
+    <delete id="removeById" parameterType="java.lang.Long">
+        <![CDATA[
+            delete from t_notice where nid = #{nid}
+        ]]>
+    </delete>
+
+    <select id="listPager" resultType="top.zzh.bean.Notice">
+        <![CDATA[
+        select * from t_notice limit #{pager.beginIndex}, #{pager.pageSize}
+    ]]>
+    </select>
+
+    <select id="listAll" resultType="top.zzh.bean.Notice">
+        <![CDATA[
+          select * from t_notice where 1=1
+        ]]>
+    </select>
+
+    <select id="getById" resultType="top.zzh.bean.Notice">
+    <![CDATA[
+        select * from t_notice where nid = #{nid}
+    ]]>
+    </select>
+
+    <select id="listNotice" resultType="top.zzh.vo.NoticeVo" >
+    <![CDATA[
+        select nid,title,content,date from t_notice  limit #{pageIndex},#{pageSize}
+    ]]>
+    </select>
+</mapper>

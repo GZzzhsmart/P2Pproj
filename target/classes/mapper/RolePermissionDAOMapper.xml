@@ -1,0 +1,53 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="top.zzh.dao.RolePermissionDAO">
+    
+    <resultMap id="roleMap" type="role"></resultMap>
+    <resultMap id="permissionMap" type="permission"></resultMap>
+
+    <select id="listRole" resultType="list" resultMap="roleMap">
+        <![CDATA[
+            select rid,rname from t_role where status = 1
+        ]]>
+    </select>
+
+    <select id="listRolePermission" resultType="list" resultMap="roleMap">
+        <![CDATA[
+            select p.id,p.des_zh from t_permission p ,t_role_permission rp where p.id = rp.permission_id;
+        ]]>
+    </select>
+
+    <select id="listPermission" resultType="list" resultMap="permissionMap">
+        <![CDATA[
+            select id,des_zh from t_permission where status = 1
+        ]]>
+    </select>
+
+
+    <delete id="deleteRolePermission">
+        <![CDATA[
+            delete from t_role_permission where role_id = #{roleId}
+        ]]>
+    </delete>
+
+
+    <insert id="saveRolePermission">
+        <![CDATA[
+              insert into t_role_permission(role_id, permission_id) values
+          ]]>
+        <foreach collection="permissionIdList" item="permissionId" separator=",">
+            (#{roleId},#{permissionId})
+        </foreach>
+    </insert>
+
+    <select id="initSelectedP" resultMap="permissionMap">
+        <![CDATA[
+            select p.id,p.des_zh from t_permission p,t_role_permission rp
+            where p.status = 1 and p.id = rp.permission_id and rp.role_id = #{roleId}
+        ]]>
+    </select>
+
+</mapper>
+

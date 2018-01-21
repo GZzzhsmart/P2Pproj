@@ -1,0 +1,112 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="top.zzh.dao.TzbDAO">
+
+    <insert id="save" parameterType="top.zzh.vo.TzbVO">
+        <![CDATA[
+          insert into t_tzb(uid,juid,money,`time`,nprofit,cpname,baid)
+          values(#{uid},#{juid},#{money},CURRENT_TIME,#{nprofit},#{cpname},#{baid})
+        ]]>
+    </insert>
+
+    <update id="update" parameterType="top.zzh.vo.TzbVO">
+        <![CDATA[
+         update t_tzb set money = #{money}
+           where tzid = #{tzid}
+        ]]>
+    </update>
+
+    <!-- 投资金额，投资产品-->
+    <sql id="cash_query_criteria">
+        <if test="query != null and query.money != null and query.money!=''">
+            and t.money like concat('%', #{query.money}, '%')
+        </if>
+        <if test="query != null and query.cpname != null and query.cpname!=''">
+            and t.cpname like concat('%', #{query.cpname}, '%')
+        </if>
+    </sql>
+
+    <select id="listPager" resultType="top.zzh.vo.TzbVO">
+        <![CDATA[
+            select u.uid,u.uname,b.rname,t.money,t.time,t.cpname,t.nprofit from t_tzb t,t_user u,t_borrowapply b
+          where t.uid = u.uid and b.baid = t.baid
+             limit #{pager.beginIndex}, #{pager.pageSize}
+        ]]>
+    </select>
+
+    <select id="listPagerCriteria" resultType="top.zzh.vo.TzbVO">
+        select t.juid,u.uid,u.uname,b.rname,t.money,t.time,t.cpname,t.nprofit
+        from t_tzb t,t_user u,t_borrowapply b
+        where t.uid = u.uid and b.baid = t.baid
+        <include refid="cash_query_criteria"/>
+          limit #{pager.beginIndex}, #{pager.pageSize}
+    </select>
+
+    <select id="countCriteria" resultType="long">
+        <![CDATA[
+            select count(tzid) from t_tzb t,t_user u,t_borrowapply b
+          where t.uid = u.uid and b.baid = t.baid
+        ]]>
+    </select>
+
+    <select id="count" resultType="long">
+        <![CDATA[
+          select count(tzid) from t_tzb
+        ]]>
+    </select>
+
+    <select id="countById" resultType="long">
+        <![CDATA[
+          select count(uid) from t_tzb where uid = #{id}
+        ]]>
+    </select>
+
+    <select id="listPagerById" resultType="top.zzh.vo.TzbVO">
+        <![CDATA[
+             select u.uname,b.rname,t.money,t.time,t.cpname,t.nprofit
+          from t_tzb t,t_user u,t_borrowapply b
+          where t.uid = u.uid and b.baid = t.baid and u.uid = #{id}
+        ]]>
+    </select>
+
+    <select id="listPagerByUId" resultType="top.zzh.vo.TzbVO">
+        <![CDATA[
+             select t.uid,t.juid,t.baid,u.uname,b.rname,t.money,t.time,t.cpname,t.nprofit
+          from t_tzb t,t_user u,t_borrowapply b
+          where t.uid = u.uid and b.baid = t.baid and u.uid = #{query.uid}
+          limit #{pager.beginIndex}, #{pager.pageSize}
+        ]]>
+    </select>
+
+    <select id="getCount" resultType="long">
+        <![CDATA[
+          select count(tzid)  from t_tzb where uid = #{query.uid}
+        ]]>
+    </select>
+
+    <select id="listAll" resultType="top.zzh.vo.TzbVO">
+        <![CDATA[
+               select b.uid,b.baid,u.uname,bd.money as mmoney,b.rname,t.money,t.time,t.cpname,t.nprofit
+          from t_tzb t,t_user u,t_borrowapply b,t_borrowdetail bd
+          where t.uid = u.uid and b.baid = t.baid and bd.baid = b.baid
+        ]]>
+    </select>
+
+    <select id="listTzb" resultType="top.zzh.vo.TzbVO">
+        <![CDATA[
+          select * from t_tzb  where uid = #{uid} and baid = #{baid}
+        ]]>
+    </select>
+
+    <select id="getById" resultType="long">
+        <![CDATA[
+           select ba.baid,ba.uid,bd.bdid,bd.sid,ba.rname,b.bzname,ba.term,ba.deadline,bd.fpic,bd.ypic,
+            bd.qpic,bd.tpic,bd.mpurpose,bd.hksource,bd.suggest,bd.xmdescrip,bd.guarantee,bd.money as mmoney,ba.money,um.zmoney,um.kymoney,um.tzmoney,bd.nprofit,s.way,bd.cpname
+            from t_borrowdetail bd,t_borrowapply ba,t_bz b,t_sway s,t_usermoney um,t_tzb t,t_user u
+            where t.uid = u.uid and ba.baid = t.baid and ba.bzid =b.bzid and  ba.baid = bd.baid and s.sid = bd.sid and ba.uid = um.uid and u.uid = #{uid}
+        ]]>
+    </select>
+
+</mapper>

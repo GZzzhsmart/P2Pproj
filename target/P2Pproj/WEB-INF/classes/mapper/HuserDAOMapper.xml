@@ -1,0 +1,58 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="top.zzh.dao.HuserDAO">
+
+    <resultMap id="huserMap" type="huser">
+
+    </resultMap>
+
+    <select id="getByNamePwd" resultMap="huserMap">
+        select huid,huname,state from t_huser
+        where phone=#{phone}
+        and hpwd =#{pwd}
+        and state = 1
+    </select>
+
+    <select id="getByPhone" resultMap="huserMap">
+        select huid,huname,state from t_huser
+        where phone=#{phone}
+    </select>
+
+
+
+    <insert id="register" parameterType="huser">
+
+        <![CDATA[
+           insert into t_huser (huname,phone,hpwd)  VALUES(#{huname},#{phone},#{hpwd})
+        ]]>
+    </insert>
+
+    <select id="getById" resultMap="huserMap">
+        select rname,sex,phone,huname,email from t_huser
+        where huid=#{huid}
+    </select>
+
+    <update id="update" parameterType="huser">
+        <![CDATA[
+          update t_huser set huname=#{huname},rname=#{rname},sex=#{sex},phone=#{phone},email=#{email}
+          where huid=#{huid}
+        ]]>
+    </update>
+
+    <select id="findPwd" resultType="string">
+        <![CDATA[
+          select hpwd from t_huser where huid=#{huid}
+        ]]>
+    </select>
+
+    <update id="updatePwd">
+
+      <![CDATA[
+        update t_huser set hpwd=#{hpwd} where huid=#{huid}
+       ]]>
+
+    </update>
+
+</mapper>

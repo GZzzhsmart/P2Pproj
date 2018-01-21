@@ -1,0 +1,131 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="top.zzh.dao.UserDAO">
+
+    <resultMap id="userMap" type="user">
+
+    </resultMap>
+
+    <select id="getByNamePwd" resultMap="userMap">
+        select uid,uname,state from t_user
+        where uname=#{name}
+        and upwd =#{pwd}
+    </select>
+
+    <select id="getByPhone" resultMap="userMap">
+        select uid,uname,state from t_user
+        where phone=#{phone}
+    </select>
+
+    <select id="getByUid" resultType="top.zzh.vo.UserVO">
+        <![CDATA[
+            select u.uid,um.kymoney from t_user u,t_usermoney um where u.uid = um.uid  and u.uid = #{uid}
+        ]]>
+    </select>
+
+    <insert id="register" parameterType="user">
+
+        <selectKey keyColumn="uid" keyProperty="uid" resultType="long" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        <![CDATA[
+           insert into t_user (uname,upwd,phone,tzm,tid,state,idtype,isvip)  VALUES(#{uname},#{upwd},#{phone},#{tzm},#{tid},1,'身份证',1)
+        ]]>
+    </insert>
+
+
+    <update id="saveHeader" parameterType="string">
+        <![CDATA[
+           update t_user set face=#{face} where uname=#{uname}
+        ]]>
+    </update>
+
+    <select id="getByface" resultMap="userMap">
+        select uid,uname,face from t_user
+        where uname=#{uname}
+    </select>
+
+
+    <update id="updateZpwd" parameterType="string">
+        <![CDATA[
+           update t_user set zpwd=#{zpwd} where uname=#{uname}
+        ]]>
+    </update>
+
+    <select id="getByZpwd" resultType="string">
+        select zpwd from t_user
+        where uname=#{uname}
+    </select>
+
+
+    <select id="getById" resultMap="userMap">
+        select uname,upwd,phone,tzm,idtype,zpwd,idno,email,rname,face,sex,isvip,create_time from t_user
+        where uid=#{uid}
+    </select>
+
+    <update id="update" parameterType="user">
+        <![CDATA[
+           update t_user set phone=#{phone},idno=#{idno},email=#{email},
+            rname=#{rname},sex=#{sex}  where uname=#{uname}
+        ]]>
+    </update>
+    <update id="updatepwd">
+        <![CDATA[
+           update t_user set zpwd=#{zpwd}  where uid=#{uid}
+        ]]>
+    </update>
+
+    <update id="updateUpwd">
+        <![CDATA[
+           update t_user set upwd=#{upwd}  where uid=#{uid}
+        ]]>
+    </update>
+
+
+    <sql id="userQuery_pager_common">
+        <if test="query!=null and query.uname!=null and query.uname!=''">
+            and uname like concat('%',#{query.uname},'%')
+        </if>
+        <if test="query!=null and query.state!=null and query.state!=''">
+            and state like concat('%',#{query.state},'%')
+        </if>
+    </sql>
+
+    <select id="listPagerCriteria" resultType="top.zzh.query.UserQuery">
+        <![CDATA[
+         select uid,uname,face,rname,email,sex,isvip,state,create_time  from t_user where 1=1
+        ]]>
+        <include refid="userQuery_pager_common"/>
+        limit #{pager.beginIndex},#{pager.pageSize}
+    </select>
+
+
+    <select id="countCriteria" resultType="long">
+        <![CDATA[
+          select count(uid) from t_user  where  1=1
+        ]]>
+        <include refid="userQuery_pager_common"/>
+    </select>
+
+    <select id="count" resultType="long">
+        <![CDATA[
+          select count(uid) from t_user
+        ]]>
+    </select>
+
+    <update id="updateState">
+        <![CDATA[
+          update t_user set state=#{state} where uid=#{uid}
+        ]]>
+    </update>
+
+    <update id="resettingUpwd">
+        <![CDATA[
+           update t_user set upwd=#{upwd}  where phone=#{phone}
+        ]]>
+    </update>
+
+
+</mapper>

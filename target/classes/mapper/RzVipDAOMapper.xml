@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.zzh.dao.RzVipDAO">
+
+    <resultMap id="rzvipMap" type="rzvip">
+
+    </resultMap>
+
+
+    <insert id="save" parameterType="rzvip">
+        <![CDATA[
+          insert into t_rzvip(uid,xl,ism,bschool,addr,work,age)
+          VALUES (#{uid},#{xl},#{ism},#{bschool},#{addr},#{work},#{age});
+        ]]>
+    </insert>
+
+
+
+    <select id="getById" resultMap="rzvipMap">
+        <![CDATA[
+          select rid,uid,xl,ism,bschool,addr,age,work from t_rzvip where uid=#{uid}
+        ]]>
+    </select>
+
+    <update id="update" parameterType="rzvip">
+        <![CDATA[
+          update t_rzvip set xl=#{xl},ism=#{ism},bschool=#{bschool},addr=#{addr},
+          work=#{work},age=#{age} where uid=#{uid}
+        ]]>
+    </update>
+
+
+    <sql id="rzvipQuery_pager_common">
+        <if test="query!=null and query.uname!=null and query.uname!=''">
+            and u.uname like concat('%',#{query.uname},'%')
+        </if>
+        <if test="query!=null and query.xl!=null and query.xl!=''">
+            and r.xl like concat('%',#{query.xl},'%')
+        </if>
+    </sql>
+
+    <select id="listPagerCriteria" resultType="top.zzh.query.RzvipQuery">
+        <![CDATA[
+         select rc.isok,rc.huid,r.rid,r.uid,u.uname,r.xl,r.ism,r.bschool,r.addr,r.work,r.age from t_user u,t_rzvip r,t_rzvipcheck rc where u.uid=r.uid and rc.uid=r.uid
+        ]]>
+        <include refid="rzvipQuery_pager_common"/>
+        limit #{pager.beginIndex},#{pager.pageSize}
+    </select>
+
+
+    <select id="countCriteria" resultType="long">
+        <![CDATA[
+          select count(rc.uid) from t_user u,t_rzvip r,t_rzvipcheck rc where u.uid=r.uid and rc.uid=r.uid
+        ]]>
+        <include refid="rzvipQuery_pager_common"/>
+    </select>
+
+
+    <select id="findDetails" resultType="top.zzh.query.RzvipDetails">
+        <![CDATA[
+        select u.uname,u.isvip,u.phone,u.idno,u.email,u.rname,u.face,u.state,u.sex from
+        t_user u,t_rzvip r,t_rzvipcheck rc where u.uid=r.uid and rc.uid=r.uid  and  r.uid=#{uid};
+        ]]>
+    </select>
+
+
+</mapper>

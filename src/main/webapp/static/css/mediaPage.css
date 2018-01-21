@@ -1,0 +1,13 @@
+.a_rcon{ width: 850px; margin-left: 70px; float: left ; margin-top: 0px}
+.a_rcontext{ border: 1px solid #e0e0e0; margin-top: 0px; margin-bottom: 150px; }
+/*公告*/
+.gg_news .gg_newstitle{ width:848px; height:100px; margin:0 auto 15px; background:#f8f8f8; text-align:center; padding-top:30px;}
+.gg_news{}
+.gg_news p{ line-height: 26px;font-size: 15px;padding: 0 40px;font-family: "微软雅黑";}
+.gg_news .gg_newstitle p{ font-size:24px; line-height:38px; color:#333; margin:0; padding:0 40px;}
+.gg_news .gg_newstitle b{ font-size:16px; line-height:28px; color:#999; }
+.gg_news .fanhui{ border-top:1px solid #e5e5e5; width:100%;  margin-top:50px;margin-bottom: 30px;}
+.gg_news .fanhui a:hover{border-radius:3px;color: blue;}
+
+
+

@@ -1,0 +1,54 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="top.zzh.dao.JklxDAO">
+
+    <select id="count" resultType="long">
+        <![CDATA[
+		select count(*) from t_jklx
+		]]>
+    </select>
+
+    <insert id="save" parameterType="top.zzh.bean.Jklx">
+        <![CDATA[
+          insert into t_jklx(lxid,lxname,state) values(#{lxid},#{lxname},0)
+        ]]>
+    </insert>
+
+    <update id="update" parameterType="top.zzh.bean.Jklx">
+        <![CDATA[
+            update t_jklx set lxname = #{lxname},state = #{state} where lxid = #{lxid}
+        ]]>
+    </update>
+
+    <update id="updateState" parameterType="top.zzh.bean.Jklx">
+        <![CDATA[
+            update t_jklx set state = #{state} where lxid = #{lxid}
+        ]]>
+    </update>
+
+    <delete id="removeById" parameterType="java.lang.Long">
+        <![CDATA[
+            delete from t_jklx where lxid = #{lxid}
+        ]]>
+    </delete>
+
+    <select id="listPager" resultType="top.zzh.bean.Jklx">
+        <![CDATA[
+        select * from t_jklx limit #{pager.beginIndex}, #{pager.pageSize}
+    ]]>
+    </select>
+
+    <select id="listAll" resultType="top.zzh.bean.Jklx">
+        <![CDATA[
+          select * from t_jklx
+        ]]>
+    </select>
+
+    <select id="getById" resultType="top.zzh.bean.Jklx" >
+        <![CDATA[
+        select * from t_jklx where lxid = #{lxid}
+    ]]>
+    </select>
+</mapper>

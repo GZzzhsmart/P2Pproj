@@ -1,0 +1,122 @@
+<!--债权列表广告 关于我们广告-->
+.credit-ad{ float:left; width:1000px; height:80px; overflow:hidden;}
+/*个人中心左侧导航*/
+.personal .personal-left{ float:left; width:250px; margin-top:10px;  margin-right:10px; background:#fff; padding-top:15px; color:#4a4a4a;}
+.personal .personal-left ul{ margin-bottom:60px;}
+.personal .personal-left li{ min-height:44px; width:250px; line-height:44px; font-size:16px; overflow:visible; margin-bottom:1px;}
+.personal .personal-left li span{ display:block; width:250px; font-size:16px;transition:background 0.2s ease-in-out;}
+.personal .personal-left a{display:block; width:210px; color:#4a4a4a; padding:0 20px;}
+
+/*.pleft-cur当前页标题样式  .on鼠标悬浮  无为默认样式*/
+.personal .personal-left li.pleft-cur span,.personal .personal-left li.on span{ display:block;width:250px; line-height:44px; font-size:16px; color:#fff; background-color:#0caffe;}
+.personal .personal-left li.pleft-cur span a,.personal-left li.on span a{ color:#fff;}
+.personal .personal-left li .personal-sub{margin-top:0; display:block; font-size:14px;}
+.personal .personal-left li .personal-sub dt{ margin-top:1px;}
+.personal .personal-left li .personal-sub dt a{padding-left:50px; width:100px; }
+
+/*.on 账户总览中列表dt的当前样式*/
+.personal .personal-left dt:hover,.personal .personal-left dt.on{ display:block;line-height:44px; font-size:14px; color:#fff;  background-color:#0caffe; width:170px; }
+.personal .personal-left dt:hover a,.personal .personal-left dt.on a{color:#fff; }
+
+/*.pleft-cur当前页标题样式  .on鼠标悬浮  无为默认样式*/
+.personal .personal-left li.pleft-cur span,.personal .personal-left li.on span{ display:block;width:250px; line-height:44px; font-size:16px; color:#fff; background-color:#0caffe;}
+.personal .personal-left li.pleft-cur span a,.personal-left li.on span a{ color:#fff;}
+
+
+/*个人中心*/
+.personal{}
+.personal .dot{ float:left; margin-top:13px; background:url(../images/grzx.png) no-repeat;
+    -webkit-transition: 0.3s -webkit-transform ease;
+    -o-transition: 0.3s -o-transform ease;
+    -moz-transition: 0.3s -moz-transform ease;
+    -ms-transition: 0.3s -ms-transform ease;
+}
+.personal .dot01{ background-position:0 0; width:19px; height:16px; margin-right:11px;}/*总览*/
+.personal .dot02{ background-position:0 -75px; width:17px; height:15px; margin-right:13px;}/*开通第三方*/
+.personal .dot03{ background-position:0 -25px; width:17px; height:17px; margin-right:13px;}/*充值*/
+.personal .dot04{ background-position:-80px -50px; width:17px; height:17px; margin-right:13px;}/*提现*/
+.personal .dot05{ background-position:0 -50px; width:17px; height:16px; margin-right:13px;}/*银行卡管理*/
+
+.personal .dot07{ background-position:-80px 0; width:17px; height:18px; margin-right:13px;}/*自动投标*/
+.personal .dot08{ background-position:0 -96px; width:17px; height:16px; margin-right:13px;}/*系统消息*/
+.personal .dot09{ background-position:0 -120px; width:17px; height:17px; margin-right:13px;}/*账户设置*/
+.personal .dot010{ background-position:-80px -90px; width:17px; height:17px; margin-right:13px;}/*债权转让*/
+
+.personal .dot06{ background-position:-80px -130px; width:17px; height:17px; margin-right:13px;}/*我的红包*/
+
+/*选中时的dot图标*/
+.personal .dot1{ background-position:-40px 0; width:19px; height:16px; margin-right:11px;
+    -webkit-transform:rotate(360deg);
+    -o-transform:rotate(360deg);
+    -moz-transform:rotate(360deg);
+    -ms-transform:rotate(360deg);
+}
+.personal .dot2{ background-position:-40px -75px; width:17px; height:17px; margin-right:13px;
+    -webkit-transform:rotate(360deg);
+    -o-transform:rotate(360deg);
+    -moz-transform:rotate(360deg);
+    -ms-transform:rotate(360deg);
+}
+.personal .dot3{ background-position:-40px -25px; width:17px; height:17px; margin-right:13px;
+    -webkit-transform:rotate(360deg);
+    -o-transform:rotate(360deg);
+    -moz-transform:rotate(360deg);
+    -ms-transform:rotate(360deg);
+}
+.personal .dot4{ background-position:-80px -70px; width:17px; height:17px; margin-right:13px;
+    -webkit-transform:rotate(360deg);
+    -o-transform:rotate(360deg);
+    -moz-transform:rotate(360deg);
+    -ms-transform:rotate(360deg);
+}
+.personal .dot5{ background-position:-40px -50px; width:17px; height:16px; margin-right:13px;
+    -webkit-transform:rotate(360deg);
+    -o-transform:rotate(360deg);
+    -moz-transform:rotate(360deg);
+    -ms-transform:rotate(360deg);
+}
+.personal .dot7{ background-position:-80px -25px; width:17px; height:18px; margin-right:13px;
+    -webkit-transform:rotate(360deg);
+    -o-transform:rotate(360deg);
+    -moz-transform:rotate(360deg);
+    -ms-transform:rotate(360deg);
+}
+
+.personal .dot8{ background-position:-40px -96px; width:17px; height:16px; margin-right:13px;
+    -webkit-transform:rotate(360deg);
+    -o-transform:rotate(360deg);
+    -moz-transform:rotate(360deg);
+    -ms-transform:rotate(360deg);
+}
+.personal .dot9{ background-position:-40px -120px; width:17px; height:17px; margin-right:13px;
+    -webkit-transform:rotate(360deg);
+    -o-transform:rotate(360deg);
+    -moz-transform:rotate(360deg);
+    -ms-transform:rotate(360deg);
+}
+.personal .dot10{ background-position:-80px -110px; width:17px; height:17px; margin-right:13px;
+    -webkit-transform:rotate(360deg);
+    -o-transform:rotate(360deg);
+    -moz-transform:rotate(360deg);
+    -ms-transform:rotate(360deg);
+}
+.personal .dot6{ background-position:-80px -150px; width:17px; height:17px; margin-right:13px;
+    -webkit-transform:rotate(360deg);
+    -o-transform:rotate(360deg);
+    -moz-transform:rotate(360deg);
+    -ms-transform:rotate(360deg);
+}
+
+/*个人中心右侧*/
+.personal-main{ float:left; width:940px; height:auto; margin-top:10px; color:#848484}
+/*个人中心标题*/
+.personal-zhsz h3,.personal-xtxx h3,.personal-pay h3,.personal-back h3,.personal-investnote h3,.personal-deposit h3,.personal-money h3,.personal-wdhb h3,.personal-yqjl h3,.auto-tit h3{ position:relative;font-size:18px; color:#333; border-bottom:1px solid rgba(232, 213, 250, 0.01); width:880px; padding-top:25px; height:35px;}  /* 20150425 */
+.personal-zhsz h3 i,.personal-xtxx h3 i,.personal-pay h3 i,.personal-back h3 i,.personal-investnote h3 i,.personal-deposit h3 i,.personal-money h3 i,.personal-wdhb h3 i,.personal-yqjl h3 i,.auto-tit h3 i{ position:absolute; left:0; bottom:-1px; border-bottom:2px solid #28A7E1; padding-bottom:10px;} /* 20150425 */
+
+
+
+
+
+
+
+

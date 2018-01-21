@@ -1,0 +1,57 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="top.zzh.dao.BankCardDAO">
+
+    <select id="countCriteria" resultType="long">
+        <![CDATA[
+		select count(*) from t_bankcard b, t_user u
+		where u.uid = b.uid
+		]]>
+    </select>
+    <select id="countDank" resultType="long">
+        <![CDATA[
+		select count(*) from t_bankcard
+		where uid = #{uid}
+		]]>
+    </select>
+
+    <select id="getDank" resultType="string">
+        <![CDATA[
+		select cardno from t_bankcard
+		where uid = #{uid}
+		]]>
+    </select>
+
+    <select id="getType" resultType="string">
+        <![CDATA[
+		select type from t_bankcard
+		where uid = #{uid}
+		]]>
+    </select>
+
+    <insert id="save" parameterType="top.zzh.bean.BankCard">
+        <![CDATA[
+          insert into t_bankcard(uid,cardno,rname,idno,type,state,date) values(#{uid},#{cardno},#{rname},#{idno},#{type},#{state},CURRENT_TIME )
+        ]]>
+    </insert>
+
+    <update id="update" parameterType="top.zzh.bean.BankCard">
+        <![CDATA[
+            update t_bankcard set cardno = #{cardno},rname = #{rname},idno = #{idno} and type = #{type} where bcid = #{bcid}
+        ]]>
+    </update>
+
+    <update id="updateState" parameterType="top.zzh.bean.BankCard">
+        <![CDATA[
+            update t_bankcard set state = #{state} where bcid = #{bcid}
+        ]]>
+    </update>
+
+    <delete id="removeById" parameterType="java.lang.Long">
+        <![CDATA[
+            delete from t_bankcard where uid = #{bcid}
+        ]]>
+    </delete>
+</mapper>

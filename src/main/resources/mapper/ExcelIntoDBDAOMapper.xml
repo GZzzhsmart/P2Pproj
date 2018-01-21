@@ -1,0 +1,15 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="top.zzh.dao.ExcelIntoDAO">
+
+    <insert id="intoDB">
+        <![CDATA[
+          insert into t_permission(id,url,des_zh,status) values
+        ]]>
+        <foreach collection ="permissionList" item="permission" separator =",">
+           (#{permission.id},#{permission.url},#{permission.desZh},1)
+        </foreach >
+    </insert>
+</mapper>

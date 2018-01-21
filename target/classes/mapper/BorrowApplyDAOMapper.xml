@@ -1,0 +1,228 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="top.zzh.dao.BorrowApplyDAO">
+
+    <delete id="removeById" parameterType="top.zzh.bean.BorrowApply">
+        <![CDATA[
+          delete from t_borrowapply where baid = #{baid}
+        ]]>
+    </delete>
+
+    <insert id="save" parameterType="top.zzh.bean.BorrowApply">
+        <selectKey keyColumn="baid" keyProperty="baid" resultType="long" order="AFTER">
+            SELECT LAST_INSERT_ID();
+        </selectKey>
+        <![CDATA[
+          insert into t_borrowapply(rname,money,uid,bzid,state,time,lxid,term,deadline,reason,huid)
+          values(#{rname},#{money},#{uid},#{bzid},1,CURRENT_TIME ,#{lxid},#{term},#{deadline},#{reason},#{huid})
+        ]]>
+    </insert>
+
+    <update id="update" parameterType="top.zzh.bean.BorrowApply">
+        <![CDATA[
+            update t_borrowapply set money = #{money},bzid = #{bzid},state = 1,lxid = #{lxid},
+            term = #{term},deadline = #{deadline},reason = #{reason} where baid = #{baid}
+        ]]>
+    </update>
+
+    <!-- 审核-->
+    <update id="updateState" parameterType="top.zzh.bean.BorrowApply">
+        <![CDATA[
+           update t_borrowapply set state = #{state},time = CURRENT_TIME,reason = #{reason},huid = #{huid} where baid = #{baid}
+        ]]>
+    </update>
+
+    <!-- 真实姓名，申请借款金额-->
+    <sql id="cash_query_criteria">
+        <if test="query != null and query.rname != null and query.rname!=''">
+            and ba.rname like concat('%', #{query.rname}, '%')
+        </if>
+        <if test="query != null and query.money != null and query.money!=''">
+            and ba.money like concat('%', #{query.money}, '%')
+        </if>
+    </sql>
+
+    <select id="listPager" resultType="top.zzh.bean.BorrowApply">
+        <![CDATA[
+         select ba.rname,ba.reason,h.rname as username,ba.time,ba.state,bd.bdid from
+        t_borrowapply ba,t_user u,t_huser h,t_borrowdetail bd
+        where ba.uid = u.uid and ba.huid = h.huid and bd.baid = ba.baid
+        limit #{pager.beginIndex}, #{pager.pageSize}
+         ]]>
+    </select>
+
+    <select id="listPagerCriteria" resultType="top.zzh.vo.BorrowDetailVO">
+        select ba.baid,ba.bzid,u.uid,ba.rname,ba.money,bd.cpname,ba.reason,u.uname,ba.time,ba.state,b.bzname,ba.term,j.lxname,ba.deadline from
+        t_borrowapply ba,t_user u,t_bz b,t_jklx j,t_huser h,t_borrowdetail bd
+        where ba.baid = bd.baid and ba.uid = u.uid and ba.bzid = b.bzid and j.lxid = ba.lxid and ba.huid = h.huid order by ba.state = 0
+        <include refid="cash_query_criteria"/>
+        limit #{pager.beginIndex}, #{pager.pageSize}
+    </select>
+
+    <select id="listAll" resultType="top.zzh.vo.BorrowDetailVO">
+        <![CDATA[
+             select ba.baid,ba.bzid,ba.rname,bd.money as mmoney,ba.money,um.zmoney,um.kymoney,um.tzmoney,u.uname,ba.time,ba.state,b.bzname,ba.term,j.lxname,s.way,ba.deadline,bd.nprofit,bd.cpname from
+            t_borrowapply ba,t_user u,t_bz b,t_jklx j,t_huser h,t_borrowdetail bd,t_sway s,t_usermoney um
+            where ba.uid = u.uid and ba.bzid = b.bzid and j.lxid = ba.lxid
+            and bd.sid = s.sid and ba.baid = bd.baid and ba.huid = h.huid
+            and ba.uid = um.uid and ba.state = 0
+        ]]>
+    </select>
+
+    <select id="souye1" resultType="top.zzh.vo.BorrowDetailVO">
+        <![CDATA[
+              select ba.baid,ba.bzid,ba.rname,bd.money as mmoney,ba.money,u.uname,ba.time,ba.state,b.bzname,ba.term,j.lxname,s.way,ba.deadline,bd.nprofit,bd.cpname from
+        t_borrowapply ba,t_user u,t_bz b,t_jklx j,t_huser h,t_borrowdetail bd,t_sway s,t_usermoney um
+        where ba.uid = u.uid and ba.bzid = b.bzid and j.lxid = ba.lxid
+				and bd.sid = s.sid and ba.baid = bd.baid and ba.huid = h.huid
+				and ba.uid = um.uid and ba.state = 0 and b.bzname = '新手标' and ba.baid = 23
+        ]]>
+    </select>
+
+
+    <select id="souye2" resultType="top.zzh.vo.BorrowDetailVO">
+        <![CDATA[
+              select ba.baid,ba.bzid,ba.rname,bd.money as mmoney,ba.money,u.uname,ba.time,ba.state,b.bzname,ba.term,j.lxname,s.way,ba.deadline,bd.nprofit,bd.cpname from
+        t_borrowapply ba,t_user u,t_bz b,t_jklx j,t_huser h,t_borrowdetail bd,t_sway s,t_usermoney um
+        where ba.uid = u.uid and ba.bzid = b.bzid and j.lxid = ba.lxid
+				and bd.sid = s.sid and ba.baid = bd.baid and ba.huid = h.huid
+				and ba.uid = um.uid and ba.state = 0 and b.bzname = '普金宝' and ba.baid = 2
+        ]]>
+    </select>
+
+    <select id="souye3" resultType="top.zzh.vo.BorrowDetailVO">
+        <![CDATA[
+            select ba.baid,ba.bzid,ba.rname,bd.money as mmoney,ba.money,u.uname,ba.time,ba.state,b.bzname,ba.term,j.lxname,s.way,ba.deadline,bd.nprofit,bd.cpname from
+        t_borrowapply ba,t_user u,t_bz b,t_jklx j,t_huser h,t_borrowdetail bd,t_sway s,t_usermoney um
+        where ba.uid = u.uid and ba.bzid = b.bzid and j.lxid = ba.lxid
+				and bd.sid = s.sid and ba.baid = bd.baid and h.huid = ba.huid
+				and ba.uid = um.uid and ba.state = 0 and b.bzname = '多金宝' and ba.baid = 1
+        ]]>
+    </select>
+
+    <select id="souye4" resultType="top.zzh.vo.BorrowDetailVO">
+        <![CDATA[
+             select ba.baid,ba.bzid,ba.rname,bd.money as mmoney,ba.money,u.uname,ba.time,ba.state,b.bzname,ba.term,j.lxname,s.way,ba.deadline,bd.nprofit,bd.cpname from
+        t_borrowapply ba,t_user u,t_bz b,t_jklx j,t_huser h,t_borrowdetail bd,t_sway s,t_usermoney um
+        where ba.uid = u.uid and ba.bzid = b.bzid and j.lxid = ba.lxid
+				and bd.sid = s.sid and ba.baid = bd.baid and h.huid = ba.huid
+				and ba.uid = um.uid and ba.state = 0 and b.bzname = '恒金宝' and ba.baid = 3
+        ]]>
+    </select>
+
+    <!--前台投资列表搜索,项目期限，年化收益，标种名称 -->
+    <sql id="search">
+        <if test="query != null and query.term ==1 and query.term!=''">
+            and ba.term BETWEEN 1 and 3
+        </if>
+        <if test="query != null and query.term ==2 and query.term!=''">
+            and ba.term BETWEEN 3 and 6
+        </if>
+        <if test="query != null and query.term ==3 and query.term!=''">
+            and ba.term BETWEEN 6 and 9
+        </if>
+        <if test="query != null and query.term ==4 and query.term!=''">
+            and ba.term  &gt; 9
+        </if>
+        <if test="query != null and query.nprofit ==1 and query.nprofit!=''">
+            and bd.nprofit  &lt;= 10
+        </if>
+        <if test="query != null and query.nprofit ==2 and query.nprofit!=''">
+            and bd.nprofit BETWEEN 10 and 15
+        </if>
+        <if test="query != null and query.nprofit ==3 and query.nprofit!=''">
+            and bd.nprofit BETWEEN 15 and 25
+        </if>
+        <if test="query != null and query.nprofit ==4 and query.nprofit!=''">
+            and bd.nprofit &gt; 25
+        </if>
+        <if test="query != null and query.bzname == 3 and query.bzname!=''">
+            and b.bzname ='多金宝'
+        </if>
+        <if test="query != null and query.bzname == 4 and query.bzname!=''">
+            and b.bzname ='普金宝'
+        </if>
+        <if test="query != null and query.bzname == 5 and query.bzname!=''">
+            and b.bzname ='恒金宝'
+        </if>
+        <if test="query != null and query.bzname == 6 and query.bzname!=''">
+            and b.bzname ='新手标'
+        </if>
+    </sql>
+
+    <!-- 显示投资列表+分页-->
+    <select id="listPagerByUId" resultType="top.zzh.vo.BorrowDetailVO">
+        select ba.baid,ba.bzid,ba.rname,bd.money as mmoney,ba.money,um.zmoney,um.kymoney,um.tzmoney,u.uname,ba.time,ba.state,b.bzname,ba.term,j.lxname,s.way,ba.deadline,bd.nprofit,bd.cpname
+         from t_borrowapply ba,t_user u,t_bz b,t_jklx j,t_huser h,t_borrowdetail bd,t_sway s,t_usermoney um
+        where ba.uid = u.uid and ba.bzid = b.bzid and j.lxid = ba.lxid
+        and bd.sid = s.sid and ba.baid = bd.baid and ba.huid = h.huid
+        and ba.uid = um.uid and ba.state = 0
+        <include refid="search"/>
+     limit #{pager.beginIndex}, #{pager.pageSize}
+    </select>
+
+    <select id="getCount" resultType="long">
+          select count(ba.baid)  from t_borrowapply ba,t_user u,t_bz b,t_jklx j,t_huser h,t_borrowdetail bd,t_sway s,t_usermoney um
+            where ba.uid = u.uid and ba.bzid = b.bzid and j.lxid = ba.lxid
+            and bd.sid = s.sid and ba.baid = bd.baid and ba.huid = h.huid
+            and ba.uid = um.uid and ba.state = 0
+        <include refid="search"/>
+    </select>
+
+    <select id="countCriteria" resultType="long">
+        <![CDATA[
+            select count(baid) from t_borrowapply ba,t_user u,t_bz b
+        where ba.uid = u.uid and ba.bzid = b.bzid
+        ]]>
+    </select>
+
+    <select id="count" resultType="long">
+        select count(baid) from t_borrowapply ba,t_user u,t_huser h
+        where ba.uid = u.uid and ba.huid = h.huid
+    </select>
+
+    <select id="getById" resultType="top.zzh.vo.BorrowDetailVO">
+
+        <![CDATA[
+            select ba.baid,u.uid,ba.bzid,ba.lxid,bd.sid,ba.rname,ba.money,ba.term,ba.state,j.lxname,b.bzname,
+            bd.fpic,bd.ypic,bd.qpic,bd.tpic,bd.bdid,bd.mpurpose,bd.hksource,bd.nprofit,
+            s.way,bd.suggest,bd.xmdescrip,bd.guarantee from
+            t_borrowapply ba,t_user u,t_borrowdetail bd,t_jklx j,t_sway s,t_bz b
+            where ba.uid = u.uid  and bd.baid = ba.baid and ba.baid = bd.baid and
+            j.lxid = ba.lxid  and ba.bzid = b.bzid and bd.sid = s.sid and  ba.baid = #{uid}
+        ]]>
+    </select>
+
+    <select id="listPagerById" resultType="top.zzh.bean.BorrowApply">
+        <![CDATA[
+            select ba.rname,ba.reason,h.rname as username,ba.money,j.lxname,ba.time,ba.state,bd.bdid from
+        t_borrowapply ba,t_user u,t_huser h,t_borrowdetail bd,t_jklx j
+        where ba.uid = u.uid and ba.huid = h.huid and bd.baid = ba.baid and j.lxid = ba.lxid and u.uid = #{id}
+          limit #{pager.beginIndex}, #{pager.pageSize}
+        ]]>
+    </select>
+
+    <select id="countById" resultType="long">
+        select count(uid) from
+        t_borrowapply where  uid=#{id}
+    </select>
+
+    <select id="shResult" resultType="top.zzh.vo.Borrow">
+        <![CDATA[
+          select bp.baid,b.bzname,bp.money,bi.cpname,bi.sid,bp.state  from
+          t_borrowapply as bp,t_borrowdetail as bi,t_bz as b where bp.baid=bi.baid and bp.bzid=b.bzid and bp.uid = #{uid}
+           limit #{pager.beginIndex}, #{pager.pageSize}
+        ]]>
+    </select>
+
+    <select id="shCount" resultType="long">
+          <![CDATA[
+           select count(bp.baid)from
+           t_borrowapply as bp,t_borrowdetail as bi,t_bz as b where bp.baid=bi.baid and bp.bzid=b.bzid and bp.uid = #{uid}
+        ]]>
+    </select>
+
+
+</mapper>

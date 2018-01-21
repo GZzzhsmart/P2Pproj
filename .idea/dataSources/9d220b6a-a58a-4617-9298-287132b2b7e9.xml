@@ -1,0 +1,1813 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="p2p_2@192.168.3.105">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.2">
+    <root id="1"/>
+    <schema id="2" parent="1" name="p2p_2">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="information_schema"/>
+    <schema id="4" parent="1" name="mysql"/>
+    <schema id="5" parent="1" name="p2p_1"/>
+    <schema id="6" parent="1" name="performance_schema"/>
+    <schema id="7" parent="1" name="sakila"/>
+    <schema id="8" parent="1" name="world"/>
+    <table id="9" parent="2" name="t_bank"/>
+    <table id="10" parent="2" name="t_bankcard"/>
+    <table id="11" parent="2" name="t_borrowapply"/>
+    <table id="12" parent="2" name="t_borrowdetail"/>
+    <table id="13" parent="2" name="t_bz"/>
+    <table id="14" parent="2" name="t_dxmodel"/>
+    <table id="15" parent="2" name="t_dynamic"/>
+    <table id="16" parent="2" name="t_friend"/>
+    <table id="17" parent="2" name="t_hkb"/>
+    <table id="18" parent="2" name="t_home"/>
+    <table id="19" parent="2" name="t_huser"/>
+    <table id="20" parent="2" name="t_huser_role"/>
+    <table id="21" parent="2" name="t_jklx"/>
+    <table id="22" parent="2" name="t_letter"/>
+    <table id="23" parent="2" name="t_logczz"/>
+    <table id="24" parent="2" name="t_login_log"/>
+    <table id="25" parent="2" name="t_logmoney"/>
+    <table id="26" parent="2" name="t_logtx"/>
+    <table id="27" parent="2" name="t_media"/>
+    <table id="28" parent="2" name="t_module"/>
+    <table id="29" parent="2" name="t_notice"/>
+    <table id="30" parent="2" name="t_option"/>
+    <table id="31" parent="2" name="t_permission"/>
+    <table id="32" parent="2" name="t_recommend"/>
+    <table id="33" parent="2" name="t_reward"/>
+    <table id="34" parent="2" name="t_rewardsetting"/>
+    <table id="35" parent="2" name="t_role"/>
+    <table id="36" parent="2" name="t_role_permission"/>
+    <table id="37" parent="2" name="t_rzvip"/>
+    <table id="38" parent="2" name="t_rzvipcheck"/>
+    <table id="39" parent="2" name="t_shborrow"/>
+    <table id="40" parent="2" name="t_skb"/>
+    <table id="41" parent="2" name="t_sway"/>
+    <table id="42" parent="2" name="t_ticket"/>
+    <table id="43" parent="2" name="t_txcheck"/>
+    <table id="44" parent="2" name="t_tzb"/>
+    <table id="45" parent="2" name="t_user"/>
+    <table id="46" parent="2" name="t_user_role"/>
+    <table id="47" parent="2" name="t_usermoney"/>
+    <table id="48" parent="2" name="t_userticket"/>
+    <table id="49" parent="2" name="t_ydate"/>
+    <column id="50" parent="9" name="id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="51" parent="9" name="bankName">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="52" parent="9" name="deposit">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <key id="53" parent="9" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="54" parent="10" name="bcid">
+      <Position>1</Position>
+      <Comment>主键id</Comment>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="55" parent="10" name="uid">
+      <Position>2</Position>
+      <Comment>用户id</Comment>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="56" parent="10" name="cardno">
+      <Position>3</Position>
+      <Comment>银行卡号</Comment>
+      <DataType>varchar(30)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="57" parent="10" name="rname">
+      <Position>4</Position>
+      <Comment>绑卡人姓名</Comment>
+      <DataType>varchar(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="58" parent="10" name="idno">
+      <Position>5</Position>
+      <Comment>身份证号码，默认为18位</Comment>
+      <DataType>char(18)|0</DataType>
+    </column>
+    <column id="59" parent="10" name="type">
+      <Position>6</Position>
+      <Comment>所属银行</Comment>
+      <DataType>varchar(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="60" parent="10" name="state">
+      <Position>7</Position>
+      <Comment>银行卡状态，0激活，1冻结</Comment>
+      <DataType>tinyint(4)|0</DataType>
+    </column>
+    <column id="61" parent="10" name="date">
+      <Position>8</Position>
+      <Comment>绑卡时间</Comment>
+      <DataType>datetime|0</DataType>
+    </column>
+    <key id="62" parent="10" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>bcid</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="63" parent="11" name="baid">
+      <Position>1</Position>
+      <Comment>主键</Comment>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="64" parent="11" name="rname">
+      <Position>2</Position>
+      <Comment>真实姓名</Comment>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="65" parent="11" name="money">
+      <Position>3</Position>
+      <Comment>申请金额</Comment>
+      <DataType>decimal(10,2)|0</DataType>
+    </column>
+    <column id="66" parent="11" name="uid">
+      <Position>4</Position>
+      <Comment>借款人id，uid为t_user表id</Comment>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="67" parent="11" name="bzid">
+      <Position>5</Position>
+      <Comment>标种</Comment>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="68" parent="11" name="time">
+      <Position>6</Position>
+      <Comment>审核时间</Comment>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="69" parent="11" name="state">
+      <Position>7</Position>
+      <Comment>审核状态（0表示审核通过，1表示未审核，2已满标，3审核不通过）</Comment>
+      <DataType>tinyint(4)|0</DataType>
+    </column>
+    <column id="70" parent="11" name="lxid">
+      <Position>8</Position>
+      <Comment>借款类型为标种的主键字段</Comment>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="71" parent="11" name="term">
+      <Position>9</Position>
+      <Comment>借款期限</Comment>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="72" parent="11" name="deadline">
+      <Position>10</Position>
+      <Comment>截止时间</Comment>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="73" parent="11" name="reason">
+      <Position>11</Position>
+      <Comment>预留字段</Comment>
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <column id="74" parent="11" name="huid">
+      <Position>12</Position>
+      <Comment>预留字段</Comment>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <key id="75" parent="11" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>baid</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="76" parent="12" name="bdid">
+      <Position>1</Position>
+      <Comment>主键</Comment>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="77" parent="12" name="fpic">
+      <Position>2</Position>
+      <Comment>法人身份证照片</Comment>
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <column id="78" parent="12" name="ypic">
+      <Position>3</Position>
+      <Comment>营业执照副本照片</Comment>
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <column id="79" parent="12" name="qpic">
+      <Position>4</Position>
+      <Comment>企业银行账号</Comment>
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <column id="80" parent="12" name="tpic">
+      <Position>5</Position>
+      <Comment>其他资料</Comment>
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <column id="81" parent="12" name="mpurpose">
+      <Position>6</Position>
+      <Comment>资金用途</Comment>
+      <DataType>varchar(100)|0</DataType>
+    </column>
+    <column id="82" parent="12" name="hksource">
+      <Position>7</Position>
+      <Comment>还款来源</Comment>
+      <DataType>varchar(100)|0</DataType>
+    </column>
+    <column id="83" parent="12" name="suggest">
+      <Position>8</Position>
+      <Comment>借款人介绍</Comment>
+      <DataType>varchar(500)|0</DataType>
+    </column>
+    <column id="84" parent="12" name="xmdescrip">
+      <Position>9</Position>
+      <Comment>项目描述</Comment>
+      <DataType>varchar(500)|0</DataType>
+    </column>
+    <column id="85" parent="12" name="guarantee">
+      <Position>10</Position>
+      <Comment>保障措施</Comment>
+      <DataType>varchar(500)|0</DataType>
+    </column>
+    <column id="86" parent="12" name="money">
+      <Position>11</Position>
+      <Comment>金额</Comment>
+      <DataType>decimal(10,2)|0</DataType>
+    </column>
+    <column id="87" parent="12" name="nprofit">
+      <Position>12</Position>
+      <Comment>年化收益</Comment>
+      <DataType>decimal(7,2)|0</DataType>
+    </column>
+    <column id="88" parent="12" name="sid">
+      <Position>13</Position>
+      <Comment>收益方式,t_sway表sid</Comment>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="89" parent="12" name="cpname">
+      <Position>14</Position>
+      <Comment>产品名称</Comment>
+      <DataType>varchar(200)|0</DataType>
+    </column>
+    <column id="90" parent="12" name="baid">
+      <Position>15</Position>
+      <Comment>借款人id，baid为t_borrowapply表id</Comment>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <key id="91" parent="12" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>bdid</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="92" parent="13" name="bzid">
+      <Position>1</Position>
+      <Comment>主键id</Comment>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="93" parent="13" name="bzname">
+      <Position>2</Position>
+      <Comment>标种名称</Comment>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="94" parent="13" name="state">
+      <Position>3</Position>
+      <Comment>标种状态(0为可用，1为不可用)</Comment>
+      <DataType>tinyint(4)|0</DataType>
+    </column>
+    <key id="95" parent="13" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>bzid</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="96" parent="14" name="dxid">
+      <Position>1</Position>
+      <Comment>主键id</Comment>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="97" parent="14" name="content">
+      <Position>2</Position>
+      <Comment>内容</Comment>
+      <DataType>varchar(500)|0</DataType>
+    </column>
+    <key id="98" parent="14" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>dxid</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="99" parent="15" name="dyid">
+      <Position>1</Position>
+      <Comment>主键id</Comment>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="100" parent="15" name="title">
+      <Position>2</Position>
+      <Comment>标题</Comment>
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <column id="101" parent="15" name="date">
+      <Position>3</Position>
+      <Comment>时间</Comment>
+      <DataType>date|0</DataType>
+    </column>
+    <column id="102" parent="15" name="content">
+      <Position>4</Position>
+      <Comment>内容</Comment>
+      <DataType>varchar(5000)|0</DataType>
+    </column>
+    <column id="103" parent="15" name="pic">
+      <Position>5</Position>
+      <Comment>封面图片</Comment>
+      <DataType>varchar(500)|0</DataType>
+    </column>
+    <column id="104" parent="15" name="state">
+      <Position>6</Position>
+      <DataType>tinyint(4)|0</DataType>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <key id="105" parent="15" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>dyid</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="106" parent="16" name="fid">
+      <Position>1</Position>
+      <Comment>主键id</Comment>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="107" parent="16" name="furl">
+      <Position>2</Position>
+      <Comment>链接</Comment>
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <column id="108" parent="16" name="fpic">
+      <Position>3</Position>
+      <Comment>图片</Comment>
+      <DataType>varchar(500)|0</DataType>
+    </column>
+    <key id="109" parent="16" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>fid</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="110" parent="17" name="hkid">
+      <Position>1</Position>
+      <Comment>主键id</Comment>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="111" parent="17" name="uid">
+      <Position>2</Position>
+      <Comment>uid为前台用户表t_user主键字段</Comment>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="112" parent="17" name="rname">
+      <Position>3</Position>
+      <Comment>真实姓名</Comment>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="113" parent="17" name="cpname">
+      <Position>4</Position>
+      <Comment>产品名称</Comment>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="114" parent="17" name="rnum">
+      <Position>5</Position>
+      <Comment>已还期数</Comment>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="115" parent="17" name="tnum">
+      <Position>6</Position>
+      <Comment>总期数</Comment>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="116" parent="17" name="ytime">
+      <Position>7</Position>
+      <Comment>应还时间</Comment>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="117" parent="17" name="rtime">
+      <Position>8</Position>
+      <Comment>实际还款时间</Comment>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="118" parent="17" name="bzname">
+      <Position>9</Position>
+      <Comment>标种名称，bzname为t_bz表里面标种名称</Comment>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="119" parent="17" name="ybx">
+      <Position>10</Position>
+      <Comment>应还本息</Comment>
+      <DataType>decimal(10,2)|0</DataType>
+    </column>
+    <column id="120" parent="17" name="rbx">
+      <Position>11</Position>
+      <Comment>已还本息</Comment>
+      <DataType>decimal(10,2)|0</DataType>
+    </column>
+    <column id="121" parent="17" name="ylx">
+      <Position>12</Position>
+      <Comment>应还利息</Comment>
+      <DataType>decimal(10,2)|0</DataType>
+    </column>
+    <column id="122" parent="17" name="rlx">
+      <Position>13</Position>
+      <Comment>已还利息</Comment>
+      <DataType>decimal(10,2)|0</DataType>
+    </column>
+    <column id="123" parent="17" name="ybj">
+      <Position>14</Position>
+      <Comment>应还本金</Comment>
+      <DataType>decimal(10,2)|0</DataType>
+    </column>
+    <column id="124" parent="17" name="rbj">
+      <Position>15</Position>
+      <Comment>已还本金</Comment>
+      <DataType>decimal(10,2)|0</DataType>
+    </column>
+    <column id="125" parent="17" name="yfx">
+      <Position>16</Position>
+      <Comment>应还罚息</Comment>
+      <DataType>decimal(10,2)|0</DataType>
+    </column>
+    <column id="126" parent="17" name="rfx">
+      <Position>17</Position>
+      <Comment>已还罚息</Comment>
+      <DataType>decimal(10,2)|0</DataType>
+    </column>
+    <column id="127" parent="17" name="yucount">
+      <Position>18</Position>
+      <Comment>逾期次数</Comment>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="128" parent="17" name="state">
+      <Position>19</Position>
+      <Comment>还款状态（0未还款，1已还款）</Comment>
+      <DataType>tinyint(4)|0</DataType>
+    </column>
+    <column id="129" parent="17" name="baid">
+      <Position>20</Position>
+      <Comment>借款人id ，t_borrowapply主键id</Comment>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="130" parent="17" name="yustartime">
+      <Position>21</Position>
+      <Comment>逾期执行时间</Comment>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="131" parent="17" name="huid">
+      <Position>22</Position>
+      <Comment>贷后负责人 t_huser后台用户id字段</Comment>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="132" parent="17" name="djq">
+      <Position>23</Position>
+      <Comment>第几期</Comment>
+      <DataType>int(20)|0</DataType>
+    </column>
+    <column id="133" parent="17" name="int1">
+      <Position>24</Position>
+      <Comment>预留字段</Comment>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="134" parent="17" name="str1">
+      <Position>25</Position>
+      <Comment>预留字段</Comment>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <key id="135" parent="17" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>hkid</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="136" parent="18" name="hid">
+      <Position>1</Position>
+      <Comment>主键ID</Comment>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="137" parent="18" name="pic1">
+      <Position>2</Position>
+      <Comment>轮播图1</Comment>
+      <DataType>varchar(500)|0</DataType>
+    </column>
+    <column id="138" parent="18" name="pic2">
+      <Position>3</Position>
+      <Comment>轮播图2</Comment>
+      <DataType>varchar(500)|0</DataType>
+    </column>
+    <column id="139" parent="18" name="pic3">
+      <Position>4</Position>
+      <Comment>轮播图3</Comment>
+      <DataType>varchar(500)|0</DataType>
+    </column>
+    <column id="140" parent="18" name="ewm">
+      <Position>5</Position>
+      <Comment>二维码</Comment>
+      <DataType>varchar(500)|0</DataType>
+    </column>
+    <column id="141" parent="18" name="phone">
+      <Position>6</Position>
+      <Comment>手机号码</Comment>
+      <DataType>char(11)|0</DataType>
+    </column>
+    <column id="142" parent="18" name="l1">
+      <Position>7</Position>
+      <Comment>链接1</Comment>
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <column id="143" parent="18" name="l2">
+      <Position>8</Position>
+      <Comment>链接2</Comment>
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <column id="144" parent="18" name="l3">
+      <Position>9</Position>
+      <Comment>链接3</Comment>
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <column id="145" parent="18" name="l4">
+      <Position>10</Position>
+      <Comment>链接4</Comment>
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <column id="146" parent="18" name="state">
+      <Position>11</Position>
+      <DataType>tinyint(4)|0</DataType>
+    </column>
+    <column id="147" parent="18" name="date">
+      <Position>12</Position>
+      <DataType>date|0</DataType>
+    </column>
+    <key id="148" parent="18" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>hid</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="149" parent="19" name="huid">
+      <Position>1</Position>
+      <Comment>主键id</Comment>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="150" parent="19" name="rname">
+      <Position>2</Position>
+      <Comment>真实姓名</Comment>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="151" parent="19" name="sex">
+      <Position>3</Position>
+      <Comment>性别（0男，1女）</Comment>
+      <DataType>tinyint(4)|0</DataType>
+    </column>
+    <column id="152" parent="19" name="phone">
+      <Position>4</Position>
+      <Comment>手机号码</Comment>
+      <DataType>char(11)|0</DataType>
+    </column>
+    <column id="153" parent="19" name="huname">
+      <Position>5</Position>
+      <Comment>用户名，相当于昵称</Comment>
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <column id="154" parent="19" name="oid">
+      <Position>6</Position>
+      <Comment>所属组id</Comment>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="155" parent="19" name="oname">
+      <Position>7</Position>
+      <Comment>组名</Comment>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="156" parent="19" name="email">
+      <Position>8</Position>
+      <Comment>电子邮箱</Comment>
+      <DataType>varchar(30)|0</DataType>
+    </column>
+    <column id="157" parent="19" name="state">
+      <Position>9</Position>
+      <Comment>预留字段</Comment>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="158" parent="19" name="hpwd">
+      <Position>10</Position>
+      <Comment>预留字段</Comment>
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <key id="159" parent="19" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>huid</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="160" parent="20" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="161" parent="20" name="huser_id">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="162" parent="20" name="role_id">
+      <Position>3</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <key id="163" parent="20" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="164" parent="21" name="lxid">
+      <Position>1</Position>
+      <Comment>主键id</Comment>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="165" parent="21" name="lxname">
+      <Position>2</Position>
+      <Comment>借款名称，如（先本后息，先息后本，等额本息，等额本金）</Comment>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="166" parent="21" name="state">
+      <Position>3</Position>
+      <Comment>状态（0可用，1不可用）</Comment>
+      <DataType>tinyint(4)|0</DataType>
+    </column>
+    <key id="167" parent="21" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>lxid</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="168" parent="22" name="lid">
+      <Position>1</Position>
+      <Comment>主键id</Comment>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="169" parent="22" name="title">
+      <Position>2</Position>
+      <Comment>标题</Comment>
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <column id="170" parent="22" name="content">
+      <Position>3</Position>
+      <Comment>内容</Comment>
+      <DataType>varchar(500)|0</DataType>
+    </column>
+    <column id="171" parent="22" name="date">
+      <Position>4</Position>
+      <Comment>日期</Comment>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="172" parent="22" name="state">
+      <Position>5</Position>
+      <Comment>状态，0激活，1冻结</Comment>
+      <DataType>tinyint(4)|0</DataType>
+    </column>
+    <key id="173" parent="22" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>lid</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="174" parent="23" name="id">
+      <Position>1</Position>
+      <Comment>主键id</Comment>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="175" parent="23" name="uid">
+      <Position>2</Position>
+      <Comment>用户id</Comment>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="176" parent="23" name="bankcard">
+      <Position>3</Position>
+      <Comment>银行卡号</Comment>
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <column id="177" parent="23" name="banktype">
+      <Position>4</Position>
+      <Comment>所属银行</Comment>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="178" parent="23" name="money">
+      <Position>5</Position>
+      <Comment>金额</Comment>
+      <DataType>decimal(10,2)|0</DataType>
+    </column>
+    <column id="179" parent="23" name="date">
+      <Position>6</Position>
+      <Comment>时间</Comment>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="180" parent="23" name="state">
+      <Position>7</Position>
+      <Comment>状态，0充值成功，1充值失败</Comment>
+      <DataType>tinyint(4)|0</DataType>
+    </column>
+    <key id="181" parent="23" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="182" parent="24" name="id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="183" parent="24" name="user_id">
+      <Position>2</Position>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="184" parent="24" name="login_time">
+      <Position>3</Position>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="185" parent="24" name="login_ip">
+      <Position>4</Position>
+      <DataType>varchar(100)|0</DataType>
+    </column>
+    <column id="186" parent="24" name="is_online">
+      <Position>5</Position>
+      <DataType>tinyint(4)|0</DataType>
+    </column>
+    <column id="187" parent="24" name="logout_time">
+      <Position>6</Position>
+      <DataType>datetime|0</DataType>
+    </column>
+    <key id="188" parent="24" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="189" parent="25" name="id">
+      <Position>1</Position>
+      <Comment>主键id</Comment>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="190" parent="25" name="uid">
+      <Position>2</Position>
+      <Comment>用户id</Comment>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="191" parent="25" name="type">
+      <Position>3</Position>
+      <Comment>类型，0充值，1提现，2回款，3.公司奖励，4投资金额，5收款，6还款</Comment>
+      <DataType>tinyint(4)|0</DataType>
+    </column>
+    <column id="192" parent="25" name="in">
+      <Position>4</Position>
+      <Comment>收入</Comment>
+      <DataType>decimal(10,2)|0</DataType>
+    </column>
+    <column id="193" parent="25" name="out">
+      <Position>5</Position>
+      <Comment>支出</Comment>
+      <DataType>decimal(10,2)|0</DataType>
+    </column>
+    <column id="194" parent="25" name="date">
+      <Position>6</Position>
+      <Comment>时间</Comment>
+      <DataType>datetime|0</DataType>
+    </column>
+    <key id="195" parent="25" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="196" parent="26" name="id">
+      <Position>1</Position>
+      <Comment>主键id</Comment>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="197" parent="26" name="uid">
+      <Position>2</Position>
+      <Comment>用户id</Comment>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="198" parent="26" name="bankcard">
+      <Position>3</Position>
+      <Comment>银行卡号</Comment>
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <column id="199" parent="26" name="banktype">
+      <Position>4</Position>
+      <Comment>所属银行</Comment>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="200" parent="26" name="money">
+      <Position>5</Position>
+      <Comment>提现金额</Comment>
+      <DataType>decimal(10,2)|0</DataType>
+    </column>
+    <column id="201" parent="26" name="date_time">
+      <Position>6</Position>
+      <Comment>时间</Comment>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="202" parent="26" name="state">
+      <Position>7</Position>
+      <Comment>状态，0提现成功，1未提现失败</Comment>
+      <DataType>tinyint(4)|0</DataType>
+    </column>
+    <key id="203" parent="26" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="204" parent="27" name="mid">
+      <Position>1</Position>
+      <Comment>主键id</Comment>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="205" parent="27" name="title">
+      <Position>2</Position>
+      <Comment>标题</Comment>
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <column id="206" parent="27" name="content">
+      <Position>3</Position>
+      <Comment>内容</Comment>
+      <DataType>varchar(5000)|0</DataType>
+    </column>
+    <column id="207" parent="27" name="pic">
+      <Position>4</Position>
+      <Comment>封面图片</Comment>
+      <DataType>varchar(500)|0</DataType>
+    </column>
+    <column id="208" parent="27" name="date">
+      <Position>5</Position>
+      <Comment>时间</Comment>
+      <DataType>date|0</DataType>
+    </column>
+    <column id="209" parent="27" name="url">
+      <Position>6</Position>
+      <Comment>报道的链接地址</Comment>
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <column id="210" parent="27" name="state">
+      <Position>7</Position>
+      <DataType>tinyint(4)|0</DataType>
+    </column>
+    <key id="211" parent="27" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>mid</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="212" parent="28" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="213" parent="28" name="name">
+      <Position>2</Position>
+      <DataType>varchar(100)|0</DataType>
+    </column>
+    <key id="214" parent="28" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="215" parent="29" name="nid">
+      <Position>1</Position>
+      <Comment>主键id</Comment>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="216" parent="29" name="content">
+      <Position>2</Position>
+      <Comment>内容</Comment>
+      <DataType>text|0</DataType>
+    </column>
+    <column id="217" parent="29" name="title">
+      <Position>3</Position>
+      <Comment>标题</Comment>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="218" parent="29" name="date">
+      <Position>4</Position>
+      <Comment>公告时间</Comment>
+      <DataType>datetime|0</DataType>
+    </column>
+    <key id="219" parent="29" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>nid</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="220" parent="30" name="opid">
+      <Position>1</Position>
+      <Comment>主键id</Comment>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="221" parent="30" name="phone">
+      <Position>2</Position>
+      <Comment>电话</Comment>
+      <DataType>char(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="222" parent="30" name="content">
+      <Position>3</Position>
+      <Comment>内容</Comment>
+      <DataType>varchar(200)|0</DataType>
+    </column>
+    <column id="223" parent="30" name="date">
+      <Position>4</Position>
+      <Comment>反馈时间</Comment>
+      <DataType>date|0</DataType>
+    </column>
+    <key id="224" parent="30" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>opid</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="225" parent="31" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="226" parent="31" name="url">
+      <Position>2</Position>
+      <DataType>varchar(200)|0</DataType>
+    </column>
+    <column id="227" parent="31" name="des_zh">
+      <Position>3</Position>
+      <DataType>varchar(100)|0</DataType>
+    </column>
+    <column id="228" parent="31" name="module_id">
+      <Position>4</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="229" parent="31" name="status">
+      <Position>5</Position>
+      <DataType>tinyint(4)|0</DataType>
+    </column>
+    <key id="230" parent="31" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="231" parent="32" name="id">
+      <Position>1</Position>
+      <Comment>主键id</Comment>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="232" parent="32" name="tid">
+      <Position>2</Position>
+      <Comment>推荐人id</Comment>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="233" parent="32" name="tname">
+      <Position>3</Position>
+      <Comment>推荐人姓名</Comment>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="234" parent="32" name="uid">
+      <Position>4</Position>
+      <Comment>被推荐人id</Comment>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="235" parent="32" name="rname">
+      <Position>5</Position>
+      <Comment>被推荐人姓名</Comment>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="236" parent="32" name="date">
+      <Position>6</Position>
+      <Comment>推荐时间</Comment>
+      <DataType>datetime|0</DataType>
+    </column>
+    <key id="237" parent="32" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="238" parent="33" name="rwid">
+      <Position>1</Position>
+      <Comment>主键id</Comment>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="239" parent="33" name="uid">
+      <Position>2</Position>
+      <Comment>投资人id，t_user前台用户表id字段</Comment>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="240" parent="33" name="tmoney">
+      <Position>3</Position>
+      <Comment>投资总额</Comment>
+      <DataType>decimal(20,2)|0</DataType>
+    </column>
+    <column id="241" parent="33" name="money">
+      <Position>4</Position>
+      <Comment>奖励金额</Comment>
+      <DataType>decimal(20,2)|0</DataType>
+    </column>
+    <column id="242" parent="33" name="state">
+      <Position>5</Position>
+      <Comment>状态（0已发放，1未发放）</Comment>
+      <DataType>tinyint(4)|0</DataType>
+    </column>
+    <column id="243" parent="33" name="date">
+      <Position>6</Position>
+      <Comment>奖励发放时间</Comment>
+      <DataType>datetime|0</DataType>
+    </column>
+    <key id="244" parent="33" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>rwid</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="245" parent="34" name="rwid">
+      <Position>1</Position>
+      <Comment>主键id</Comment>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="246" parent="34" name="minmoney">
+      <Position>2</Position>
+      <Comment>最小金额</Comment>
+      <DataType>decimal(10,2)|0</DataType>
+    </column>
+    <column id="247" parent="34" name="maxmoney">
+      <Position>3</Position>
+      <Comment>最大金额</Comment>
+      <DataType>decimal(10,2)|0</DataType>
+    </column>
+    <column id="248" parent="34" name="percent">
+      <Position>4</Position>
+      <Comment>奖励百分比</Comment>
+      <DataType>double(255)|0</DataType>
+    </column>
+    <key id="249" parent="34" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>rwid</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="250" parent="35" name="rid">
+      <Position>1</Position>
+      <Comment>主键id</Comment>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="251" parent="35" name="rname">
+      <Position>2</Position>
+      <Comment>角色名称</Comment>
+      <DataType>varchar(30)|0</DataType>
+    </column>
+    <column id="252" parent="35" name="content">
+      <Position>3</Position>
+      <Comment>角色描述</Comment>
+      <DataType>varchar(500)|0</DataType>
+    </column>
+    <column id="253" parent="35" name="status">
+      <Position>4</Position>
+      <DataType>tinyint(4)|0</DataType>
+    </column>
+    <key id="254" parent="35" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>rid</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="255" parent="36" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="256" parent="36" name="role_id">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="257" parent="36" name="permission_id">
+      <Position>3</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="258" parent="36" name="set_time">
+      <Position>4</Position>
+      <DataType>datetime|0</DataType>
+    </column>
+    <key id="259" parent="36" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="260" parent="37" name="rid">
+      <Position>1</Position>
+      <Comment>主键id</Comment>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="261" parent="37" name="uid">
+      <Position>2</Position>
+      <Comment>用户id</Comment>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="262" parent="37" name="xl">
+      <Position>3</Position>
+      <Comment>学历</Comment>
+      <DataType>varchar(40)|0</DataType>
+    </column>
+    <column id="263" parent="37" name="ism">
+      <Position>4</Position>
+      <Comment>婚否（0已婚，1未婚，2单身）</Comment>
+      <DataType>tinyint(4)|0</DataType>
+    </column>
+    <column id="264" parent="37" name="bschool">
+      <Position>5</Position>
+      <Comment>毕业学校</Comment>
+      <DataType>varchar(30)|0</DataType>
+    </column>
+    <column id="265" parent="37" name="addr">
+      <Position>6</Position>
+      <Comment>居住地址</Comment>
+      <DataType>varchar(40)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="266" parent="37" name="work">
+      <Position>7</Position>
+      <Comment>现工作</Comment>
+      <DataType>varchar(30)|0</DataType>
+    </column>
+    <column id="267" parent="37" name="age">
+      <Position>8</Position>
+      <Comment>年龄</Comment>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="268" parent="37" name="int1">
+      <Position>9</Position>
+      <Comment>预留字段</Comment>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="269" parent="37" name="str1">
+      <Position>10</Position>
+      <Comment>预留字段</Comment>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <key id="270" parent="37" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>rid</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="271" parent="38" name="rcid">
+      <Position>1</Position>
+      <Comment>主键id</Comment>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="272" parent="38" name="uid">
+      <Position>2</Position>
+      <Comment>用户id</Comment>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="273" parent="38" name="huid">
+      <Position>3</Position>
+      <Comment>审核人id</Comment>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="274" parent="38" name="isok">
+      <Position>4</Position>
+      <Comment>审核是否通过，0通过，1未通过</Comment>
+      <DataType>tinyint(4)|0</DataType>
+    </column>
+    <column id="275" parent="38" name="excute">
+      <Position>5</Position>
+      <Comment>理由</Comment>
+      <DataType>varchar(200)|0</DataType>
+    </column>
+    <column id="276" parent="38" name="date">
+      <Position>6</Position>
+      <Comment>审核时间</Comment>
+      <DataType>datetime|0</DataType>
+    </column>
+    <key id="277" parent="38" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>rcid</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="278" parent="39" name="shid">
+      <Position>1</Position>
+      <Comment>主键id</Comment>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="279" parent="39" name="huid">
+      <Position>2</Position>
+      <Comment>审核人id，t_huser后台用户主键id</Comment>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="280" parent="39" name="isok">
+      <Position>3</Position>
+      <Comment>审核是否通过（0未通过，1已通过）</Comment>
+      <DataType>tinyint(4)|0</DataType>
+    </column>
+    <column id="281" parent="39" name="excute">
+      <Position>4</Position>
+      <Comment>审核理由</Comment>
+      <DataType>varchar(200)|0</DataType>
+    </column>
+    <column id="282" parent="39" name="date">
+      <Position>5</Position>
+      <Comment>审核时间</Comment>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="283" parent="39" name="baid">
+      <Position>6</Position>
+      <Comment>借款人id，t_borrowapply申请借款表主键id字段</Comment>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <key id="284" parent="39" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>shid</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="285" parent="40" name="skid">
+      <Position>1</Position>
+      <Comment>主键id</Comment>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="286" parent="40" name="uid">
+      <Position>2</Position>
+      <Comment>用户id，前台用户t_user主键id</Comment>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="287" parent="40" name="juid">
+      <Position>3</Position>
+      <Comment>借款人id，t_borrowapply表主键id</Comment>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="288" parent="40" name="ybx">
+      <Position>4</Position>
+      <Comment>应收本息</Comment>
+      <DataType>decimal(10,2)|0</DataType>
+    </column>
+    <column id="289" parent="40" name="rbx">
+      <Position>5</Position>
+      <Comment>已收本息</Comment>
+      <DataType>decimal(10,2)|0</DataType>
+    </column>
+    <column id="290" parent="40" name="ylx">
+      <Position>6</Position>
+      <Comment>应收利息</Comment>
+      <DataType>decimal(10,2)|0</DataType>
+    </column>
+    <column id="291" parent="40" name="rlx">
+      <Position>7</Position>
+      <Comment>已收利息</Comment>
+      <DataType>decimal(10,2)|0</DataType>
+    </column>
+    <column id="292" parent="40" name="ybj">
+      <Position>8</Position>
+      <Comment>应收本金</Comment>
+      <DataType>decimal(10,2)|0</DataType>
+    </column>
+    <column id="293" parent="40" name="rbj">
+      <Position>9</Position>
+      <Comment>已收本金</Comment>
+      <DataType>decimal(10,2)|0</DataType>
+    </column>
+    <column id="294" parent="40" name="rnum">
+      <Position>10</Position>
+      <Comment>已还期数</Comment>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="295" parent="40" name="tnum">
+      <Position>11</Position>
+      <Comment>总期数</Comment>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="296" parent="40" name="date">
+      <Position>12</Position>
+      <Comment>日期</Comment>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="297" parent="40" name="baid">
+      <Position>13</Position>
+      <Comment>借款人id，t_borrowapply表主键id</Comment>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="298" parent="40" name="fmoney">
+      <Position>14</Position>
+      <Comment>好友奖励</Comment>
+      <DataType>decimal(10,2)|0</DataType>
+    </column>
+    <column id="299" parent="40" name="djq">
+      <Position>15</Position>
+      <Comment>第几期收款</Comment>
+      <DataType>int(20)|0</DataType>
+    </column>
+    <column id="300" parent="40" name="sktime">
+      <Position>16</Position>
+      <Comment>收款时间</Comment>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="301" parent="40" name="state">
+      <Position>17</Position>
+      <Comment>收款状态</Comment>
+      <DataType>tinyint(4)|0</DataType>
+    </column>
+    <column id="302" parent="40" name="tzmoney">
+      <Position>18</Position>
+      <Comment>显示投资金额</Comment>
+      <DataType>decimal(10,2)|0</DataType>
+    </column>
+    <column id="303" parent="40" name="int1">
+      <Position>19</Position>
+      <Comment>预留字段</Comment>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="304" parent="40" name="str1">
+      <Position>20</Position>
+      <Comment>预留字段</Comment>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <key id="305" parent="40" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>skid</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="306" parent="41" name="sid">
+      <Position>1</Position>
+      <Comment>主键id</Comment>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="307" parent="41" name="way">
+      <Position>2</Position>
+      <Comment>方式</Comment>
+      <DataType>varchar(100)|0</DataType>
+    </column>
+    <column id="308" parent="41" name="fw">
+      <Position>3</Position>
+      <Comment>算法</Comment>
+      <DataType>varchar(200)|0</DataType>
+    </column>
+    <column id="309" parent="41" name="state">
+      <Position>4</Position>
+      <Comment>还款方式状态（0不可用，1可用）</Comment>
+      <DataType>tinyint(4)|0</DataType>
+    </column>
+    <key id="310" parent="41" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>sid</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="311" parent="42" name="kid">
+      <Position>1</Position>
+      <Comment>主键id</Comment>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="312" parent="42" name="type">
+      <Position>2</Position>
+      <Comment>优惠券类型，如现金劵1，代金券2，体验金3，加息券4</Comment>
+      <DataType>tinyint(4)|0</DataType>
+    </column>
+    <column id="313" parent="42" name="tkmoney">
+      <Position>3</Position>
+      <Comment>优惠券金额</Comment>
+      <DataType>decimal(10,2)|0</DataType>
+    </column>
+    <column id="314" parent="42" name="tktime">
+      <Position>4</Position>
+      <Comment>有效时间</Comment>
+      <DataType>date|0</DataType>
+    </column>
+    <column id="315" parent="42" name="tname">
+      <Position>5</Position>
+      <Comment>优惠卷名称</Comment>
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <column id="316" parent="42" name="tintro">
+      <Position>6</Position>
+      <Comment>优惠卷简介（例如什么情况下用）</Comment>
+      <DataType>varchar(500)|0</DataType>
+    </column>
+    <column id="317" parent="42" name="usecondition">
+      <Position>7</Position>
+      <Comment>使用条件</Comment>
+      <DataType>decimal(10) unsigned|0</DataType>
+    </column>
+    <column id="318" parent="42" name="status">
+      <Position>8</Position>
+      <Comment>优惠券状态(0冻结1激活)</Comment>
+      <DataType>tinyint(255)|0</DataType>
+    </column>
+    <key id="319" parent="42" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>kid</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="320" parent="43" name="id">
+      <Position>1</Position>
+      <Comment>主键id</Comment>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="321" parent="43" name="txid">
+      <Position>2</Position>
+      <Comment>提现人id</Comment>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="322" parent="43" name="huid">
+      <Position>3</Position>
+      <Comment>审核人id</Comment>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="323" parent="43" name="isok">
+      <Position>4</Position>
+      <Comment>审核是否通过，0通过，1未通过</Comment>
+      <DataType>tinyint(4)|0</DataType>
+    </column>
+    <column id="324" parent="43" name="excute">
+      <Position>5</Position>
+      <Comment>审核理由</Comment>
+      <DataType>varchar(200)|0</DataType>
+    </column>
+    <column id="325" parent="43" name="date_time">
+      <Position>6</Position>
+      <Comment>审核时间</Comment>
+      <DataType>datetime|0</DataType>
+    </column>
+    <key id="326" parent="43" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="327" parent="44" name="tzid">
+      <Position>1</Position>
+      <Comment>主键id</Comment>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="328" parent="44" name="uid">
+      <Position>2</Position>
+      <Comment>前台用户t_user表id字段</Comment>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="329" parent="44" name="juid">
+      <Position>3</Position>
+      <Comment>借款人id，t_borrowapply表主键id</Comment>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="330" parent="44" name="money">
+      <Position>4</Position>
+      <Comment>投资金额</Comment>
+      <DataType>decimal(10,2)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="331" parent="44" name="time">
+      <Position>5</Position>
+      <Comment>投资时间</Comment>
+      <DataType>datetime|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="332" parent="44" name="nprofit">
+      <Position>6</Position>
+      <Comment>利率</Comment>
+      <DataType>float(3,2)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="333" parent="44" name="cpname">
+      <Position>7</Position>
+      <Comment>产品名称</Comment>
+      <DataType>varchar(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="334" parent="44" name="baid">
+      <Position>8</Position>
+      <Comment>借款id 取t_borrowapply表id</Comment>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="335" parent="44" name="int1">
+      <Position>9</Position>
+      <DataType>int(20)|0</DataType>
+    </column>
+    <column id="336" parent="44" name="str1">
+      <Position>10</Position>
+      <Comment>预留字段</Comment>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="337" parent="44" name="int2">
+      <Position>11</Position>
+      <Comment>预留字段</Comment>
+      <DataType>int(20)|0</DataType>
+    </column>
+    <key id="338" parent="44" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>tzid</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="339" parent="45" name="uid">
+      <Position>1</Position>
+      <Comment>主键id</Comment>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="340" parent="45" name="uname">
+      <Position>2</Position>
+      <Comment>用户名</Comment>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="341" parent="45" name="upwd">
+      <Position>3</Position>
+      <Comment>密码，进行MD5加密</Comment>
+      <DataType>varchar(100)|0</DataType>
+    </column>
+    <column id="342" parent="45" name="phone">
+      <Position>4</Position>
+      <Comment>手机号码</Comment>
+      <DataType>char(11)|0</DataType>
+    </column>
+    <column id="343" parent="45" name="tzm">
+      <Position>5</Position>
+      <Comment>推荐码</Comment>
+      <DataType>varchar(100)|0</DataType>
+    </column>
+    <column id="344" parent="45" name="idtype">
+      <Position>6</Position>
+      <Comment>证件类型</Comment>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="345" parent="45" name="idno">
+      <Position>7</Position>
+      <Comment>证件号（身份证号）</Comment>
+      <DataType>char(18)|0</DataType>
+    </column>
+    <column id="346" parent="45" name="zpwd">
+      <Position>8</Position>
+      <Comment>支付密码</Comment>
+      <DataType>varchar(100)|0</DataType>
+    </column>
+    <column id="347" parent="45" name="email">
+      <Position>9</Position>
+      <Comment>电子邮箱</Comment>
+      <DataType>varchar(30)|0</DataType>
+    </column>
+    <column id="348" parent="45" name="rname">
+      <Position>10</Position>
+      <Comment>真实姓名</Comment>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="349" parent="45" name="tid">
+      <Position>11</Position>
+      <Comment>推荐人id， t_recommend推荐人表主键id</Comment>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="350" parent="45" name="face">
+      <Position>12</Position>
+      <Comment>头像</Comment>
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <column id="351" parent="45" name="sex">
+      <Position>13</Position>
+      <Comment>性别（0男，1女）</Comment>
+      <DataType>tinyint(4)|0</DataType>
+    </column>
+    <column id="352" parent="45" name="isvip">
+      <Position>14</Position>
+      <Comment>是否为VIP用户，0是，1否</Comment>
+      <DataType>tinyint(4)|0</DataType>
+    </column>
+    <column id="353" parent="45" name="state">
+      <Position>15</Position>
+      <Comment>预留字段</Comment>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="354" parent="45" name="create_time">
+      <Position>16</Position>
+      <Comment>预留字段</Comment>
+      <DataType>datetime|0</DataType>
+    </column>
+    <key id="355" parent="45" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>uid</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="356" parent="46" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="357" parent="46" name="user_id">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="358" parent="46" name="role_id">
+      <Position>3</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <key id="359" parent="46" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="360" parent="47" name="umid">
+      <Position>1</Position>
+      <Comment>主键id</Comment>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="361" parent="47" name="uid">
+      <Position>2</Position>
+      <Comment>用户id</Comment>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="362" parent="47" name="zmoney">
+      <Position>3</Position>
+      <Comment>总资产</Comment>
+      <DataType>decimal(10,2)|0</DataType>
+    </column>
+    <column id="363" parent="47" name="kymoney">
+      <Position>4</Position>
+      <Comment>可用余额</Comment>
+      <DataType>decimal(10,2)|0</DataType>
+    </column>
+    <column id="364" parent="47" name="symoney">
+      <Position>5</Position>
+      <Comment>收益总额</Comment>
+      <DataType>decimal(10,2)|0</DataType>
+    </column>
+    <column id="365" parent="47" name="tzmoney">
+      <Position>6</Position>
+      <Comment>投资总额</Comment>
+      <DataType>decimal(10,2)|0</DataType>
+    </column>
+    <column id="366" parent="47" name="djmoney">
+      <Position>7</Position>
+      <Comment>冻结金额</Comment>
+      <DataType>decimal(10,2)|0</DataType>
+    </column>
+    <column id="367" parent="47" name="dsmoney">
+      <Position>8</Position>
+      <Comment>待收金额</Comment>
+      <DataType>decimal(10,2)|0</DataType>
+    </column>
+    <column id="368" parent="47" name="jlmoney">
+      <Position>9</Position>
+      <Comment>奖励金额</Comment>
+      <DataType>decimal(20,2)|0</DataType>
+    </column>
+    <key id="369" parent="47" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>umid</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="370" parent="48" name="ukid">
+      <Position>1</Position>
+      <Comment>主键id</Comment>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="371" parent="48" name="uid">
+      <Position>2</Position>
+      <Comment>前台用户id</Comment>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="372" parent="48" name="kid">
+      <Position>3</Position>
+      <Comment>劵id</Comment>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="373" parent="48" name="tktime">
+      <Position>4</Position>
+      <Comment>领劵时间</Comment>
+      <DataType>date|0</DataType>
+    </column>
+    <column id="374" parent="48" name="usestatus">
+      <Position>5</Position>
+      <Comment>使用状态（0未使用，1已使用，2已过期）</Comment>
+      <DataType>tinyint(4)|0</DataType>
+    </column>
+    <key id="375" parent="48" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>ukid</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="376" parent="49" name="yid">
+      <Position>1</Position>
+      <Comment>主键id</Comment>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="377" parent="49" name="date">
+      <Position>2</Position>
+      <Comment>生成时间</Comment>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="378" parent="49" name="tmoney">
+      <Position>3</Position>
+      <Comment>交易总额</Comment>
+      <DataType>decimal(10,2)|0</DataType>
+    </column>
+    <column id="379" parent="49" name="mmoney">
+      <Position>4</Position>
+      <Comment>月交易总额</Comment>
+      <DataType>decimal(10,2)|0</DataType>
+    </column>
+    <column id="380" parent="49" name="tuser">
+      <Position>5</Position>
+      <Comment>总用户数</Comment>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="381" parent="49" name="muser">
+      <Position>6</Position>
+      <Comment>月用户数</Comment>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="382" parent="49" name="ttzno">
+      <Position>7</Position>
+      <Comment>总投资人数</Comment>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="383" parent="49" name="mtzno">
+      <Position>8</Position>
+      <Comment>月投资人数</Comment>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="384" parent="49" name="tdkno">
+      <Position>9</Position>
+      <Comment>总贷款人数</Comment>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="385" parent="49" name="mdkno">
+      <Position>10</Position>
+      <Comment>月贷款人数</Comment>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="386" parent="49" name="tdkbno">
+      <Position>11</Position>
+      <Comment>总贷款笔数</Comment>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="387" parent="49" name="mdkbno">
+      <Position>12</Position>
+      <Comment>月贷款笔数</Comment>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <key id="388" parent="49" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>yid</ColNames>
+      <Primary>1</Primary>
+    </key>
+  </database-model>
+</dataSource>

@@ -1,0 +1,16 @@
+@charset "utf-8";
+*{ margin:0; padding:0; list-style:none}
+body{ background:#EBECED; font-family:'微软雅黑'}
+
+.form{width: 450px;height: auto; margin:100px auto; overflow:hidden;font-size: 16px;color: #1b1b1b;text-align: left; padding:50px; border:1px solid #ccc; border-radius:10px;}
+.form div{padding:5px 0;overflow: hidden;}
+.form label{width: 90px;display: block;float: left;}
+.form .infos{width:200px;height: 26px;line-height: 26px;border:1px solid #BFBFBF;padding:2px;border-radius:4px;float: left;}
+.form .div-phone a.send1{height: 26px;text-decoration:none;line-height: 26px;padding:2px;width: 80px;background: #AA8926;font-family: '宋体';color: #fff;font-size: 12px;text-align: center;display: block;float: left;border-radius:2px;margin-left:2px;-webkit-transition:all 0.2s linear;-moz-transition:all 0.2s linear;-ms-transition:all 0.2s linear;-o-transition:all 0.2s linear;transition:all 0.2s linear;}
+.form .div-phone a.send1:hover{text-decoration: none;background: #866c1b;-webkit-transition:all 0.2s linear;-moz-transition:all 0.2s linear;-ms-transition:all 0.2s linear;-o-transition:all 0.2s linear;transition:all 0.2s linear;}
+.form .div-phone a.send0{height: 26px;text-decoration:none;line-height: 26px;padding:2px;width: 80px;background: #A1A1A1;font-family: '宋体';color: #fff;font-size: 12px;text-align: center;display: block;float: left;border-radius:2px;margin-left:2px;}
+.form .div-phone a.send0:hover{background: #A1A1A1;font-family: '宋体';color: #fff;font-size: 12px;text-decoration: none;}
+.form span.error{height: 26px;line-height: 26px;padding:2px;width: 100px;color: red;padding-left:20px;display: block;float: left;margin-left:10px;font-size: 12px;font-family: '宋体';background: url(../images/error.png) no-repeat left center;}
+.form #phone{width: 116px;}
+.form .div-conform{padding-right:153px;}
+.form .div-conform a.conform{width: 136px;height: 34px;display: block;text-align: left;overflow: hidden;background: url(../images/btn.jpg) no-repeat;float: right;text-indent: -1000px;}

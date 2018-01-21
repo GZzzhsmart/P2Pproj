@@ -1,0 +1,118 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="top.zzh.dao.HomeDAO">
+
+    <resultMap id="homeMap" type="home">
+
+    </resultMap>
+    <!--首页信息的新增-->
+    <insert id="save" parameterType="home">
+      <![CDATA[
+        insert into t_home(hid,pic1,pic2,pic3,ewm,phone,l1,l2,l3,l4,state,date)
+        values(#{hid},#{pic1},#{pic2},#{pic3},#{ewm},#{phone},#{l1},#{l2},#{l3},#{l4},#{state},#{date})
+      ]]>
+    </insert>
+
+    <!--首页信息的更新-->
+    <update id="update" parameterType="home">
+        <![CDATA[
+          update t_home
+        ]]>
+        <set>
+            <if test="pic1 != null and pic1 != ''">
+                pic1 = #{pic1},
+            </if>
+            <if test="pic2 != null and pic2 != ''">
+                pic2 = #{pic2},
+            </if>
+            <if test="pic3 != null and pic3 != ''">
+                pic3 = #{pic3},
+            </if>
+            <if test="ewm != null and ewm != ''">
+                ewm = #{ewm},
+            </if>
+            <if test="phone != null and ewm != ''">
+                phone = #{phone},
+            </if>
+            <if test="l1 != null and l1 != ''">
+                l1 = #{l1},
+            </if>
+            <if test="l2 != null and l2 != ''">
+                l2 = #{l2},
+            </if>
+            <if test="l3 != null and l3 != ''">
+                l1 = #{l1},
+            </if>
+            <if test="l4 != null and l4 != ''">
+                l1 = #{l1},
+            </if>
+            <if test="state != null and state != ''">
+                state = #{state},
+            </if>
+            <if test="date != null and date != ''">
+                date = #{date},
+            </if>
+        </set>
+        where hid = #{hid}
+    </update>
+    <!--修改状态-->
+    <update id="updateStatus" parameterType="home">
+        <![CDATA[
+          update t_home set state = #{state} where hid = #{hid}
+        ]]>
+    </update>
+
+    <!--首页信息的删除-->
+    <delete id="remove" parameterType="home">
+        <![CDATA[
+          delete from t_home where hid = #{hid}
+        ]]>
+    </delete>
+
+    <!--首页信息的分页查询-->
+    <sql id="home_query_criteria">
+        <if test="query != null and query.phone != null">
+            and phone like concat("%",#{query.phone},"%")
+        </if>
+        <if test="query != null and query.l1 != null">
+            and l1 like concat("%",#{query.l1},"%")
+        </if>
+        <if test="query != null and query.l2 != null">
+            and l2 like concat("%",#{query.l2},"%")
+        </if>
+        <if test="query !=null and query.l3 != null">
+            and l3 like concat("%",#{query.l3},"%")
+        </if>
+        <if test="query != null and query.l4 != null">
+            and l4 like concat("%",#{query.l4},"%")
+        </if>
+        <if test="query != null and query.date != null and query.date != ''">
+            and date <![CDATA[<=]]> #{query.date}
+        </if>
+    </sql>
+    <select id="listPagerCriteria" resultType="home">
+        select * from t_home where 1=1
+        <include refid="home_query_criteria"/>
+        order by date desc
+        limit #{pager.beginIndex},#{pager.pageSize}
+    </select>
+
+    <select id="countCriteria" resultType="long">
+        select count(hid) from t_home where 1=1
+        <include refid="home_query_criteria"/>
+    </select>
+
+    <select id="listAll" resultType="home">
+        <![CDATA[
+          select * from t_home where state = 0
+           order by date desc
+          limit 0,1
+        ]]>
+    </select>
+
+    <select id="getById" parameterType="long" resultType="home">
+        select * from t_home where hid = #{hid}
+    </select>
+</mapper>

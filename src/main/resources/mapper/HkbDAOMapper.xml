@@ -1,0 +1,115 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="top.zzh.dao.HkbDAO">
+
+    <insert id="save" parameterType="top.zzh.bean.Hkb">
+        <![CDATA[
+           insert into t_hkb(uid,rname,cpname,tnum,ytime,bzname,ybx,ylx,ybj,state,baid,huid)
+          values(#{uid},#{rname},#{cpname},#{tnum},#{ytime},#{bzname},#{ybx},#{ylx},#{ybj},#{state},#{baid},#{huid} )
+        ]]>
+    </insert>
+
+    <insert id="saveList" parameterType="list">
+        <![CDATA[
+          insert into t_hkb(uid, rname, cpname, bzname,huid,
+          ybx, ylx, ybj, tnum, baid, ytime, state, djq
+          ) values
+        ]]>
+        <foreach collection="list" item="item" index="index" separator="," >
+            (#{item.uid},#{item.rname},#{item.cpname},#{item.bzname},#{item.huid}
+            ,#{item.ybx},#{item.ylx},#{item.ybj},#{item.tnum},#{item.baid},#{item.ytime},#{item.state},#{item.djq})
+        </foreach>
+    </insert>
+
+
+    <!-- 还款人项目，贷后负责人-->
+    <sql id="cash_query_criteria">
+        <if test="query != null and query.rname != null and query.rname!=''">
+                and h.rname like concat('%', #{query.rname}, '%')
+        </if>
+        <if test="query != null and query.username != null and query.username!=''">
+                and username like concat('%', #{query.username}, '%')
+        </if>
+    </sql>
+
+
+    <select id="listPagerCriteria" resultType="top.zzh.vo.HkbVO">
+       select h.rname,b.rname as name1 ,hu.rname as username,h.cpname,h.rnum,h.tnum,h.bzname,h.ybx,h.rbx,h.ylx,
+        h.rbx,h.ybj,h.rbj,h.yfx,h.rfx,h.yucount,h.djq,h.state,h.ytime,h.rtime
+        from t_hkb h,t_huser hu,t_user u,t_borrowapply b where b.baid = h.baid
+        and  h.uid = u.uid and h.huid = hu.huid
+        <include refid="cash_query_criteria"/>
+        limit #{pager.beginIndex}, #{pager.pageSize}
+    </select>
+
+    <select id="countCriteria" resultType="long">
+        <![CDATA[
+        select count(hkid) from t_hkb h,t_huser hu,t_user u,t_borrowapply b where b.baid = h.baid
+              and  h.uid = u.uid and h.huid = hu.huid
+        ]]>
+    </select>
+
+    <select id="find" resultType="top.zzh.vo.HkbVO">
+        <![CDATA[
+            select h.hkid,ba.baid,u.uid,h.rname,h.bzname,h.cpname,h.ybx,h.rbx,h.ylx,h.rlx,h.ybj,h.rbj,h.yfx,h.rfx,h.yucount,h.djq,h.tnum,h.rnum,h.state
+            from t_hkb h,t_user u,t_borrowapply ba
+            where h.uid = u.uid and h.baid = ba.baid and u.uid = #{query.uid}
+            limit #{pager.beginIndex}, #{pager.pageSize}
+        ]]>
+    </select>
+
+
+    <select id="listPager" resultType="top.zzh.query.HkbQuery">
+         select hkid,uid,baid,cpname,rnum,ytime,bzname,ybx,rbx,rbx,ylx,rlx,ybj,rbj,yfx,rfx,yucount,djq,state  from t_hkb
+        where uid =#{uid}
+        limit #{pager.beginIndex}, #{pager.pageSize}
+    </select>
+
+    <select id="count" resultType="long">
+        <![CDATA[
+
+        select count(uid)  from t_hkb where uid =#{uid}
+      ]]>
+    </select>
+
+
+    <!--还款-->
+    <update id="updateHmoney" parameterType="top.zzh.query.HkbQuery">
+        <![CDATA[
+          update t_hkb
+        ]]>
+        <set>
+            rtime=CURRENT_TIMESTAMP,
+
+            <if test="rnum!=null and rnum!=''">
+                rnum =#{rnum},
+            </if>
+
+            <if test="rbx!=null and rbx!=''">
+                rbx=#{rbx},
+            </if>
+            <if test="rlx!=null and rlx!=''">
+                rlx=#{rlx},
+            </if>
+            <if test="rbj!=null and rbj!=''">
+                rbj=#{rbj},
+            </if>
+            <if test="state!=null and state!=''">
+                state=#{state},
+            </if>
+        </set>
+        where hkid=#{hkid}
+    </update>
+
+
+
+    <select id="countByUid" resultType="long">
+        <![CDATA[
+          select count(u.uid) from t_hkb h,t_user u,t_borrowapply ba
+            where h.uid = u.uid and h.baid = ba.baid and u.uid = #{query.uid}
+        ]]>
+    </select>
+
+</mapper>

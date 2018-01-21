@@ -1,0 +1,128 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="top.zzh.dao.BorrowDetailDAO">
+
+    <insert id="save" parameterType="top.zzh.bean.BorrowDetail">
+        <selectKey keyColumn="bdid" keyProperty="bdid" resultType="long" order="AFTER">
+            SELECT LAST_INSERT_ID();
+        </selectKey>
+        <![CDATA[
+          insert into t_borrowdetail(mpurpose,hksource,suggest,xmdescrip,guarantee,money,nprofit,sid,cpname,baid)
+          values(#{mpurpose},
+            #{hksource},#{suggest},#{xmdescrip},#{guarantee},#{money},#{nprofit},#{sid},#{cpname},#{baid})
+        ]]>
+    </insert>
+
+    <update id="update" parameterType="top.zzh.bean.BorrowDetail">
+
+        <![CDATA[
+          update t_borrowdetail set mpurpose = #{mpurpose},hksource = #{hksource},suggest = #{suggest},xmdescrip = #{xmdescrip},
+          guarantee = #{guarantee},nprofit = #{nprofit},sid = #{sid} where bdid = #{bdid}
+        ]]>
+    </update>
+
+    <update id="updateBybaid" parameterType="top.zzh.bean.BorrowDetail">
+        <![CDATA[
+         update t_borrowdetail set money= #{money}
+           where baid = #{baid}
+        ]]>
+    </update>
+
+    <update id="updateTupian" parameterType="top.zzh.bean.BorrowDetail">
+        <![CDATA[
+           update t_borrowdetail set fpic = #{fpic}, ypic = #{ypic},tpic = #{tpic},qpic = #{qpic}  where bdid = #{bdid}
+        ]]>
+    </update>
+
+    <!-- 还款来源，产品名称，借款人，借款金额-->
+    <sql id="cash_query_criteria">
+        <if test="query != null and query.money != null">
+            and money like concat('%', #{query.money}, '%')
+        </if>
+        <if test="query != null and query.cpname != null">
+            and cpname like concat('%', #{query.cpname}, '%')
+        </if>
+        <if test="query != null and query.rname != null">
+            and rname like concat('%', #{query.rname}, '%')
+        </if>
+        <if test="query != null and query.hksource != null">
+            and hksource like concat('%', #{query.hksource}, '%')
+        </if>
+    </sql>
+
+    <select id="listPagerCriteria" resultType="top.zzh.vo.BorrowApplyVO">
+        select bd.fpic,bd.ypic,bd.qpic,bd.tpic,bd.mpurpose,bd.hksource,bd.suggest,bd.xmdescrip,bd.guarantee,ba.money,bd.nprofit,s.way,bd.cpname,ba.rname
+        from t_borrowdetail bd,t_borrowapply ba,t_sway s where ba.baid = bd.baid and ba.money = bd.money and s.sid = bd.sid
+        <include refid="cash_query_criteria"/>
+        limit #{pager.beginIndex}, #{pager.pageSize}
+    </select>
+
+    <select id="listPager" resultType="top.zzh.vo.BorrowApplyVO">
+        <![CDATA[
+            select bd.fpic,bd.ypic,bd.qpic,bd.tpic,bd.mpurpose,bd.hksource,bd.suggest,bd.xmdescrip,bd.guarantee,ba.money,bd.nprofit,bd.way,bd.cpname,ba.rname
+            from t_borrowdetail bd,t_borrowapply ba where ba.baid = bd.baid and ba.money = bd.money
+            limit #{pager.beginIndex}, #{pager.pageSize}
+         ]]>
+    </select>
+
+    <select id="countCriteria" resultType="long">
+        <![CDATA[
+            select count(bdid) from t_borrowdetail bd,t_borrowapply ba
+            where ba.baid = bd.baid and ba.money = bd.money
+
+        ]]>
+    </select>
+
+    <select id="count" resultType="top.zzh.bean.BorrowDetail">
+        <![CDATA[
+            select count(bdid) from t_borrowdetail
+
+        ]]>
+    </select>
+
+    <select id="listAll" resultType="top.zzh.bean.BorrowDetail">
+        select bd.fpic,bd.ypic,bd.qpic,bd.tpic,bd.mpurpose,bd.hksource,bd.suggest,bd.xmdescrip,bd.guarantee,ba.money,bd.nprofit,bd.sid,s.way,bd.cpname,ba.baid,ba.rname
+        from t_borrowdetail bd,t_borrowapply ba,t_sway s where ba.baid = bd.baid and ba.money = bd.money and bd.sid = s.sid
+    </select>
+
+    <select id="findDetails" resultType="top.zzh.vo.BorrowDetailVO">
+        <![CDATA[
+          select ba.huid,ba.baid,ba.uid,bd.bdid,bd.sid,ba.rname,b.bzname,ba.term,ba.deadline,bd.fpic,bd.ypic,
+            bd.qpic,bd.tpic,bd.mpurpose,bd.hksource,bd.suggest,bd.xmdescrip,bd.guarantee,bd.money as mmoney,ba.money,um.zmoney,um.kymoney,um.tzmoney,bd.nprofit,s.way,bd.cpname
+            from t_borrowdetail bd,t_borrowapply ba,t_bz b,t_sway s,t_usermoney um
+            where ba.bzid =b.bzid and  ba.baid = bd.baid  and  s.sid = bd.sid and ba.uid = um.uid and ba.baid = #{baid}
+        ]]>
+    </select>
+
+    <select id="find" resultType="top.zzh.vo.BorrowDetailVO">
+        <![CDATA[
+           select ba.baid,ba.uid,bd.bdid,bd.sid,ba.rname,b.bzname,ba.term,ba.deadline,bd.fpic,bd.ypic,
+            bd.qpic,bd.tpic,bd.mpurpose,bd.hksource,bd.suggest,bd.xmdescrip,bd.guarantee,ba.money,bd.nprofit,s.way,bd.cpname
+            from t_borrowdetail bd,t_borrowapply ba,t_bz b,t_sway s
+            where ba.bzid =b.bzid and  ba.baid = bd.baid  and  s.sid = bd.sid  and ba.baid = #{baid}
+       ]]>
+    </select>
+
+    <select id="getById" resultType="top.zzh.vo.BorrowDetailVO">
+        <![CDATA[
+           select b.uid,b.baid,b.money,bd.money as mmoney from t_borrowapply as b,t_borrowdetail as bd
+            where b.baid = bd.baid and b.baid = #{baid}
+        ]]>
+    </select>
+
+
+
+    <select id="findWay" resultType="top.zzh.vo.BorrowDetailVO">
+        <![CDATA[
+
+        select s.way,bw.term,b.nprofit,b.money,bw.money as mmoney  from t_tzb t,t_borrowdetail b,t_sway s,t_borrowapply bw where
+         t.baid=b.baid and b.sid=s.sid and bw.baid=b.baid and t.uid=#{uid} and t.juid=#{juid} and t.baid=#{baid};
+         ]]>
+    </select>
+
+
+
+
+</mapper>

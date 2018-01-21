@@ -1,0 +1,13 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="top.zzh.dao.RewardSettingDAO">
+
+    <select id="selectpercent" resultType="double">
+        select r.percent from  t_rewardsetting as r
+        WHERE #{money} <![CDATA[>=]]> r.minmoney and #{money} <![CDATA[<]]> r.maxmoney
+    </select>
+
+</mapper>
+

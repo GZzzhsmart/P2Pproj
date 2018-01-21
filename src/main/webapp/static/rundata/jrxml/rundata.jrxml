@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rundata" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1a45b5d0-57f3-4294-8508-fa7f98699124">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="tmoney" class="java.lang.String"/>
+	<parameter name="mmoney" class="java.lang.String"/>
+	<parameter name="tuser" class="java.lang.String"/>
+	<parameter name="muser" class="java.lang.String"/>
+	<parameter name="ttzno" class="java.lang.String"/>
+	<parameter name="mtzno" class="java.lang.String"/>
+	<parameter name="tdkno" class="java.lang.String"/>
+	<parameter name="mdkno" class="java.lang.String"/>
+	<parameter name="tdkbno" class="java.lang.String"/>
+	<parameter name="mdkbno" class="java.lang.String"/>
+	<parameter name="tmoneyImg" class="java.lang.Object"/>
+	<parameter name="tuserImg" class="java.lang.Object"/>
+	<parameter name="ttznoImg" class="java.lang.Object"/>
+	<parameter name="tdknoImg" class="java.lang.Object"/>
+	<parameter name="tdkbnoImg" class="java.lang.Object"/>
+	<parameter name="sexJfreeChart" class="net.sf.jasperreports.engine.JRRenderable"/>
+	<parameter name="ageJfreeChart" class="net.sf.jasperreports.engine.JRRenderable"/>
+	<parameter name="createTime" class="java.lang.String"/>
+	<parameter name="createMonth" class="java.lang.String"/>
+	<detail>
+		<band height="802">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="21" y="716" width="85" height="30" uuid="c06faeec-6ef6-489a-80c6-f8fd747fc58e"/>
+				<textElement>
+					<font fontName="宋体" size="16" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[总贷款笔数]]></text>
+			</staticText>
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="21" y="336" width="171" height="27" uuid="b68fa623-2be7-43f8-9477-12b618b137e2"/>
+				<textElement>
+					<font fontName="宋体" size="16" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[平台撮合交易总额(元)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="352" y="337" width="85" height="26" uuid="a577f9e4-bfd2-49f9-a374-8c6140de8167"/>
+				<textElement>
+					<font fontName="宋体" size="16" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[总用户数]]></text>
+			</staticText>
+			<textField>
+				<reportElement stretchType="RelativeToBandHeight" x="139" y="556" width="82" height="26" uuid="d402d7ea-641a-41a3-af26-82f93e1b29ea"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{mtzno}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="57" y="556" width="86" height="32" uuid="c42df509-2bc3-41fe-947b-666e8004a4fc"/>
+				<textElement>
+					<font fontName="宋体" size="16" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[月投资人数]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="478" y="376" width="86" height="31" uuid="405a0d37-3641-4758-bbef-c4371e052bf7"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{muser}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="392" y="377" width="86" height="29" uuid="ceb844bf-9d23-4e1f-b8c6-86c95230c093"/>
+				<textElement>
+					<font fontName="宋体" size="16" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[月用户数]]></text>
+			</staticText>
+			<textField>
+				<reportElement stretchType="RelativeToBandHeight" x="106" y="514" width="85" height="26" uuid="48bb1d76-5eaf-40fd-add1-4bfba5339313"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{ttzno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToBandHeight" x="223" y="381" width="100" height="26" uuid="58206f84-d593-440c-9a23-242ee33f1ff3"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{mmoney}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="57" y="381" width="181" height="27" uuid="c8549327-cc02-46f4-85dc-f1fc04491b13"/>
+				<textElement>
+					<font fontName="宋体" size="16" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[月平台撮合交易总额(元)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="50" y="760" width="86" height="30" uuid="7263bd48-5496-44c0-bd1c-ab55e926a6fd"/>
+				<textElement>
+					<font fontName="宋体" size="16" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[月贷款笔数]]></text>
+			</staticText>
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="28" y="512" width="85" height="28" uuid="88e946d7-1895-4973-a7b9-1a14fa858dc6"/>
+				<textElement>
+					<font fontName="宋体" size="16" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[总投资人数]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="437" y="337" width="85" height="29" uuid="2d705683-6822-4486-b16e-777df1525dae"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{tuser}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="323" y="516" width="85" height="24" uuid="0360dcf2-d1de-4dc6-b4f8-dced91cf79b6"/>
+				<textElement>
+					<font fontName="宋体" size="16" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[总贷款人数]]></text>
+			</staticText>
+			<textField>
+				<reportElement stretchType="RelativeToBandHeight" x="136" y="760" width="119" height="30" uuid="f650ebda-fe26-4780-827c-30ad0c60033c"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{mdkbno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToBandHeight" x="113" y="716" width="85" height="30" uuid="3336b625-5582-4225-9ed7-4a629ddb44a3"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{tdkbno}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="346" y="558" width="92" height="24" uuid="8d2c1476-6bb6-4081-b0d1-69a6414942ff"/>
+				<textElement>
+					<font fontName="宋体" size="16" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[月贷款人数]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="438" y="560" width="92" height="22" uuid="8bd04f17-5145-4d41-b1c7-f8fb70cc6189"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{mdkno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToBandHeight" x="191" y="335" width="100" height="26" uuid="72d640e5-59c5-4909-89d2-d0fb1b1afaff"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{tmoney}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToBandHeight" x="400" y="518" width="85" height="22" uuid="03a70d60-d3c1-4aca-a8d0-049a96505c11"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{tdkno}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement stretchType="RelativeToBandHeight" x="21" y="252" width="163" height="83" uuid="62fd77d8-abac-4bc0-a647-d6d4469d4634"/>
+				<imageExpression><![CDATA[$P{tmoneyImg}]]></imageExpression>
+			</image>
+			<textField pattern="">
+				<reportElement stretchType="RelativeToBandHeight" x="28" y="381" width="29" height="30" uuid="bc5547a7-c99c-4ac4-b2d2-8f4e453e2ca4"/>
+				<textElement>
+					<font fontName="宋体" size="16" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{createMonth}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement stretchType="RelativeToBandHeight" x="360" y="246" width="125" height="89" uuid="b943af17-0977-49ed-bcc1-ad2938879de2"/>
+				<imageExpression><![CDATA[$P{tuserImg}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement stretchType="RelativeToBandHeight" x="28" y="411" width="178" height="103" uuid="d911a4f0-83dc-4021-93f4-53898884fd6b"/>
+				<imageExpression><![CDATA[$P{ttznoImg}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement stretchType="RelativeToBandHeight" x="352" y="418" width="130" height="94" uuid="53ff4600-0aeb-487c-a5ad-65937aabbda0"/>
+				<imageExpression><![CDATA[$P{tdknoImg}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement stretchType="RelativeToBandHeight" x="20" y="600" width="119" height="116" uuid="c6cfd2cc-87bf-4aed-bb57-4792a6e11982"/>
+				<imageExpression><![CDATA[$P{tdkbnoImg}]]></imageExpression>
+			</image>
+			<textField pattern="">
+				<reportElement stretchType="RelativeToBandHeight" x="353" y="377" width="29" height="30" uuid="420870dc-2332-46cc-bccf-809f418b15a0"/>
+				<textElement>
+					<font fontName="宋体" size="16" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{createMonth}]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement stretchType="RelativeToBandHeight" x="28" y="556" width="29" height="30" uuid="b416c6fe-21ee-4165-8178-448a25eca1f3"/>
+				<textElement>
+					<font fontName="宋体" size="16" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{createMonth}]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement stretchType="RelativeToBandHeight" x="323" y="558" width="29" height="30" uuid="e5273ce9-f66f-4821-9e1c-24951cc1849d"/>
+				<textElement>
+					<font fontName="宋体" size="16" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{createMonth}]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement stretchType="RelativeToBandHeight" x="20" y="760" width="29" height="30" uuid="4c29596a-6cc9-49bf-ada5-ca66340af4be"/>
+				<textElement>
+					<font fontName="宋体" size="16" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{createMonth}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="136" y="126" width="125" height="45" backcolor="#FF6600" uuid="f84bcd7e-b04a-47bb-8ff4-f60a2c67d05b"/>
+				<textElement>
+					<font fontName="宋体" size="30" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[截止时间]]></text>
+			</staticText>
+			<textField pattern="yyyy/MM/dd">
+				<reportElement stretchType="RelativeToBandHeight" x="255" y="121" width="214" height="50" backcolor="#FF6600" uuid="004d1f09-39ae-473a-bafb-b714b1391179"/>
+				<textElement>
+					<font size="30"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{createTime}]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement stretchType="RelativeToBandHeight" mode="Transparent" x="168" y="54" width="70" height="38" backcolor="#FF6600" uuid="52e2641e-f56f-4a55-b24d-e9b486607754"/>
+				<textElement>
+					<font fontName="宋体" size="30" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{createMonth}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="238" y="54" width="162" height="38" backcolor="#FF6600" uuid="f5b0ad8e-5cdc-4329-b7f4-72e4f9caf770"/>
+				<textElement>
+					<font fontName="宋体" size="30" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[月运营报告]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<summary>
+		<band height="802">
+			<staticText>
+				<reportElement x="139" y="0" width="227" height="47" uuid="5b947138-1f33-4d2c-874c-0e51f312b983"/>
+				<textElement>
+					<font fontName="宋体" size="30" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[投资人性别占比]]></text>
+			</staticText>
+			<elementGroup>
+				<image scaleImage="RetainShape" hAlign="Left" vAlign="Top">
+					<reportElement x="74" y="64" width="363" height="166" uuid="38ca9017-fef8-4625-bce6-e5e2d08f4592"/>
+					<imageExpression><![CDATA[$P{sexJfreeChart}]]></imageExpression>
+				</image>
+			</elementGroup>
+			<staticText>
+				<reportElement x="184" y="247" width="127" height="44" uuid="6e9aef45-52bd-4278-8bb8-14b779b70571"/>
+				<textElement>
+					<font fontName="宋体" size="30" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[年龄占比]]></text>
+			</staticText>
+			<image>
+				<reportElement x="74" y="317" width="350" height="276" uuid="130e34d7-8385-436b-9ae8-222ae22a460e"/>
+				<imageExpression><![CDATA[$P{ageJfreeChart}]]></imageExpression>
+			</image>
+		</band>
+	</summary>
+</jasperReport>

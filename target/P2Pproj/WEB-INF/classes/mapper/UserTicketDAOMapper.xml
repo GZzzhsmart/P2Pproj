@@ -1,0 +1,93 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="top.zzh.dao.UserTicketDAO">
+    <sql id="usertick_query_common">
+    <![CDATA[
+        select ut.ukid,ut.uid,ut.kid,ut.tktime as uttime,ut.usestatus,
+        t.kid,t.type,t.tkmoney,t.tktime,t.tname,t.tintro
+        from t_userticket ut inner join t_ticket t where ut.kid=t.kid  and ut.uid=#{uid}
+         ]]>
+    </sql>
+    <sql id="usertickcount_query_common">
+        <![CDATA[
+        select count(ut.ukid)
+        from t_userticket ut inner join t_ticket t where ut.kid=t.kid  and ut.uid=#{uid}
+         ]]>
+    </sql>
+
+    <select id="list" parameterType="long" resultType="top.zzh.vo.UserTicketVo">
+        <include refid="usertick_query_common"></include>
+        <![CDATA[
+        and CURRENT_DATE <= t.tktime and ut.usestatus=0 and t.tintro = '请直接转到余额里面哦'
+        ]]>
+    </select>
+
+    <select id="unuse" parameterType="long" resultType="top.zzh.vo.UserTicketVo">
+        <include refid="usertick_query_common"></include>
+        <![CDATA[
+        and CURRENT_DATE <= t.tktime and ut.usestatus=0
+        ]]>
+    </select>
+    <select id="unuseCount" parameterType="long" resultType="int">
+        <include refid="usertickcount_query_common"></include>
+        <![CDATA[
+        and CURRENT_DATE <= t.tktime and ut.usestatus=0
+        ]]>
+    </select>
+    <select id="used" parameterType="long" resultType="top.zzh.vo.UserTicketVo">
+        <include refid="usertick_query_common"></include>
+        <![CDATA[
+        and ut.usestatus=1
+        ]]>
+    </select>
+    <select id="usedCount" parameterType="long" resultType="int">
+        <include refid="usertickcount_query_common"></include>
+        <![CDATA[
+        and ut.usestatus=1
+        ]]>
+    </select>
+    <select id="overed" parameterType="long" resultType="top.zzh.vo.UserTicketVo">
+        <include refid="usertick_query_common"></include>
+        <![CDATA[
+        and ((CURRENT_DATE > t.tktime and ut.usestatus=0) or ut.usestatus=2)
+        ]]>
+    </select>
+    <select id="overedCount" parameterType="long" resultType="int">
+        <include refid="usertickcount_query_common"></include>
+        <![CDATA[
+        and ((CURRENT_DATE > t.tktime and ut.usestatus=0) or ut.usestatus=2)
+        ]]>
+    </select>
+    <select id="selectKidListByName" parameterType="string" resultType="long">
+        <![CDATA[
+            select kid from t_ticket where CURRENT_DATE < tktime and tname=#{tname}
+        ]]>
+    </select>
+    <select id="selectUtkListByName" resultType="top.zzh.vo.UserTicketVo">
+        <include refid="usertick_query_common"></include>
+        <![CDATA[
+        and CURRENT_DATE < t.tktime and ut.usestatus=0 and t.tname=#{tname}
+        ]]>
+    </select>
+    <insert id="save" useGeneratedKeys="true" parameterType="userTicket">
+        insert into t_userticket(uid,kid,tktime,usestatus) values(#{uid},#{kid},CURRENT_DATE ,0);
+    </insert>
+    <update id="updateUseStt" parameterType="long">
+        <![CDATA[
+        update t_userticket set usestatus=1 where 1=1 and uid=#{uid}
+        ]]>
+    </update>
+    <update id="updateEGold">
+        <![CDATA[
+        update t_userticket set usestatus=2 where kid in (select kid from t_ticket where type=3) and datediff(CURRENT_DATE,tktime)>3 ;
+        ]]>
+    </update>
+
+    <update id="updateState" parameterType="top.zzh.vo.UserTicketVo">
+        <![CDATA[
+          update t_userticket set usestatus = 1 where uid = #{uid} and kid = #{kid}
+        ]]>
+    </update>
+</mapper>

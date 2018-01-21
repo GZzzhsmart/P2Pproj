@@ -1,0 +1,76 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="top.zzh.dao.LogMoneyDAO">
+
+    <insert id="save" parameterType="logMoney">
+        <![CDATA[
+          insert into t_logmoney(uid, type, `in`,`out`, `date`)
+          values(#{uid},#{type},#{in},#{out},CURRENT_TIMESTAMP)
+        ]]>
+    </insert>
+    <update id="update" parameterType="logMoney">
+      <![CDATA[
+
+        ]]>
+    </update>
+
+    <select id="listPager" resultType="top.zzh.vo.LogMoneyVO">
+      select u.rname,u.face,lm.type,lm.`in`,lm.out,lm.`date` from
+      t_logmoney as lm,t_user as u where lm.uid=u.uid
+       limit #{pager.beginIndex}, #{pager.pageSize}
+    </select>
+
+    <select id="count" resultType="long">
+        select count(id) from
+        t_logmoney as lm,t_user as u where lm.uid=u.uid
+    </select>
+
+    <sql id="query_criteria">
+        <if test="query != null and query.date != null">
+            and lm.date<![CDATA[<=]]> #{query.date}
+        </if>
+        <if test="query != null and query.rname != null and query.rname != ''">
+            and u.rname like concat('%', #{query.rname}, '%')
+        </if>
+    </sql>
+
+    <select id="listPagerCriteria" resultType="top.zzh.vo.LogMoneyVO">
+        select u.rname,u.face,lm.type,lm.`in`,lm.out,lm.`date` from
+        t_logmoney as lm,t_user as u where lm.uid=u.uid
+        <include refid="query_criteria"/>
+        limit #{pager.beginIndex}, #{pager.pageSize}
+    </select>
+    <select id="countCriteria" resultType="long">
+        select count(lm.id) from
+        t_logmoney as lm,t_user as u where  lm.uid=u.uid
+        <include refid="query_criteria"/>
+    </select>
+
+    <!--资金流向管理（个人）-->
+    <select id="listPagerById" resultType="logMoney">
+      select * from
+        t_logmoney  where uid=#{id}
+        limit #{pager.beginIndex}, #{pager.pageSize}
+    </select>
+
+    <select id="countById" resultType="long">
+        select count(uid) from
+        t_logmoney where  uid=#{id}
+    </select>
+
+    <select id="listPagerUid" resultType="top.zzh.vo.LogMoneydate">
+        <![CDATA[
+           select * from
+        t_logmoney  where uid=#{query.uid}
+          limit #{pager.beginIndex}, #{pager.pageSize}
+       ]]>
+    </select>
+
+    <select id="getCount" resultType="long">
+        select count(uid) from
+        t_logmoney where uid=#{query.uid}
+    </select>
+
+</mapper>

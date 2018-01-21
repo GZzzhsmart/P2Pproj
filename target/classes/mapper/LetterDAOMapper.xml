@@ -1,0 +1,107 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--Created by 谢学培 on 2017/12/21.-->
+
+<mapper namespace="top.zzh.dao.LetterDAO">
+    <insert id="save" parameterType="top.zzh.vo.LetterVO">
+        <selectKey keyColumn="lid" keyProperty="lid" resultType="long" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into t_letter(title,content,date,state) values(#{title},#{content},now(),#{state});
+    </insert>
+    <insert id="letterUserSave">
+        insert into t_letter_user(uid) select uid from t_user;
+    </insert>
+    <update id="letterUserUpdate" parameterType="long">
+    <![CDATA[
+       UPDATE t_letter_user set lid=#{lid},state =0 where lid is null;
+    ]]>
+    </update>
+
+    <!--条件查询【推荐人姓名或被推荐人姓名】-->
+    <sql id="cash_query_criteria">
+        <if test="query != null and query.title != null and query.title!=''">
+            and title like concat('%', #{query.title}, '%')
+        </if>
+        <if test="query != null and query.content != null and query.content!=''">
+            and content like concat('%', #{query.content}, '%')
+        </if>
+        <if test="query != null and query.state != null and query.state ==1 or query.state==2">
+            and state = (#{query.state}-1)
+        </if>
+        <if test="query != null and query.startTime != null and query.startTime != ''">
+            and `date` <![CDATA[>=]]> #{query.startTime}
+        </if>
+        <if test="query != null and query.endTime != null and query.endTime != ''">
+            and `date`<![CDATA[<=]]> #{query.endTime}
+        </if>
+    </sql>
+    <select id="listPagerCriteria" resultType="letter">
+        select lid,title,content,`date`,state from t_letter where 1=1
+        <include refid="cash_query_criteria"/>
+        order by `date` desc limit #{pager.beginIndex}, #{pager.pageSize}
+    </select>
+    <select id="countCriteria" resultType="long">
+        select count(lid) from t_letter where 1=1
+        <include refid="cash_query_criteria"/>
+    </select>
+
+    <sql id="queryByUid">
+        from t_user u, t_letter l, t_letter_user lu
+        where lu.uid=u.uid
+        and lu.lid=l.lid
+        and l.state=0
+        <if test="obj!=null and obj.uid!=null">
+            and lu.uid=#{obj.uid}
+        </if>
+        <if test="obj!=null and obj.lState!=null and obj.lState==0 or obj.lState==1">
+            and lu.state = #{obj.lState}
+        </if>
+    </sql>
+    <select id="listPagerUid" resultType="top.zzh.vo.LetterVO">
+        select l.lid,l.title,l.date,lu.state as lState
+        <include refid="queryByUid"/>
+        order by l.date desc limit #{pager.beginIndex}, #{pager.pageSize}
+    </select>
+    <select id="countByUid" resultType="long">
+        select count(l.lid)
+        <include refid="queryByUid"/>
+    </select>
+
+    <delete id="remove" parameterType="letter">
+        <![CDATA[
+
+          delete from t_letter where lid=#{lid}
+
+        ]]>
+    </delete>
+    <select id="checkContent" resultType="String">
+        select content from t_letter where lid=#{lid}
+    </select>
+    <update id="updateState" parameterType="long">
+        <![CDATA[
+          update t_letter_user set state=1 where lid=#{lid} and uid=#{uid}
+        ]]>
+    </update>
+    <update id="updateLetterState">
+        <![CDATA[
+          update t_letter set state=#{state} where lid=#{lid}
+        ]]>
+    </update>
+    <select id="countByRead" resultType="Long" parameterType="long">
+        select count(id) from t_letter_user where uid=#{uid} and state=1
+    </select>
+    <delete id="removeById" parameterType="Long">
+        <![CDATA[
+          delete from t_letter_user where uid=#{uid} and state=1
+        ]]>
+    </delete>
+    <!--推荐排行榜-->
+    <select id="recommendRanking" resultType="top.zzh.vo.RecommendVO">
+     select tid,tname,count(tid) as ci from t_recommend
+     where DateDiff(`date`,now())=0
+     group by tid having count(tid)>=1
+     order by ci desc limit 0,10
+    </select>
+</mapper>

@@ -1,0 +1,53 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="top.zzh.dao.SwayDAO">
+
+    <select id="count" resultType="long">
+        <![CDATA[
+		select count(*) from t_sway
+		]]>
+    </select>
+
+    <insert id="save" parameterType="top.zzh.bean.Sway">
+        <![CDATA[
+          insert into t_sway(sid,way,fw,state) values(#{sid},#{way},#{fw},0)
+        ]]>
+    </insert>
+
+    <update id="update" parameterType="top.zzh.bean.Sway">
+        <![CDATA[
+            update t_sway set way = #{way} , fw = #{fw} ,state = #{state} where sid = #{sid}
+        ]]>
+    </update>
+
+    <update id="updateState" parameterType="top.zzh.bean.Sway">
+        <![CDATA[
+            update t_sway set state = #{state} where sid = #{sid}
+        ]]>
+    </update>
+
+    <delete id="removeById" parameterType="java.lang.Long">
+        <![CDATA[
+            delete from t_sway where sid = #{sid}
+        ]]>
+    </delete>
+
+    <select id="listPager" resultType="top.zzh.bean.Sway">
+        <![CDATA[
+        select * from t_sway limit #{pager.beginIndex}, #{pager.pageSize}
+    ]]>
+    </select>
+
+    <select id="getById" resultType="top.zzh.bean.Sway" >
+        <![CDATA[
+        select * from t_sway where sid = #{sid}
+    ]]>
+    </select>
+    <select id="listAll" resultType="top.zzh.bean.Sway" >
+        <![CDATA[
+        select * from t_sway
+    ]]>
+    </select>
+</mapper>

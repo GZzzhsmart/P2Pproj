@@ -1,0 +1,20 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="top.zzh.dao.BankDAO">
+
+    <select id="getDeposit" resultType="string">
+        <![CDATA[
+		select deposit from t_bank
+		where id = #{id}
+		]]>
+    </select>
+
+    <select id="getBankName" resultType="string">
+        <![CDATA[
+		select bankName from t_bank
+		where id = #{id}
+		]]>
+    </select>
+</mapper>

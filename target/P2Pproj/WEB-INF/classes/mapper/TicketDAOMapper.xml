@@ -1,0 +1,77 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="top.zzh.dao.TicketDAO">
+    <sql id="query_common_sql">
+        <if test="query!=null and query.type!=null">
+            and type=#{query.type}
+        </if>
+        <if test="query!=null and query.tkmoney!=null">
+            and tkmoney like concat("%",#{query.tkmoney},"%")
+        </if>
+        <if test="query!=null and query.tktime!=null and query.tktime!=''">
+            and tktime<![CDATA[<=]]>#{query.tktime}
+        </if>
+        <if test="query!=null and query.tname!=null and query.tname!=''">
+            and tname like concat("%",#{query.tname},"%")
+        </if>
+    </sql>
+    <select id="listPager" parameterType="top.zzh.common.Pager" resultType="ticket">
+        select kid,type,tkmoney,tktime,tname,tintro,usecondition,status from t_ticket order by tktime desc limit #{beginIndex}, #{pageSize}
+    </select>
+    <select id="count" parameterType="top.zzh.common.Pager" resultType="long">
+        select count(kid) from t_ticket
+    </select>
+    <select id="getById" parameterType="long" resultType="top.zzh.vo.TicketVo">
+        select kid,type,tkmoney,tktime,tname,tintro,usecondition,status from t_ticket where kid=#{kid}
+    </select>
+    <select id="listPagerCriteria" resultType="ticket">
+        select kid,type,tkmoney,tktime,tname,tintro,usecondition,status from t_ticket where 1=1
+        <include refid="query_common_sql"></include>
+        order by tktime desc limit #{pager.beginIndex}, #{pager.pageSize}
+    </select>
+    <select id="countCriteria" resultType="long">
+        select count(kid) from t_ticket where 1=1
+        <include refid="query_common_sql"></include>
+    </select>
+
+    <insert id="save" parameterType="top.zzh.vo.TicketVo">
+        <![CDATA[
+			insert into t_ticket(type,tkmoney,tktime,tname,tintro,usecondition,status) values(#{type},#{tkmoney},#{tktime},#{tname},#{tintro},#{usecondition},1 )
+		]]>
+    </insert>
+
+    <update id="update" parameterType="top.zzh.vo.TicketVo">
+        <![CDATA[
+			update t_ticket
+		]]>
+        <set>
+            <if test="type!= null">
+                type = #{type},
+            </if>
+            <if test="tkmoney!= null">
+                tkmoney = #{tkmoney},
+            </if>
+            <if test="tktime!= null">
+                tktime = #{tktime},
+            </if>
+            <if test="tname!= null and tname.trim()!=''">
+                tname = #{tname},
+            </if>
+            <if test="tintro!= null and tintro.trim()!=''">
+                tintro = #{tintro},
+            </if>
+            <if test="usecondition!= null">
+                usecondition = #{usecondition},
+            </if>
+        </set>
+        where kid = #{kid}
+    </update>
+    <update id="updateStatus">
+        <![CDATA[
+			update t_ticket set status=#{status} where kid = #{kid}
+		]]>
+    </update>
+
+</mapper>

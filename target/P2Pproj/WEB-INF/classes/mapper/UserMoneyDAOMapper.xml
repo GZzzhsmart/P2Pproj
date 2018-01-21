@@ -1,0 +1,189 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="top.zzh.dao.UserMoneyDAO">
+
+    <sql id="money">
+        <if test="zmoney!=null">
+            zmoney=#{zmoney},
+        </if>
+        <if test="kymoney!=null">
+            kymoney=#{kymoney},
+        </if>
+        <if test="symoney!=null">
+            symoney=#{symoney},
+        </if>
+        <if test="tzmoney!=null">
+            tzmoney=#{tzmoney},
+        </if>
+        <if test="djmoney!=null">
+            djmoney=#{djmoney},
+        </if>
+        <if test="dsmoney!=null">
+            dsmoney=#{dsmoney},
+        </if>
+        <if test="jlmoney!=null">
+            jlmoney=#{jlmoney},
+        </if>
+    </sql>
+    <sql id="money_all">
+        <if test="query!=null and query.rname !=null and query.rname !=''">
+            and u.rname like concat('%', #{query.rname}, '%')
+        </if>
+        <if test="query!=null and query.zmoney !=null">
+            and um.zmoney<![CDATA[<=]]>#{query.zmoney}
+        </if>
+        <if test="query!=null and  query.kymoney !=null">
+           and  um.kymoney<![CDATA[<=]]>#{query.kymoney}
+        </if>
+        <if test="query!=null and  query.symoney!=null">
+            and um.symoney<![CDATA[<=]]>#{query.symoney}
+        </if>
+        <if test="query!=null and  query.tzmoney !=null">
+           and um.tzmoney<![CDATA[<=]]>#{query.tzmoney}
+        </if>
+        <if test="query!=null and  query.djmoney !=null">
+            and um.djmoney<![CDATA[<=]]>#{query.djmoney}
+        </if>
+        <if test="query!=null and  query.dsmoney !=null">
+           and um.dsmoney<![CDATA[<=]]>#{query.dsmoney}
+        </if>
+        <if test="query!=null  and query.jlmoney !=null">
+            and um.jlmoney<![CDATA[<=]]>#{query.jlmoney}
+        </if>
+    </sql>
+
+    <insert id="save" parameterType="userMoney">
+        <![CDATA[
+          insert into t_usermoney(uid,zmoney,kymoney,symoney,tzmoney,djmoney,dsmoney,jlmoney)
+        values(#{uid},0,0,0,0,0,0,0)
+   ]]>
+    </insert>
+
+
+    <update id="update" parameterType="top.zzh.vo.UserMoneyVO">
+        <![CDATA[
+             update t_usermoney set zmoney = #{zmoney},kymoney = #{kymoney},symoney = #{symoney},
+             tzmoney = #{tzmoney},djmoney = #{djmoney},dsmoney = #{dsmoney},jlmoney=#{jlmoney} where uid = #{uid}
+          ]]>
+    </update>
+
+    <select id="listPager" resultType="userMoney">
+        <![CDATA[
+        select * from t_usermoney limit #{pager.beginIndex}, #{pager.pageSize}
+        ]]>
+    </select>
+    <select id="count" resultType="long">
+        select count(id) from t_usermoney
+    </select>
+
+    <select id="listPagerCriteria" resultType="top.zzh.vo.UserMoneyVO">
+        select u.rname,um.uid,um.zmoney,um.kymoney,um.symoney,um.tzmoney,um.dsmoney,um.djmoney,um.jlmoney
+        from t_usermoney as um ,t_user as u
+        where um.uid=u.uid
+        <include refid="money_all"/>
+        limit #{pager.beginIndex}, #{pager.pageSize}
+    </select>
+
+    <select id="countCriteria" resultType="long">
+        select count(um.uid)  from t_usermoney as um ,t_user as u  where um.uid=u.uid
+        <include refid="money_all"/>
+    </select>
+
+    <select id="getMoney" resultType="long">
+        select kymoney  from t_usermoney   where uid=#{uid}
+    </select>
+
+    <select id="getZmoney" resultType="long">
+        select zmoney  from t_usermoney   where uid=#{uid}
+    </select>
+
+    <update id="updateMoney">
+        <![CDATA[
+          update t_usermoney set kymoney=#{money},zmoney=#{zmoney} where uid =#{uid}
+           ]]>
+    </update>
+
+    <!--用户资金管理（个人）-->
+    <select id="getById" parameterType="top.zzh.bean.UserMoney">
+        <![CDATA[
+         select u.rname,um.uid,um.zmoney,um.kymoney,um.symoney,
+         um.tzmoney,um.dsmoney,um.djmoney,um.jlmoney
+          from t_usermoney as um ,t_user as u
+          where  u.uid=#{uid}
+
+      ]]>
+
+    </select>
+
+    <!--查找奖励金-->
+    <select id="findJlmoney" resultType="top.zzh.bean.UserMoney">
+        <![CDATA[
+        select jlmoney,zmoney,kymoney from t_usermoney where  uid=#{uid}
+       ]]>
+    </select>
+
+    <!--修改奖励金-->
+    <update id="updateJlmoney">
+        <![CDATA[
+          update t_usermoney set jlmoney=#{jlmoney} where uid=#{uid}
+         ]]>
+    </update>
+
+
+    <!--查找用户资金-->
+    <select id="getByUid" resultType="top.zzh.vo.UserMoneyVO">
+        <![CDATA[
+         select uid,zmoney,kymoney,symoney,tzmoney,djmoney,dsmoney,jlmoney from t_usermoney  where  uid =#{uid}
+       ]]>
+    </select>
+
+    <!--修改可用余额和总资产-->
+    <update id="updateZmoney" parameterType="top.zzh.vo.UserMoneyVO">
+        <![CDATA[
+          update t_usermoney
+        ]]>
+        <set>
+            <if test="zmoney!=null and zmoney!=''">
+                zmoney =#{zmoney},
+            </if>
+            <if test="kymoney!=null and kymoney!=''">
+                kymoney=#{kymoney},
+            </if>
+            <if test="symoney!=null and symoney!=''">
+                symoney=#{symoney},
+            </if>
+        </set>
+        where uid=#{uid}
+    </update>
+
+    <select id="listPagerUid" resultType="top.zzh.bean.UserMoney">
+            <![CDATA[
+          select u.rname,um.uid,um.zmoney,um.kymoney,um.symoney,
+           um.tzmoney,um.dsmoney,um.djmoney,um.jlmoney
+          from t_usermoney as um ,t_user as u
+          where u.uid=um.uid
+          limit #{pager.beginIndex}, #{pager.pageSize}
+       ]]>
+    </select>
+    <select id="getCount" resultType="long">
+         select count(um.uid) from t_usermoney as um ,t_user as u
+          where  u.uid=um.uid
+          limit #{pager.beginIndex}, #{pager.pageSize}
+    </select>
+
+    <select id="listMoney" resultType="top.zzh.vo.UserMoneyVO">
+        <![CDATA[
+            select um.umid,u.uid,u.rname,um.zmoney,um.kymoney,um.symoney,um.tzmoney,um.djmoney,um.dsmoney,um.jlmoney
+            from t_usermoney um,t_user u where um.uid = u.uid and u.uid =#{uid}
+        ]]>
+    </select>
+    
+    <update id="updateKymoney" parameterType="top.zzh.vo.UserMoneyVO">
+      <![CDATA[
+        update t_usermoney set zmoney = #{zmoney},kymoney = #{kymoney} where uid = #{uid}
+      ]]>
+    </update>
+
+</mapper>

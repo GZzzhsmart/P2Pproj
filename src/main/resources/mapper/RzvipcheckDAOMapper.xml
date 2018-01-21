@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.zzh.dao.RzvipcheckDAO">
+
+    <resultMap id="rzvipCheckMap" type="rzvipCheck">
+
+    </resultMap>
+
+
+    <insert id="add" parameterType="rzvipCheck">
+        <![CDATA[
+          insert into t_rzvipcheck(uid,isok,date)
+          VALUES (#{uid},#{isok},CURRENT_TIMESTAMP);
+        ]]>
+    </insert>
+
+    <update id="examineAndverify" parameterType="rzvipCheck">
+
+        <![CDATA[
+          update t_rzvipcheck set huid=#{huid},isok=#{isok},excute=#{excute},date=CURRENT_TIMESTAMP  where uid=#{uid}
+        ]]>
+    </update>
+
+    <select id="shResult" resultMap="rzvipCheckMap">
+        <![CDATA[
+          select huid,isok,excute,date from t_rzvipcheck where uid=#{uid}
+        ]]>
+
+    </select>
+
+</mapper>

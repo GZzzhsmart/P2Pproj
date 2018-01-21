@@ -1,0 +1,75 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="top.zzh.dao.MediaDAO">
+    <!--媒体报道的新增-->
+    <insert id="save" parameterType="media">
+        <![CDATA[
+          insert into t_media(mid,title,content,pic,date,url,state)
+          values(#{mid},#{title},#{content},#{pic},#{date},#{url},#{state})
+        ]]>
+    </insert>
+
+    <!--媒体报道的修改-->
+    <update id="update" parameterType="media">
+        <![CDATA[
+              update t_media set title = #{title},content = #{content},pic = #{pic}, date = #{date},url = #{url} where mid = #{mid}
+        ]]>
+    </update>
+
+    <!--修改状态-->
+    <update id="updateStatus" parameterType="media">
+        <![CDATA[
+          update t_media set state = #{state} where mid = #{mid};
+        ]]>
+    </update>
+
+    <!--删除-->
+    <delete id="remove" parameterType="media">
+        <![CDATA[
+          delete from t_media where mid = #{mid}
+        ]]>
+    </delete>
+
+    <!--媒体报道的分页查询-->
+    <sql id="media_query_criteria">
+        <if test="query != null and query.title != null">
+          and title like concat("%",#{query.title},"%")
+        </if>
+        <if test="query != null and query.date != null and query.date != ''">
+          and date <![CDATA[<=]]> #{query.date}
+        </if>
+        <if test="query != null and query.url != null">
+          and url like concat("%", #{query.url},"%")
+        </if>
+    </sql>
+
+    <select id="listPagerCriteria" resultType="media">
+        select * from t_media where 1=1
+        <include refid="media_query_criteria"/>
+        order by date desc
+        limit #{pager.beginIndex},#{pager.pageSize}
+    </select>
+
+    <select id="countCriteria" resultType="long">
+        select count(mid) from t_media where 1=1
+        <include refid="media_query_criteria"/>
+    </select>
+
+    <select id="listPager" resultType="media">
+        <![CDATA[
+          select * from t_media where state = 0
+          order by date desc
+          limit #{pager.beginIndex},#{pager.pageSize}
+        ]]>
+    </select>
+
+    <select id="count" resultType="long">
+        select count(*) from t_media
+    </select>
+
+    <select id="getById" parameterType="long" resultType="media">
+        select * from t_media where mid = #{mid}
+    </select>
+</mapper>

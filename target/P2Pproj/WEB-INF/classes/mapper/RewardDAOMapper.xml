@@ -1,0 +1,66 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="top.zzh.dao.RewardDAO">
+    
+    <resultMap id="rewardMap" type="reward">
+
+    </resultMap>
+
+    <select id="findTmoney" resultMap="rewardMap">
+        <![CDATA[
+          select state,tmoney,money  from t_reward where uid=#{uid}
+        ]]>
+    </select>
+
+    <insert id="save" parameterType="reward">
+        <![CDATA[
+           insert into t_reward (uid,tmoney,money,state,date) values(#{uid},#{tmoney},#{money},#{state},#{date})
+        ]]>
+    </insert>
+
+
+    <update id="updateState" parameterType="reward">
+        <![CDATA[
+           update t_reward set state=#{state},date=#{date} where  uid=#{uid}
+        ]]>
+
+    </update>
+
+    <update id="updateTjmoney" parameterType="reward">
+        <![CDATA[
+           update t_reward set tmoney=#{tmoney},money=#{money} where  uid=#{uid}
+        ]]>
+
+    </update>
+
+    <sql id="rewardQuery_pager_common">
+        <if test="query!=null and query.uname!=null and query.uname!=''">
+            and u.uname like concat('%',#{query.uname},'%')
+        </if>
+        <if test="query!=null and query.state!=null and query.state!=''">
+            and r.state like concat('%',#{query.state},'%')
+        </if>
+    </sql>
+
+    <select id="listPagerCriteria" resultType="top.zzh.query.RewardQuery">
+        <![CDATA[
+         select r.rwid,r.uid,u.uname,r.tmoney,r.money,r.state,r.date from t_user u,t_reward r
+          where u.uid=r.uid
+        ]]>
+        <include refid="rewardQuery_pager_common"/>
+        limit #{pager.beginIndex},#{pager.pageSize}
+    </select>
+
+
+    <select id="countCriteria" resultType="long">
+        <![CDATA[
+          select  count(r.uid) from t_user u,t_reward r
+          where u.uid=r.uid
+        ]]>
+        <include refid="rewardQuery_pager_common"/>
+    </select>
+
+</mapper>
+

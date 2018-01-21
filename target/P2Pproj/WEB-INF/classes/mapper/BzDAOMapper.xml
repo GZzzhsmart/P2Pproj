@@ -1,0 +1,54 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="top.zzh.dao.BzDAO">
+
+    <select id="count" resultType="long">
+        <![CDATA[
+		select count(*) from t_bz
+		]]>
+    </select>
+
+    <insert id="save" parameterType="top.zzh.bean.Bz">
+        <![CDATA[
+          insert into t_bz(bzid,bzname,state) values(#{bzid},#{bzname},0)
+        ]]>
+    </insert>
+
+    <update id="update" parameterType="top.zzh.bean.Bz">
+        <![CDATA[
+            update t_bz set bzname = #{bzname},state = #{state} where bzid = #{bzid}
+        ]]>
+    </update>
+
+    <update id="updateState" parameterType="top.zzh.bean.Bz">
+        <![CDATA[
+            update t_bz set state = #{state} where bzid = #{bzid}
+        ]]>
+    </update>
+
+    <delete id="removeById" parameterType="java.lang.Long">
+        <![CDATA[
+            delete from t_bz where bzid = #{bzid}
+        ]]>
+    </delete>
+
+    <select id="listPager" resultType="top.zzh.bean.Bz">
+        <![CDATA[
+        select * from t_bz limit #{pager.beginIndex}, #{pager.pageSize}
+    ]]>
+    </select>
+
+    <select id="listAll" resultType="top.zzh.bean.Bz">
+        <![CDATA[
+          select * from t_bz
+        ]]>
+    </select>
+
+    <select id="getById" resultType="top.zzh.bean.Bz" >
+        <![CDATA[
+        select * from t_bz where bzid = #{bzid}
+    ]]>
+    </select>
+</mapper>

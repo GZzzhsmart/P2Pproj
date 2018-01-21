@@ -1,0 +1,70 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="top.zzh.dao.RoleDAO">
+    
+    <resultMap id="roleMap" type="role">
+    </resultMap>
+
+    <select id="listRoles" resultType="list" resultMap="roleMap">
+        select ur.user_id from t_user u,t_user_role ur where u.uid=ur.user_id and u.uname=#{username}
+    </select>
+
+    <insert id="save" parameterType="userRole">
+        <![CDATA[
+           insert into t_user_role (user_id,role_id)  VALUES(#{userId},#{roleId})
+        ]]>
+    </insert>
+
+
+
+    <insert id="addRole" parameterType="role">
+        <![CDATA[
+            insert into t_role(rname, content,status) values(#{rname},#{content},1)
+        ]]>
+    </insert>
+
+    <update id="updateRole" parameterType="role">
+        <![CDATA[
+            update t_role
+        ]]>
+        <set>
+            <if test="rname != null and rname != ''">
+                rname = #{rname},
+            </if>
+            <if test="content != null and content != ''">
+                content =#{content},
+            </if>
+        </set>
+        where rid = #{rid}
+    </update>
+
+    <select id="listPager" resultType="role">
+        <![CDATA[
+            select rid,rname,content,status from t_role order by rid desc limit #{pager.beginIndex}, #{pager.pageSize}
+        ]]>
+    </select>
+
+    <select id="count" resultType="long">
+        <![CDATA[
+            select count(rid) from t_role
+        ]]>
+    </select>
+
+    <update id="updateStatus" >
+        <![CDATA[
+            update t_role set status = #{status} where rid = #{roleId}
+        ]]>
+    </update>
+
+    <select id="listByAccount" parameterType="string" resultMap="roleMap">
+        <![CDATA[
+            select r.* from t_role r where r.`status` = 1 and r.rid in (
+                select hr.role_id from t_huser h,t_huser_role hr where h.huid = hr.huser_id and h.phone = #{phone}
+            )
+        ]]>
+    </select>
+
+</mapper>
+

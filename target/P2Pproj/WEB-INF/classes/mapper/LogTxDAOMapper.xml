@@ -1,0 +1,66 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- cander 陈桢 2017/12/22-->
+<mapper namespace="top.zzh.dao.LogTxDAO">
+
+    <insert id="save" parameterType="logTx">
+        <selectKey keyColumn="id" keyProperty="id" resultType="long" order="AFTER">
+            SELECT LAST_INSERT_ID();
+        </selectKey>
+        <![CDATA[
+          insert into t_logtx(uid,bankcard,banktype,money,date_time,state)
+          values(#{uid},#{bankcard},#{banktype},#{money},CURRENT_TIMESTAMP,#{state})
+        ]]>
+    </insert>
+
+    <update id="update" parameterType="logTx">
+        <![CDATA[
+            update t_logtx
+        ]]>
+        <set>
+            <if test="state!=null">
+                state=#{state}
+            </if>
+        </set>
+        where id =#{id}
+    </update>
+    <sql id="query_criteria">
+        <if test="query != null and query.dateTime != null and query.dateTime !='' ">
+            and  #{query.date}<![CDATA[<]]> lg.date_time <![CDATA[<=]]> #{query.dateTime}
+        </if>
+        <if test="query != null and query.rname != null and query.rname != ''">
+            and u.rname like concat('%', #{query.rname}, '%')
+        </if>
+    </sql>
+    <select id="listPagerCriteria" resultType="top.zzh.vo.LogTxVO">
+       select u.rname,lg.banktype,lg.bankcard,lg.money,lg.date_time,lg.state
+       from t_logtx as lg ,t_user as u where lg.uid=u.uid
+       <include refid="query_criteria"/>
+        limit #{pager.beginIndex}, #{pager.pageSize}
+    </select>
+    <select id="countCriteria" resultType="long">
+         select count(id)  from t_logtx as lg ,t_user as u where lg.uid=u.uid
+        <include refid="query_criteria"/>
+      </select>
+    <delete id="removeById" parameterType="long">
+        <![CDATA[
+            delete from t_logtx where uid=#{id}
+        ]]>
+    </delete>
+
+    <!--查看用户提现记录（个人）-->
+    <select id="listPagerByid" resultType="top.zzh.vo.LogTxVO">
+        select u.rname,lg.banktype,lg.bankcard,lg.money,lg.date_time,lg.state
+        from t_logtx as lg ,t_user as u where lg.uid=u.uid and u.uid=#{id}
+        limit #{pager.beginIndex}, #{pager.pageSize}
+    </select>
+
+    <select id="countById" resultType="long">
+        select count(u.uid)  from t_logtx as lg ,t_user as u where lg.uid=u.uid
+        and u.id=#{id}
+    </select>
+
+
+
+</mapper>

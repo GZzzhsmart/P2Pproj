@@ -1,0 +1,79 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="top.zzh.dao.HuserRoleDAO">
+    
+    <resultMap id="roleMap" type="role"></resultMap>
+    <resultMap id="hUserMap" type="top.zzh.bean.HUser"></resultMap>
+
+    <select id="hUserList" resultMap="hUserMap">
+        <![CDATA[
+          select huid,rname from t_huser where huid
+          not in (select h.huid from t_huser h,t_huser_role hr
+          where h.huid = hr.huser_id)
+        ]]>
+    </select>
+
+    <select id="hRoleList" resultMap="roleMap">
+        <![CDATA[
+          select rid,rname from t_role where status = 1
+        ]]>
+    </select>
+
+    <insert id="saveHuserRole">
+        <![CDATA[
+            insert into t_huser_role (huser_id, role_id) values
+        ]]>
+        <foreach collection="roleList" item="roleId" separator=",">
+            (#{hHuserId},#{roleId})
+        </foreach>
+    </insert>
+
+    <select id="hasRoleHuserList" resultMap="hUserMap">
+        <![CDATA[
+            select distinct h.huid,h.rname,h.sex,h.phone,h.huname
+            from t_huser h,t_huser_role hr where h.huid = hr.huser_id
+            limit #{pager.beginIndex}, #{pager.pageSize}
+        ]]>
+    </select>
+
+    <select id="count" resultType="long">
+       <![CDATA[
+          select count(distinct h.huid,h.rname,h.sex,h.phone,h.huname ) id
+          from t_huser h,t_huser_role hr where h.huid = hr.huser_id
+        ]]>
+    </select>
+
+
+    <select id="hRoleByHuserIdList" resultMap="roleMap">
+        <![CDATA[
+            select r.rid,r.rname from
+            t_role r, t_huser_role hr where r.status = 1 and r.rid = hr.role_id and
+            hr.huser_id = #{hUserId}
+        ]]>
+    </select>
+
+    <delete id="deleteRoleById" parameterType="java.lang.Integer">
+        <![CDATA[
+            delete from t_huser_role where huser_id = #{hUserId}
+        ]]>
+    </delete>
+
+    <insert id="saveHuser" parameterType="top.zzh.bean.HUser">
+        <selectKey keyColumn="huid" keyProperty="huid" resultType="long" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        <![CDATA[
+           insert into t_huser(phone,hpwd,state) values(#{phone},#{hpwd},#{state})
+        ]]>
+    </insert>
+
+    <select id="checkPhone" parameterType="string" resultType="int">
+        <![CDATA[
+          select count(huid) from t_huser where phone = #{phone}
+        ]]>
+    </select>
+
+</mapper>
+
