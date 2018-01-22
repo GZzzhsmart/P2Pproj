@@ -15,6 +15,16 @@ public class Dynamic {
 
     private Byte state;
 
+    private String contentToSub;
+
+    public String getContentToSub() {
+        if(content.length()>=200) {
+            return content.substring(0, 200);
+        }else{
+            return content;
+        }
+    }
+
     public Dynamic() {
     }
 

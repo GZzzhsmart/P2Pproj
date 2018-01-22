@@ -37,7 +37,7 @@
                                     <a href="<%=path%>/dynamic/initDynamic/${s.dyid}">${s.title}</a>
                                 </h5>
                                 <p class="text">
-                                    ${s.content}
+                                    ${s.contentToSub}
                                 </p>
                                 <p class="time">报道时间:${s.date}</p>
                             </div>

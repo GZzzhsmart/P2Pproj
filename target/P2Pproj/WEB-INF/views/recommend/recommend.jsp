@@ -39,32 +39,21 @@
                     搜索条件
                 </div>
                 <div class="panel-body form-group" style="margin-bottom:0px;">
-                    <div class="row">
-                        <label class="col-sm-1 control-label" style="text-align: right; margin-top:5px">推荐人：</label>
-                        <div class="col-sm-2">
-                            <input type="text" class="form-control" name="tname" id="tname"/>
-                        </div>
-                        <label class="col-sm-1 control-label" style="text-align: right; margin-top:3px">被推荐人：</label>
-                        <div class="col-sm-2">
-                            <input type="text" class="form-control" name="rname" id="rname"/>
-                        </div>
-                        <label class="col-sm-1 control-label" style="text-align: right; margin-top:3px">推荐码：</label>
-                        <div class="col-sm-2">
-                            <input type="text" class="form-control" name="tzm" id="tzm"/>
-                        </div>
+                    <label class="col-sm-1 control-label" style="text-align: right; margin-top:5px">推荐人：</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" name="tname" id="tname"/>
                     </div>
-                    <br/>
-                    <div class="row">
-                        <label class="col-sm-1 control-label" style="text-align: right; margin-top:5px">日期：</label>
-                        <div class="col-sm-2">
-                            <input type="text" class="form-control" placeholder="开始日期" readonly="readonly"
-                                   id="startTime"
-                                   name="startTime">
-                        </div>
-                        <div class="col-sm-2">
-                            <input type="text" class="form-control" placeholder="结束日期" readonly="readonly" id="endTime"
-                                   name="endTime">
-                        </div>
+                    <label class="col-sm-1 control-label" style="text-align: right; margin-top:3px">被推荐人：</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" name="rname" id="rname"/>
+                    </div>
+                    <label class="col-sm-1 control-label" style="text-align: right; margin-top:5px">时间：从</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" id="startTime" name="startTime">
+                    </div>
+                    <label class="col-sm-1 control-label" style="text-align: right; margin-top:5px">至</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" id="endTime" name="endTime">
                     </div>
                 </div>
                 <div class="panel-footer">
@@ -73,11 +62,11 @@
                 </div>
             </div>
             <table id="mytab" name="mytab" class="table table-hover"></table>
-            <input type="hidden" value="" id="deleteId"/>
+            <input type="hidden" value=""  id="deleteId"/>
             <div id="toolbar" class="btn-group pull-right" style="margin-right: 20px;">
                 <button id="btn_delete" onclick="delMany('/recommend/delMany');" type="button" class="btn btn-primary"
                         style="margin-left:5px">
-                    <i class="glyphicon glyphicon-remove"></i>删除
+                    <i class="glyphicon glyphicon-remove"></i>批量删除
                 </button>
                 <button type="button" id="download" style="margin-left:5px" class="btn btn-primary"
                         onClick="$('#mytab').tableExport({ type: 'excel', escape: 'false' })"><i
@@ -113,24 +102,18 @@
     function doSearch() {
         var tname = $("#tname").val();
         var rname = $("#rname").val();
-        var tzm = $("#tzm").val();
         var startTime = $("#startTime").val();
         var endTime = $("#endTime").val();
         var options = $("#mytab").bootstrapTable('refresh', {
             url: '/recommend/pager_criteria',
-            query: {tname: tname, rname: rname, tzm: tzm， startTime: startTime, endTime
-    :
-        endTime
+            query: {tname: tname, rname: rname, startTime: startTime, endTime: endTime}
+        });
     }
-    })
-        ;
-    }
-
     function doSearchAll() {
         $("#tname").val("");
         $("#rname").val("");
-        $("#tzm").val("");
         $("#startTime").val("");
+        $("#endTime").val("");
         $("#endTime").val("");
         doSearch();
     }

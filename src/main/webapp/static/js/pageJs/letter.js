@@ -34,12 +34,7 @@ $('#mytab').bootstrapTable({
             align: 'center',
             valign: 'middle'
         },
-        {
-            title: '编号',
-            field: 'lid',
-            align: 'center',
-            visible:false
-        },
+
         {
             title: '标题',
             field: 'title',
@@ -82,6 +77,16 @@ $('#mytab').bootstrapTable({
                 var mi = date.getMinutes();
                 var ss = date.getSeconds();
                 return y + '-' + m + '-' + d;
+            }
+        }
+        ,
+        {
+            title: '操作',
+            align: 'center',
+            field: '',
+            formatter: function (value, row, index) {
+                var d = '<a title="删除" href="javascript:void(0);" onclick="del(' + row.lid + ',\'' + '/letter/remove\'' + ')"><i class="glyphicon glyphicon-trash" alt="删除" style="color:red"></i></a> ';
+                return d;
             }
         }
     ],

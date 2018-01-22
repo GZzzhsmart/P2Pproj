@@ -2,6 +2,7 @@ package top.zzh.service;
 
 import top.zzh.vo.UserTicketVo;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 public interface UserTicketService extends BaseService{

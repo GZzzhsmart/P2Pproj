@@ -145,12 +145,7 @@ public enum ControllerStatusEnum {
     NOTICE_UPDATE_SUCCESS(327,"ok","修改成功"),
     NOTICE_UPDATE_FAIL(328,"error","修改失败"),
     NOTICE_DELETE_SUCCESS(329,"ok","删除成功"),
-    NOTICE_DELETE_FAIL(330,"error","删除失败"),
-
-    LETTER_DELETE_FAIL(900,"error2","已无已读消息，无需再清空！"),
-    LETTER_UPDATE_SUCCESS(901,"ok","成功"),
-    LETTER_UPDATE_FAIL(902,"error","失败")
-
+    NOTICE_DELETE_FAIL(330,"error","删除失败")
    ;
 
     private Integer code;

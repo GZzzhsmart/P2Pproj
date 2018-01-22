@@ -1,41 +1,15 @@
 package top.zzh.vo;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 public class LetterVO {
     private long lid;
     private String title;
     private String content;
     private int state;
-    private Date date;
+    private String date;
     private String startTime;
     private String endTime;
 
-    private long uid;
     private int lState;
-    private String dateToStr;
-
-    public Date getDate() {
-        return date;
-    }
-
-    public long getUid() {
-        return uid;
-    }
-
-    public void setUid(long uid) {
-        this.uid = uid;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public String getDateToStr() {
-        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        return sdf.format(date);
-    }
 
     public int getlState() {
         return lState;
@@ -75,6 +49,14 @@ public class LetterVO {
 
     public void setState(int state) {
         this.state = state;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String getStartTime() {

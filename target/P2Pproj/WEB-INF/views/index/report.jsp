@@ -36,8 +36,13 @@
                                 <h5>
                                     <a href="<%=path%>/media/initMedia/${s.mid}">${s.title}</a>
                                 </h5>
-                                <p class="text">
-                                        ${s.title}
+                                <p class="text" id="contentToSub">
+                                    <c:if test="${s.content.toString().length()>170}">
+                                        ${s.content.toString().substring(0,170)}......
+                                    </c:if>
+                                    <c:if test="${s.content.toString().length()<=170}">
+                                        ${s.content}
+                                    </c:if>
                                 </p>
                                 <p class="time">报道时间:${s.date}</p>
                             </div>
@@ -106,8 +111,8 @@
 <!-- 网站底部-->
 <%@include file="../common/footer.jsp" %>
 <jsp:include page="../common/bootstraptablejs.jsp"/>
-<script>
 
+<script>
     function page(str){
         if(str==${mediaPager.pageNo}&&str==1){
             layer.msg("当前已经是第一页了哦！", {icon: 2, time: 1000});
@@ -123,5 +128,6 @@
             });
     }
 </script>
+
 </body>
 </html>

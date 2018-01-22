@@ -19,21 +19,7 @@
         <div class="ibox-title">
             <h5>首页信息</h5>
             <div class="ibox-tools">
-                <a class="collapse-link">
-                    <i class="fa fa-chevron-up"></i>
-                </a>
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-wrench"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-user">
-                    <li><a href="#">选项1</a>
-                    </li>
-                    <li><a href="#">选项2</a>
-                    </li>
-                </ul>
-                <a class="close-link">
-                    <i class="fa fa-times"></i>
-                </a>
+                <h5><a  style="color: blue" href="<%=path%>/home/page">返回列表&nbsp;&nbsp;&nbsp;&nbsp;</a></h5>
             </div>
         </div>
         <div class="ibox-content">
@@ -44,8 +30,8 @@
                         <div class="layui-upload">
                             <button type="button" class="layui-btn" id="test1">上传图片</button>
                             <div class="layui-upload-list">
-                                <p id="image1">
-                                    <input type="text" id="pic1"  class="form-control" name="pic1" style="height:0px;border:0px;margin:0px;padding:0px;"/>
+                                <p id="image1"></p>
+                                    <input type="text" id="pic1"  class="form-control" name="pic1" style="height:0px;border:0px;margin:0px;padding:0px;/>
                                 <p id="demoText1"></p>
                             </div>
                         </div>
@@ -63,7 +49,7 @@
                         <div class="layui-upload">
                             <button type="button" class="layui-btn" id="test2">上传图片</button>
                             <div class="layui-upload-list">
-                                <p id="image2">
+                                <p id="image2"></p>
                                     <input type="text" id="pic2"  class="form-control" name="pic2" style="height:0px;border:0px;margin:0px;padding:0px;"/>
                                 <p id="demoText2"></p>
                             </div>
@@ -82,9 +68,8 @@
                         <div class="layui-upload">
                             <button type="button" class="layui-btn" id="test3">上传图片</button>
                             <div class="layui-upload-list">
-                                <p id="image3">
+                                <p id="image3"></p>
                                     <input type="text" id="pic3"  class="form-control" name="pic3" style="height:0px;border:0px;margin:0px;padding:0px;"/>
-
                                 <p id="demoText3"></p>
                             </div>
                         </div>
@@ -102,7 +87,7 @@
                         <div class="layui-upload">
                             <button type="button" class="layui-btn" id="test4">上传图片</button>
                             <div class="layui-upload-list">
-                                <p id="image4">
+                                <p id="image4"></p>
                                 <input type="text" id="ewm"  class="form-control" name="ewm" style="height:0px;border:0px;margin:0px;padding:0px;"/>
                                 <p id="demoText4"></p>
                             </div>

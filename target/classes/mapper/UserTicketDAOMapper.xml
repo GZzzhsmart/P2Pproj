@@ -90,4 +90,5 @@
           update t_userticket set usestatus = 1 where uid = #{uid} and kid = #{kid}
         ]]>
     </update>
+
 </mapper>

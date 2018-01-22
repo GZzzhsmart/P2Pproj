@@ -19,22 +19,11 @@ public interface LetterDAO extends BaseDAO {
     @Override
     Long countCriteria(@Param("query") Object obj);
 
-    List<Object> listPagerUid(@Param("pager") Pager pager, @Param("obj") Object obj);
+    List<Object> listPagerUid(@Param("pager") Pager pager, @Param("lState") Integer lState);
 
-    Long countByUid(@Param("obj") Object obj);
+    Long countByUid( @Param("lState") Integer lState);
 
     void letterUserSave();
 
     void letterUserUpdate(long letterId);
-
-    String checkContent(@Param("lid") long lid);
-
-    void updateState(@Param("uid") long uid, @Param("lid") long lid);
-
-    Long countByRead(@Param("uid") long uid);
-
-    @Override
-    void removeById(@Param("uid") Long id);
-
-    void updateLetterState(@Param("lid") Long lid, @Param("state") int state);
 }

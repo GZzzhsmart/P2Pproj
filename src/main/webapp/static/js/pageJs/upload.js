@@ -279,9 +279,6 @@ layui.use('upload', function(){
                 $("#mediaAdd").data("bootstrapValidator").resetForm();
                 return layer.msg(res.msg);
             }
-            /* $('#pic').val("res.msg");*/
-
-            //上传成功
         }
         ,error: function(){
             //演示失败状态，并实现重传

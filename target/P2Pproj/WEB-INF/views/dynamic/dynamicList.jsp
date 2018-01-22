@@ -7,8 +7,6 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>公司动态列表</title>
-    <%--layui上传图片--%>
-    <link rel="stylesheet" href="<%=path%>/static/layui/css/layui.css"  media="all">
     <jsp:include page="../common/bootstraptablecss.jsp"/>
 </head>
 <body class="gray-bg">
@@ -41,11 +39,8 @@
                 <button id="btn_add" type="button" class="btn btn-default">
                     <span class="glyphicon glyphicon-plus" aria-hidden="true" ></span><a a class="J_menuItem" style="color: white" href="<%=path%>/dynamic/initAdd">新增动态</a>
                 </button>
-                <button id="btn_update" type="button" onclick="update();" class="btn btn-default" style="display: block; border-radius: 0">
-                    <span class="glyphicon glyphicon-edit" aria-hidden="true" ></span>更改动态
-                </button>
-                <button id="btn_deleteMany" onclick="deleteMany();" type="button" class="btn btn-default" style="display: block;">
-                    <span class="glyphicon glyphicon-remove" aria-hidden="true" ></span>批量删除
+                <button id="btn_detail" type="button" onclick="detail();" class="btn btn-default" style="display: block; border-radius: 0">
+                    <span class="glyphicon glyphicon-search" aria-hidden="true" ></span>查看详情
                 </button>
             </div>
         </div>
@@ -54,16 +49,6 @@
 </div>
 <%--网站信息的修改--%>
 <jsp:include page="../common/bootstraptablejs.jsp"/>
-<!--UEditor js-->
-<script type="text/javascript" charset="utf-8" src="<%=path%>/ueditor/ueditor.config.js"></script>
-<script type="text/javascript" charset="utf-8" src="<%=path%>/ueditor/ueditor.all.min.js"> </script>
-<script type="text/javascript" charset="utf-8" src="<%=path%>/ueditor/lang/zh-cn/zh-cn.js"></script>
-<script type="text/javascript">
-    var ue = UE.getEditor('editor');
-</script>
-<%--layui上传图片--%>
-<script src="<%=path%>/static/layui/layui.js" charset="utf-8"></script>
-<script src="<%=path%>/static/js/pageJs/upload.js"></script>
 <script src="<%=path%>/static/js/pageJs/dynamic.js"></script>
 
 </body>

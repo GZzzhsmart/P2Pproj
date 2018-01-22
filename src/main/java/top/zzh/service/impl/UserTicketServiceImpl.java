@@ -93,6 +93,6 @@ public class UserTicketServiceImpl extends AbstractService implements UserTicket
 
     @Override
     public void updateState(Object object) {
-         userTicketDAO.updateState(object);
+        userTicketDAO.updateState(object);
     }
 }

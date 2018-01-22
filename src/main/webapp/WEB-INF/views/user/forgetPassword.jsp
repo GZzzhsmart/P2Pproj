@@ -29,7 +29,7 @@
 <div class="wrap">
     <form id="loginForm" name="loginForm" action="" method="post">
         <div class="tdbModule loginPage">
-            <div class="registerTitle">手机验证重置密码</div>
+            <div class="registerTitle">用手机验证码登录</div>
             <div class="registerCont">
                 <ul>
                     <li class="error">
@@ -47,7 +47,7 @@
 
                     </li>
                     <li class="btn">
-                        <input type="button" class="radius1" value="确认" id="submitBtn" onclick="login()">
+                        <input type="button" class="radius1" value="立即登录" id="submitBtn" onclick="login()">
                     </li>
                 </ul>
             </div>
@@ -56,6 +56,9 @@
 </div>
 <%@ include file="../common/footer.jsp"%>
 </body>
+
+<!--引用登录js-->
+<%--<script type="text/javascript" src="<%=path%>/static/js/lyj/userlogin.js"></script>--%>
 
 <!--手机验证码-->
 <script type="text/javascript" src="<%=path%>/static/js/lyj/sms.js"></script>

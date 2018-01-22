@@ -360,6 +360,10 @@ $('#homeAdd').bootstrapValidator({
                     min: 1,
                     max: 50,
                     message: '链接长度必须在1到50之间'
+                },
+                regexp: {
+                    regexp: /(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?/,
+                    message: '请输入有效的网址'
                 }
             }
         },
@@ -373,6 +377,10 @@ $('#homeAdd').bootstrapValidator({
                     min: 1,
                     max: 50,
                     message: '链接长度必须在1到50之间'
+                },
+                regexp: {
+                    regexp: /(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?/,
+                    message: '请输入有效的网址'
                 }
             }
         },
@@ -386,6 +394,10 @@ $('#homeAdd').bootstrapValidator({
                     min: 1,
                     max: 50,
                     message: '链接长度必须在1到50之间'
+                },
+                regexp: {
+                    regexp: /(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?/,
+                    message: '请输入有效的网址'
                 }
             }
         },
@@ -399,6 +411,10 @@ $('#homeAdd').bootstrapValidator({
                     min: 1,
                     max: 50,
                     message: '链接长度必须在1到50之间'
+                },
+                regexp: {
+                    regexp: /(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?/,
+                    message: '请输入有效的网址'
                 }
             }
         },
@@ -484,6 +500,10 @@ $('#updateForm').bootstrapValidator({
                     min: 1,
                     max: 50,
                     message: '链接长度必须在1到50之间'
+                },
+                regexp: {
+                    regexp: /(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?/,
+                    message: '请输入有效的网址'
                 }
             }
         },
@@ -497,6 +517,10 @@ $('#updateForm').bootstrapValidator({
                     min: 1,
                     max: 50,
                     message: '链接长度必须在1到50之间'
+                },
+                regexp: {
+                    regexp: /(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?/,
+                    message: '请输入有效的网址'
                 }
             }
         },
@@ -510,6 +534,10 @@ $('#updateForm').bootstrapValidator({
                     min: 1,
                     max: 50,
                     message: '链接长度必须在1到50之间'
+                },
+                regexp: {
+                    regexp: /(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?/,
+                    message: '请输入有效的网址'
                 }
             }
         },
@@ -523,6 +551,10 @@ $('#updateForm').bootstrapValidator({
                     min: 1,
                     max: 50,
                     message: '链接长度必须在1到50之间'
+                },
+                regexp: {
+                    regexp: /(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?/,
+                    message: '请输入有效的网址'
                 }
             }
         },
@@ -566,40 +598,4 @@ $('#updateForm').bootstrapValidator({
         "json"
     );
 });
-function deleteMany() {
-    var isactivity = "";
-    var row = $.map($("#mytab").bootstrapTable('getSelections'), function (row) {
-        if (row.state == 0) {
-            isactivity += row.state;
-        }
-        return row.hid;
-    });
-    if (row == "") {
-        layer.msg('删除失败，请勾选数据!', {
-            icon: 2,
-            time: 3000
-        });
-        return;
-    }
-    if (isactivity != "") {
-        layer.msg('删除失败，已经激活的不允许删除!', {
-            icon: 2,
-            time: 3000
-        });
-        return;
 
-    }
-    $("#hid").val(row);
-    layer.confirm('确认要执行批量删除媒体报道数据吗？', function (index) {
-        $.post(
-             "/home/deleteMany",
-            {
-                "manyId":  $("#hid").val()
-            },
-            function (data) {
-                refush();
-                layer.msg("批量删除成功！", {icon: 2, time: 3000});
-            }, "json"
-        );
-    });
-}

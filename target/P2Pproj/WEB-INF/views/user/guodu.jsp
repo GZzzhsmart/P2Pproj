@@ -394,30 +394,30 @@
                                 <div class="pay-bank" id="pay-bank">
                                     <h6>请选择绑定银行</h6>
                                     <ul id="paysSpan" style="height:150px;">
-                                        <label for="checkall1" width="165" height="75"><input type="radio" name="type" value="1"
-                                                                      id="checkall1"><img
+                                        <label for="checkall1" width="165" height="75"><span><input type="radio" name="type" value="1"
+                                                                      id="checkall1"></span><img
                                                 src="<%=path%>/static/images/logo_abc.png" width="138" height="56">
                                         </label>
-                                        <label for="checkall2" width="165" height="75"><input type="radio" name="type" value="2" id="checkall2" checked>
+                                        <label for="checkall2" width="165" height="75"><span><input type="radio" name="type" value="2" id="checkall2" checked></span>
 
                                             <img src="<%=path%>/static/images/1.jpg" width="138" height="56">
                                         </label>
-                                        <label for="checkall3" width="165" height="75"><input type="radio" name="type" value="3" id="checkall3"  align="center"><img
+                                        <label for="checkall3" width="165" height="75"><span><input type="radio" name="type" value="3" id="checkall3"  align="center"></span><img
                                                 src="<%=path%>/static/images/2.jpg" width="138" height="56">
                                         </label>
-                                        <label for="checkall4" width="165" height="75"  align="center"><input type="radio" name="type" value="4" id="checkall4"><img
+                                        <label for="checkall4" width="165" height="75"  align="center"><span><input type="radio" name="type" value="4" id="checkall4"></span><img
                                                 src="<%=path%>/static/images/3.jpg" width="138" height="56">
                                         </label>
                                         <label for="checkall5" width="165" height="75"><input type="radio" name="type" value="5" id="checkall5"><img
                                                 src="<%=path%>/static/images/4.jpg" width="138" height="56">
                                         </label>
-                                        <label for="checkall6" width="165" height="75"><input type="radio" name="type" value="6" id="checkall6"><img
+                                        <label for="checkall6" width="165" height="75"><span><input type="radio" name="type" value="6" id="checkall6"></span><img
                                                 src="<%=path%>/static/images/5.jpg" width="138" height="56">
                                         </label>
-                                        <label for="checkall7" width="165" height="75"  align="center"><input type="radio" name="type" value="7" id="checkall7"><img
+                                        <label for="checkall7" width="165" height="75"  align="center"><span><input type="radio" name="type" value="7" id="checkall7"></span><img
                                                 src="<%=path%>/static/images/6.jpg" width="138" height="56">
                                         </label>
-                                        <label for="checkall8" width="165" height="75"  align="center"><input type="radio" name="type" value="8" id="checkall8"><img
+                                        <label for="checkall8" width="165" height="75"  align="center"><span><input type="radio" name="type" value="8" id="checkall8"></span><img
                                                 src="<%=path%>/static/images/7.jpg" width="138" height="56">
                                         </label>
                                     </ul>
@@ -456,7 +456,7 @@
                             </div>
                         </div>
                     </form>
-                    <div class="pay-tipcon" style="display:none;"><b>充值提示：</b><br>
+                    <div class="pay-tipcon" style="display:none;"><b>提示：</b><br>
                         1．亿人宝充值过程免费，不向用户收取任何手续费。<br>
                         2．为了您的账户安全，请在充值前进行身份认证、手机绑定以及交易密码设置。<br>
                         3．您的账户资金将通过丰付支付第三方平台进行充值。<br>

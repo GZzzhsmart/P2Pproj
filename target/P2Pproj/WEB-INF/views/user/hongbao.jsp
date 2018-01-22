@@ -40,7 +40,7 @@
                                     <div class="par"><p>${unuse.tname}</p><sub class="sign">￥</sub><span>${unuse.tkmoney}</span><p>请及时转入余额</p></div>
                                     <div class="copy">
                                     现金券
-                                    <p>${unuse.uttime}<br>${unuse.tktime}</p><a href="<%=path%>/page/hong/${unuse.kid}">转入余额</a>
+                                    <p>${unuse.uttime}<br>${unuse.tktime}</p><a href="<%=path%>/page/list?pageNo=0&kid=${unuse.kid}">转入余额</a>
                                     </div>
                                     </div>
                                 </c:if>

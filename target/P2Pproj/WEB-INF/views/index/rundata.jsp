@@ -94,7 +94,6 @@
         </div>
     </div>
 </div>
-</div>
 <!-- 网站底部-->
 <%@include file="../common/footer.jsp" %>
 <script type="text/javascript" src="<%=path%>/static/js/jquery.min.js"></script>

@@ -87,7 +87,7 @@ public class RecommendController {
         return statusVO;
     }
 
-    @RequestMapping("delMany")
+    @RequestMapping("/delMany")
     @ResponseBody
     public ControllerStatusVO delEduList(Long[] ids) {
         logger.info("推进记录批量删除");

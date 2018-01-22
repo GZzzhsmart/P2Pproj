@@ -76,12 +76,11 @@
 <script type="text/javascript" charset="utf-8" src="<%=path%>/ueditor/ueditor.config.js"></script>
 <script type="text/javascript" charset="utf-8" src="<%=path%>/ueditor/ueditor.all.min.js"> </script>
 <script type="text/javascript" charset="utf-8" src="<%=path%>/ueditor/lang/zh-cn/zh-cn.js"></script>
-
-<%--layui上传图片--%>
-<script src="<%=path%>/static/layui/layui.js" charset="utf-8"></script>
 <script type="text/javascript">
     var ue = UE.getEditor('editor');
 </script>
+<%--layui上传图片--%>
+<script src="<%=path%>/static/layui/layui.js" charset="utf-8"></script>
 <script>
     layui.use('upload', function(){
         var $ = layui.jquery

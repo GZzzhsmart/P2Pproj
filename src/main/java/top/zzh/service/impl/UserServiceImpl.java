@@ -91,11 +91,6 @@ public class UserServiceImpl extends AbstractService implements UserService{
     }
 
     @Override
-    public void resettingUpwd(String phone, String upwd) {
-        userDAO.resettingUpwd(phone, upwd);
-    }
-
-    @Override
     public void update(Object obj) {
         userDAO.update(obj);
     }

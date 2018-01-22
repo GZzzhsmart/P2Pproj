@@ -19,26 +19,6 @@
     </insert>
     <!--条件查询【推荐人姓名或被推荐人姓名】-->
     <sql id="cash_query_criteria">
-        from t_recommend r,t_user u
-        where r.tid=u.uid
-        <if test="query != null and query.tname != null and query.tname!=''">
-            and r.tname like concat('%', #{query.tname}, '%')
-        </if>
-        <if test="query != null and query.rname != null and query.rname!=''">
-            and r.rname like concat('%', #{query.rname}, '%')
-        </if>
-        <if test="query != null and query.tzm != null and query.tzm!=''">
-            and u.tzm like concat('%', #{query.tzm}, '%')
-        </if>
-        <if test="query != null and query.startTime != null and query.startTime != ''">
-            and r.date <![CDATA[>=]]> #{query.startTime}
-        </if>
-        <if test="query != null and query.endTime != null and query.endTime != ''">
-            and r.date <![CDATA[<=]]> #{query.endTime}
-        </if>
-    </sql>
-
-    <sql id="cash_query_uid">
         <if test="query != null and query.tname != null and query.tname!=''">
             and tname like concat('%', #{query.tname}, '%')
         </if>
@@ -49,27 +29,27 @@
             and `date` <![CDATA[>=]]> #{query.startTime}
         </if>
         <if test="query != null and query.endTime != null and query.endTime != ''">
-            and `date` <![CDATA[<=]]> #{query.endTime}
+            and `date`<![CDATA[<=]]> #{query.endTime}
         </if>
     </sql>
-    <select id="listPagerCriteria" resultType="top.zzh.vo.RecommendVO">
-        select r.id,r.tid,r.tname,r.uid,r.rname,r.date ,u.tzm
+    <select id="listPagerCriteria" resultType="recommend">
+        select id,tid,tname,uid,rname,`date` from t_recommend where 1=1
         <include refid="cash_query_criteria"/>
-        order by r.date desc limit #{pager.beginIndex}, #{pager.pageSize}
+        order by `date` desc limit #{pager.beginIndex}, #{pager.pageSize}
     </select>
     <select id="countCriteria" resultType="long">
-        select count(r.id)
+        select count(id) from t_recommend where 1=1
         <include refid="cash_query_criteria"/>
     </select>
 
     <select id="listPagerUid" resultType="top.zzh.vo.RecommendData">
         select id,uid,rname,`date` from t_recommend where tid=#{query.uid}
-        <include refid="cash_query_uid"/>
+        <include refid="cash_query_criteria"/>
         order by `date` desc limit #{pager.beginIndex}, #{pager.pageSize}
     </select>
     <select id="countByUid" resultType="long">
         select count(id) from t_recommend where tid=#{query.uid}
-        <include refid="cash_query_uid"/>
+        <include refid="cash_query_criteria"/>
     </select>
     <delete id="remove" parameterType="recommend">
         <![CDATA[

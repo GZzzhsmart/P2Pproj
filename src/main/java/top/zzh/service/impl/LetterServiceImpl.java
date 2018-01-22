@@ -2,10 +2,13 @@ package top.zzh.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import top.zzh.bean.Letter;
 import top.zzh.common.Pager;
 import top.zzh.dao.LetterDAO;
+import top.zzh.dao.RecommendDAO;
 import top.zzh.service.AbstractService;
 import top.zzh.service.LetterService;
+import top.zzh.service.RecommendService;
 
 /**
  * Created by 谢学培 on 2017/1/15.
@@ -26,10 +29,9 @@ public class LetterServiceImpl extends AbstractService implements LetterService 
         letterDAO.letterUserSave();
         letterDAO.save(obj);
     }
-
     @Override
-    public void removeById(Long obj) {
-        letterDAO.removeById(obj);
+    public void remove(Object obj) {
+        letterDAO.remove(obj);
     }
 
     @Override
@@ -41,7 +43,7 @@ public class LetterServiceImpl extends AbstractService implements LetterService 
     }
 
     @Override
-    public Pager listPagerUid(Integer pageNo, Integer pageSize, Object obj) {
+    public Pager listPagerUid(Integer pageNo, Integer pageSize, Integer obj) {
         Pager pager = new Pager(pageNo, pageSize);
         pager.setRows(letterDAO.listPagerUid(pager, obj));
         pager.setTotal(letterDAO.countByUid(obj));
@@ -56,21 +58,5 @@ public class LetterServiceImpl extends AbstractService implements LetterService 
     @Override
     public void letterUserUpdate(long letterId) {
         letterDAO.letterUserUpdate(letterId);
-    }
-
-    @Override
-    public String checkContent(long uid, long lid) {
-        letterDAO.updateState(uid, lid);
-        return letterDAO.checkContent(lid);
-    }
-
-    @Override
-    public Long countByRead(long l) {
-        return letterDAO.countByRead(l);
-    }
-
-    @Override
-    public void updateLetterState(Long lid, int state) {
-        letterDAO.updateLetterState(lid, state);
     }
 }

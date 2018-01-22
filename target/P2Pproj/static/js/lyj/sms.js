@@ -77,8 +77,8 @@
             $.post(path + '/luser/forgetPassword',
                 $('#loginForm').serialize(),
                 function (data) {
-                    if (data.result === 'ok') {
-
+                    if (data.result === 'ok' || data.result==='logined') {
+                        window.location.href = path + "/luser/userindex";
                     } else {
                         swal(data.message,"","error");
 
@@ -94,7 +94,11 @@
 
 
         function login() {
-            var phone = $('#phone').val();
+
+		 	if(check!=null){
+                swal(check,"","error");
+                return;
+			}
 
             var yzm =  $('#code').val();
             if(yzm!=mobile_code){
@@ -107,7 +111,7 @@
                 $('#loginForm').serialize(),
                 function (data) {
                     if (data.result === 'ok' || data.result==='logined') {
-                        window.location.href = path + "/luser/resettingPwd/"+phone;
+                        window.location.href = path + "/luser/userindex";
                     } else {
                         swal(data.message,"","error");
                     }

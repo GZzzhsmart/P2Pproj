@@ -132,23 +132,6 @@ public class LUserController {
         return "/user/userindex";
     }
 
-    @RequestMapping("resettingPwd/{phone}")
-    public  String resettingPwd(@PathVariable("phone") String phone,HttpServletRequest request){
-        request.setAttribute("phone",phone);
-        return  "user/resettingPwd";
-    }
-
-    @RequestMapping("resttingLogin")
-    @ResponseBody
-    public ControllerStatusVO resttingLogin(String phone,String password){
-
-        ControllerStatusVO statusVO = null;
-
-        userService.resettingUpwd(phone, EncryptUtils.md5(password));
-
-        statusVO = ControllerStatusVO.status(ControllerStatusEnum.USER_LOGIN_SUCCESS);
-        return statusVO;
-    }
 
     @PostMapping("gainCode")
     @ResponseBody
@@ -168,8 +151,23 @@ public class LUserController {
         if (user == null) {
             statusVO = ControllerStatusVO.status(ControllerStatusEnum.USER_LOGIN_ERROR_EXIST);
             return statusVO;
-        }else{
+        }
+
+        List<String> stringList = roleService.listRoles(user.getUname());
+        if (stringList == null) {
+            statusVO = ControllerStatusVO.status(ControllerStatusEnum.USER_LOGIN_ERROR_EXIST_POWER);
+            return statusVO;
+        }
+
+        if (user != null && user.getState() == 1 && stringList.size() != 0) {
+            LoginLog log = new LoginLog();
+            log.setUserId(user.getUid());
+            log.setLoginIp(request.getRemoteHost());
+            loginLogService.save(log);
+            session.setAttribute(Constants.USER_IN_SESSION, user.getUname());
             statusVO = ControllerStatusVO.status(ControllerStatusEnum.USER_LOGIN_SUCCESS);
+        } else {
+            statusVO = ControllerStatusVO.status(ControllerStatusEnum.USER_LOGIN_ERROR_EXIST_POWER);
         }
 
         return statusVO;

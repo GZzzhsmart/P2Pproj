@@ -5,9 +5,9 @@
     <div class="header-top min-width">
         <div class="container fn-clear">
             <c:forEach var="s" items="${homeList}">
-               <strong class="fn-left">咨询热线：${s.phone}<span class="s-time">服务时间：9:00 - 18:00</span></strong>
+                <strong class="fn-left">咨询热线：${s.phone}<span class="s-time">服务时间：9:00 - 18:00</span></strong>
             </c:forEach>
-                <ul class="header_contact">
+            <ul class="header_contact">
                 <li class="c_1"> <a class="ico_head_weixin" id="wx"></a>
                     <div class="ceng" id="weixin_xlgz" style="display: none;">
                         <div class="cnr"> <img src="<%=path%>/static/images/code.png"> </div>

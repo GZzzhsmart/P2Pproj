@@ -70,18 +70,6 @@
                     <div class="subject-s-r-c">
                         <p>剩余可投：<span class="f24 c-333">${borrow.money-borrow.mmoney}</span>元</p>
                     </div>
-                    <%--<div class="subject-s-r-c">--%>
-                        <%--<c:if test="${users==null}">--%>
-                            <%--<p>优惠券：<span >登录后才可查看优惠券</span></p>--%>
-                        <%--</c:if>--%>
-                        <%--<c:if test="${users!=null}">--%>
-                            <%--<p>优惠券：--%>
-                                <%--<select>--%>
-                                    <%--<option value="">请选择优惠券</option>--%>
-                                <%--</select>--%>
-                            <%--</p>--%>
-                        <%--</c:if>--%>
-                    <%--</div>--%>
                     <div class="input">
                         <form method="post" action="">
                             <input type="text" style="display: none" id="kymoney" value="${borrow.kymoney}">

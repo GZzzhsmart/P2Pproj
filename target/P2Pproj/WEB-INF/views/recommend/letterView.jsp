@@ -60,28 +60,20 @@
                                        style="padding:5px 22px;display:block;" title="已读">已读</a></li>
                             </c:otherwise>
                         </c:choose>
-                        <li><a href="javascript:void(0);" onclick="empty();"
-                               style="background:#FF5722;color:white;padding:5px 22px;display:block;" title="清空已读">清空已读</a>
-                        </li>
                     </ul>
                 </div>
                 <div class="pxtxx-title">
-                    <span class="pxtxx-con ml46">标题</span>
-                    <span class="pxtxx-type">消息状态</span>
+                    <span class="pxtxx-type ml46">消息类型</span>
+                    <span class="pxtxx-con">标题</span>
                     <span class="pxxtx-date">发送时间</span>
                 </div>
                 <div class="pxtxx-list">
                     <ul style="float:left;">
                         <c:forEach items="${obj}" var="d">
                             <li>
-                                <span class="pxtxx-con ml46"><a href="javascript:void(0);"
-                                                                onclick="checkContent('${d.lid}','${d.title}','${d.dateToStr}');">${d.title}</a></span>
-                                <c:if test="${d.lState==0}"><span class="pxtxx-type"
-                                                                  style="color:#FF6666">未读</span></c:if>
-                                <c:if test="${d.lState==1}"><span class="pxtxx-type"
-                                                                  style="color:#0caffe;">已读</span></c:if>
-                                </span>
-                                <span class="pxxtx-date">${d.dateToStr}</span>
+                                <span class="pxtxx-type ml46">${d.lState}</span>
+                                <span class="pxtxx-con">${d.title}</span>
+                                <span class="pxxtx-date">${d.date}</span>
                             </li>
                         </c:forEach>
                         <!--<div style=" width:760px;height:200px;padding-top:100px; text-align:center;color:#d4d4d4; font-size:16px;">
@@ -132,7 +124,7 @@
                                                onclick="page('${page.pages}',3)">尾页</a>
                                         </c:otherwise>
                                     </c:choose>
-                                    <font size="2">共${page.total}条消息 </font>
+                                    <font size="2">共${page.total}个好友 </font>
                                 </div>
                             </li>
                         </c:if>
@@ -151,26 +143,28 @@
 <script src="<%=path%>/static/plugin/bootstrap/js/plugins/layer/layer.js"></script>
 
 <script>
-    function checkContent(letterId, title, date) {
-        $.post(
-            "/letter/checkContent",
-            {
-                letterId: letterId
-            },
-            function (data) {
-                layer.open({
-                    type: 1,
-                    title: title,
-                    skin: 0, //加上边框
-                    area: ['420px', '240px'], //宽高
-                    content: '<br/><p style="text-indent : 20px; font-family:微软雅黑;font-size: 16px;">' + data + '</p><br/><br/><br/><p style="text-align:right;">' + date + '</p>',
-                    end: function () {
-                        location.reload();
-                    }
-                });
+    function doSearch() {
+        alert($("#select-date").val());
+    }
 
-            }, "json"
-        );
+    function del(id, url) {
+        layer.confirm('确认要删除吗？', function (index) {
+            $.ajax({
+                type: 'POST',
+                url: url + '?id=' + id,
+                dataType: 'json',
+                success: function (data) {
+                    if (data.message == '删除成功') {
+                        layer.msg(data.message, {icon: 1, time: 1000});
+                    } else {
+                        layer.msg(data.message, {icon: 2, time: 1000});
+                    }
+                },
+                error: function (data) {
+                    console.log(data.msg);
+                }
+            });
+        });
     }
 
     function page(str, lState) {
@@ -186,30 +180,6 @@
             return false;
         }
         window.location.href = "/letter/listByUid/" + str + "/" + lState;
-    }
-
-    function empty() {
-        layer.confirm('确认要清空已读消息吗？', function () {
-            $.ajax({
-                type: 'POST',
-                url: "/letter/empty",
-                dataType: 'json',
-                success: function (data) {
-                    if (data.message == '删除成功') {
-                        layer.msg(data.message, {
-                            icon: 1, time: 1000, end: function () {
-                                location.reload();
-                            }
-                        });
-                    } else {
-                        layer.msg(data.message, {icon: 2, time: 1000});
-                    }
-                },
-                error: function (data) {
-                    console.log(data.msg);
-                },
-            });
-        });
     }
 </script>
 

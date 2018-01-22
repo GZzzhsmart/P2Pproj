@@ -124,21 +124,7 @@ public class HomeController {
         statusVO = ControllerStatusVO.status(ControllerStatusEnum.HOME_DELETE_SUCCESS);
         return statusVO;
     }
-    //批量删除
-    @RequestMapping("deleteMany/{hid}")
-    @ResponseBody
-    public String deleteMany(@PathVariable("hid")String id){
-        Home home = new Home();
-        String idString[] = id.split(".");
-        for(int i=0;i<idString.length;i++){
-            home.setHid(Long.parseLong(idString[i].toString()));
-            homeService.remove(id);
-        }
-        if (home != null){
-            return "homeList";
-        }
-        return "ok";
-    }
+
     @RequestMapping("page")
     public String page() {
         return "home/homeList";

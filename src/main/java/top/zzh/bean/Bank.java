@@ -5,7 +5,7 @@ public class Bank {
     private Long id;
     private String bankName;
     private String deposit;
-
+    
 
     public Bank() {
     }

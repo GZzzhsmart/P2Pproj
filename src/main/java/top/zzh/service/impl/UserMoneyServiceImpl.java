@@ -89,4 +89,6 @@ public class UserMoneyServiceImpl extends AbstractService implements UserMoneySe
     public void updateKymoney(Object object) {
         userMoneyDAO.updateKymoney(object);
     }
+
+
 }

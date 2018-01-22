@@ -71,10 +71,6 @@ $('#mytab').bootstrapTable({
                     return '<span style="color:green">公司奖励</span>';
                 }else if(value=4){
                     return '<span style="color:green">投资金额</span>';
-                }else if(value=5){
-                    return '<span style="color:green">还款</span>';
-                }else if(value=6){
-                    return '<span style="color:green">现金券充值</span>';
                 }
             }
         }

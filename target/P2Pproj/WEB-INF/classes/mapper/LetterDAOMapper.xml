@@ -27,9 +27,6 @@
         <if test="query != null and query.content != null and query.content!=''">
             and content like concat('%', #{query.content}, '%')
         </if>
-        <if test="query != null and query.state != null and query.state ==1 or query.state==2">
-            and state = (#{query.state}-1)
-        </if>
         <if test="query != null and query.startTime != null and query.startTime != ''">
             and `date` <![CDATA[>=]]> #{query.startTime}
         </if>
@@ -52,14 +49,12 @@
         where lu.uid=u.uid
         and lu.lid=l.lid
         and l.state=0
-        <if test="obj!=null and obj.uid!=null">
-            and lu.uid=#{obj.uid}
-        </if>
-        <if test="obj!=null and obj.lState!=null and obj.lState==0 or obj.lState==1">
-            and lu.state = #{obj.lState}
+        and lu.uid=37
+        <if test="lState!=null and lState==0 or lState==1">
+            and lu.state = #{lState}
         </if>
     </sql>
-    <select id="listPagerUid" resultType="top.zzh.vo.LetterVO">
+    <select id="listPagerUid" resultType="top.zzh.vo.LetterVO" parameterType="Integer">
         select l.lid,l.title,l.date,lu.state as lState
         <include refid="queryByUid"/>
         order by l.date desc limit #{pager.beginIndex}, #{pager.pageSize}
@@ -74,27 +69,6 @@
 
           delete from t_letter where lid=#{lid}
 
-        ]]>
-    </delete>
-    <select id="checkContent" resultType="String">
-        select content from t_letter where lid=#{lid}
-    </select>
-    <update id="updateState" parameterType="long">
-        <![CDATA[
-          update t_letter_user set state=1 where lid=#{lid} and uid=#{uid}
-        ]]>
-    </update>
-    <update id="updateLetterState">
-        <![CDATA[
-          update t_letter set state=#{state} where lid=#{lid}
-        ]]>
-    </update>
-    <select id="countByRead" resultType="Long" parameterType="long">
-        select count(id) from t_letter_user where uid=#{uid} and state=1
-    </select>
-    <delete id="removeById" parameterType="Long">
-        <![CDATA[
-          delete from t_letter_user where uid=#{uid} and state=1
         ]]>
     </delete>
     <!--推荐排行榜-->

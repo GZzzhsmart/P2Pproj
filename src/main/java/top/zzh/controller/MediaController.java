@@ -35,18 +35,6 @@ public class MediaController {
      * 跳转页面
      * @return
      * */
-    @RequestMapping("initMedia/{mid}")
-    public String initNotice(@PathVariable("mid") Long mid ,HttpServletRequest request) {
-        Media media = (Media) mediaService.getById(mid);
-        request.setAttribute("media",media);
-        return "index/mediaPage";
-    }
-    @RequestMapping("initAdd")
-    public String initAdd(){
-        return "media/mediaAdd";
-    }
-
-
     @RequestMapping("upload")
     @ResponseBody
     public FileVo fileUp(MultipartFile file, HttpServletRequest request){
@@ -78,6 +66,17 @@ public class MediaController {
         String ext = filename.substring(position);
         return System.nanoTime() + ext;
     }
+    @RequestMapping("initMedia/{mid}")
+    public String initNotice(@PathVariable("mid") Long mid ,HttpServletRequest request) {
+        Media media = (Media) mediaService.getById(mid);
+        request.setAttribute("media",media);
+        return "index/mediaPage";
+    }
+    @RequestMapping("initAdd")
+    public String initAdd(){
+        return "media/mediaAdd";
+    }
+
     //新增媒体报道
     @RequestMapping("save")
     @ResponseBody
@@ -94,23 +93,31 @@ public class MediaController {
     }
     //通过id查找媒体报道
     @RequestMapping("findMedia/{mid}")
-    @ResponseBody
-    public Media findMedia(@PathVariable("mid")Long mid){
+    public String findMedia(@PathVariable("mid")Long mid,HttpServletRequest request){
         Media media = new Media();
         media = (Media) mediaService.getById(mid);
-        return media;
+        request.setAttribute("media",media);
+        return "media/mediaDetail";
+    }
+    @RequestMapping("initUpdate/{mid}")
+    public String initUpdate(@PathVariable("mid") Long mid  ,HttpServletRequest request){
+        Media media = new Media();
+        media = (Media)mediaService.getById(mid);
+        request.setAttribute("media",media);
+        return "media/mediaUpdate";
     }
     //修改媒体报道
     @RequestMapping("update")
-    @ResponseBody
-    public ControllerStatusVO update(Media media){
+    public String update(Media media,HttpServletRequest request){
         try {
             mediaService.update(media);
         }catch (Exception e){
             statusVO = ControllerStatusVO.status(ControllerStatusEnum.MEDIA_UPDATE_FAIL);
+            request.setAttribute("statusVO",statusVO);
         }
         statusVO = ControllerStatusVO.status(ControllerStatusEnum.MEDIA_UPDATE_SUCCESS);
-        return statusVO;
+        request.setAttribute("statusVO",statusVO);
+        return "media/mediaList";
     }
 
     //修改状态
@@ -141,21 +148,6 @@ public class MediaController {
         return statusVO;
     }
 
-    //批量删除
-    @RequestMapping("deleteMany/{mid}")
-    @ResponseBody
-    public String deleteMany(@PathVariable("mid")String id){
-            Media media = new Media();
-            String idString[] = id.split(".");
-            for(int i=0;i<idString.length;i++){
-                media.setMid(Long.parseLong(idString[i].toString()));
-                mediaService.remove(id);
-            }
-            if (media != null){
-                return "mediaList";
-            }
-        return "ok";
-    }
     @RequestMapping("page")
     public String page(){
         return "media/mediaList";

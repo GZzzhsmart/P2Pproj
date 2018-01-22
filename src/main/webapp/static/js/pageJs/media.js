@@ -98,7 +98,7 @@ $('#mytab').bootstrapTable({
             align: 'center',
             field: '',
             formatter: function (value, row, index) {
-                var e = '<a title="编辑" href="javascript:void(0);" id="leave"  data-toggle="modal" data-id="\'' + row.mid + '\'" data-target="#mediaUpdate" onclick="return edit(\'' + row.mid + '\')"><i class="glyphicon glyphicon-pencil" alt="修改" style="color:green"></i></a> ';
+                var e = '<a title="编辑" href="initUpdate/'+row.mid+'"><i class="glyphicon glyphicon-pencil" alt="修改" style="color:green"></i></a> ';
                 var d = '<a title="删除" href="javascript:void(0);" onclick="del(' + row.mid + ',' + row.state + ')"><i class="glyphicon glyphicon-trash" alt="删除" style="color:red"></i></a> ';
                 var f = '';
                 if (row.state == 0) {
@@ -154,6 +154,23 @@ function refush() {
     $('#mytab').bootstrapTable('refresh', {url: '/media/pager_criteria'});
 }
 
+//查看详情
+function detail() {
+    var row = $.map($("#mytab").bootstrapTable('getSelections'), function (row) {
+        return row.mid;
+    });
+    if (row == "") {
+        layer.msg('查看详情失败，请勾选数据!', {
+            icon: 2,
+            time: 2000
+        });
+        return;
+    }else {
+        window.location.href = "/media/findMedia/"+row;
+    }
+
+}
+
 //单个删除
 function del(mid, state) {
     if (state == 0) {
@@ -179,57 +196,6 @@ function del(mid, state) {
         });
     });
 }
-//编辑
-function edit(mid) {
-         $.post("/media/findMedia/" + mid,
-            function (data) {
-                $("#updateForm").autofill(data);
-                $("#demo1").attr("src","/"+data.pic);
-                },
-            "json"
-        );
-}
-$("#update").click(function () {
-    $.post(
-        "/media/update",
-        $("#updateForm").serialize(),
-        function (data) {
-            if (data.result == "ok") {
-                layer.msg(data.message, {icon: 1, time: 3000});
-            } else {
-                layer.msg(data.message, {icon: 2, time: 3000});
-            }
-            refush();
-            $("#mediaUpdate").modal('hide');
-        }, "json"
-    );
-});
-function update() {
-    var row = $.map($("#mytab").bootstrapTable('getSelections'), function (row) {
-        return row.mid;
-    });
-    if (row == "") {
-        layer.msg('修改失败，请勾选数据!', {
-            icon: 2,
-            time: 3000
-        });
-        return ;
-
-    }else {
-        $.post("/media/findMedia/" + $("#mid").val(),
-            function (data) {
-                if (data.result == "ok") {
-                    $("#updateForm").autofill(data);
-                } else {
-                    layer.msg(data.message, {icon: 2, time: 3000});
-                }
-
-            },
-            "json"
-        );
-    }
-}
-
 function updatestatus(mid, state) {
     $.post("/media/updateStatus/" + mid + "/" + state,
         function (data) {
@@ -274,7 +240,7 @@ $('#mediaAdd').bootstrapValidator({
             }
         },
         url: {
-            message: '报道标题验证失败',
+            message: '报道地址验证失败',
             validators: {
                 notEmpty: {
                     message: '请输入报道地址'
@@ -283,6 +249,10 @@ $('#mediaAdd').bootstrapValidator({
                     min: 1,
                     max: 100,
                     message: '请输入报道地址长度必须在1到100之间'
+                },
+                regexp: {
+                    regexp: /(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?/,
+                    message: '请输入有效的网址'
                 }
             }
         },
@@ -321,6 +291,7 @@ $('#mediaAdd').bootstrapValidator({
             } else {
                 layer.msg(data.message, {icon: 2, time: 3000});
             }
+            refush();
             $("#mediaAdd").data('bootstrapValidator').resetForm();
             $("#title").val("");
             $("#pic").val("");
@@ -329,7 +300,6 @@ $('#mediaAdd').bootstrapValidator({
             $("#demo1").attr("src",'');
             $("#demo").html('');
             ue.setContent('');
-            refush();
         },
         "json"
     );
@@ -357,7 +327,7 @@ $('#updateForm').bootstrapValidator({
             }
         },
         url: {
-            message: '报道标题验证失败',
+            message: '报道地址验证失败',
             validators: {
                 notEmpty: {
                     message: '请输入报道地址'
@@ -366,28 +336,11 @@ $('#updateForm').bootstrapValidator({
                     min: 1,
                     max: 100,
                     message: '请输入报道地址长度必须在1到100之间'
-                }
-            }
-        },
-        pic: {
-            message: '图片验证失败',
-            validators: {
-                notEmpty: {
-                    message: '封面图片不能为空'
-                }
-            }
-        },
-        date: {
-            message: '报道时间验证失败',
-            validators: {
-                notEmpty: {
-                    message: '请选择报道时间'
                 },
-                date:{
-                    format : 'YYYY/MM/DD',
-                    message : '日期格式不正确'
+                regexp: {
+                    regexp: /(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?/,
+                    message: '请输入有效的网址'
                 }
-
             }
         }
     }
@@ -395,67 +348,13 @@ $('#updateForm').bootstrapValidator({
     e.preventDefault();
     var $form = $(e.target);
     var bv = $form.data('bootstrapValidator');
-
     $.post(
         "/media/update",
         $('#updateForm').serialize(),
-        function (data) {
-            if (data.result == "ok") {
-                layer.msg(data.message, {icon: 1, time: 3000});
-            } else {
-                layer.msg(data.message, {icon: 2, time: 3000});
-            }
-            $("#mediaUpdate").modal('hide');
-            $("#title").val("");
-            $("#pic").val("");
-            $("#date").val("");
-            $("#url").val("");
-            $("#demo1").attr("src",'');
-            ue.setContent('');
-            refush();
+        function () {
+            console.log("test");
+            window.location.href="/media/page";
         },
-        "json"
+        "html"
     );
 });
-function deleteMany() {
-    var isactivity = "";
-    var row = $.map($("#mytab").bootstrapTable('getSelections'), function (row) {
-        if (row.state == 0) {
-            isactivity += row.state;
-        }
-        return row.id;
-    });
-    if (row == "") {
-        layer.msg('删除失败，请勾选数据!', {
-            icon: 2,
-            time: 3000
-        });
-        return;
-    }
-    if (isactivity != "") {
-        layer.msg('删除失败，已经激活的不允许删除!', {
-            icon: 2,
-            time: 3000
-        });
-        return;
-
-    }
-    $("#deleteId").val(row);
-    layer.confirm('确认要执行批量删除媒体报道数据吗？', function (index) {
-        $.post(
-            "/media/deleteMany",
-            {
-                "manyId": $("#deleteId").val()
-            },
-            function (data) {
-                if (data.result == "ok") {
-                    layer.msg("批量删除成功", {icon: 1, time: 3000});
-                    refush();
-                } else {
-                    layer.msg("批量删除失败", {icon: 2, time: 3000});
-                }
-                refush();
-            }, "json"
-        );
-    });
-}

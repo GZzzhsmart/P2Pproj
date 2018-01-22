@@ -32,6 +32,4 @@ public interface UserService extends BaseService {
 
     //前台统计用户数
     Long count();
-
-    void resettingUpwd(String  phone,String upwd);
 }

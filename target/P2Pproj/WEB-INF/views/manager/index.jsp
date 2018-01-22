@@ -86,6 +86,8 @@
                             </li>
                             <li><a class="J_menuItem" href="<%=path%>/option/page">用户反馈</a>
                             </li>
+                            <li><a class="J_menuItem" href="<%=path%>/letter/page">站内信管理</a>
+                            </li>
                             <li><a class="J_menuItem" href="<%=path%>/luser/loginlog">登录日志</a>
                             </li>
                         </ul>
@@ -149,38 +151,19 @@
                     <li>
                         <a href="javascript:void(0);">
                             <i class="fa fa-desktop"></i>
-                            <span class="nav-label">媒体报道</span>
+                            <span class="nav-label">宣传管理</span>
                             <span class="fa arrow"></span>
                         </a>
                         <ul class="nav nav-second-level">
                             <shiro:hasPermission name="媒体报道:媒体报道列表">
-                                <li><a a class="J_menuItem" href="<%=path%>/media/page">媒体报道列表</a></li>
+                                <li><a a class="J_menuItem" href="<%=path%>/media/page">媒体报道</a></li>
                             </shiro:hasPermission>
-                            <shiro:hasPermission name="媒体报道:新增媒体报道">
-                                <li><a a class="J_menuItem" href="<%=path%>/media/initAdd">新增媒体报道</a></li>
-                            </shiro:hasPermission>
-                            <shiro:hasPermission name="媒体报道:首页信息列表">
-                                <li><a a class="J_menuItem" href="<%=path%>/home/page">首页信息列表</a></li>
-                            </shiro:hasPermission>
-                            <shiro:hasPermission name="媒体报道:新增首页信息">
-                                <li><a a class="J_menuItem" href="<%=path%>/home/initAdd">新增首页信息</a></li>
-                            </shiro:hasPermission>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0);">
-                            <i class="fa fa-bar-chart-o"></i>
-                            <span class="nav-label">公司动态</span>
-                            <span class="fa arrow"></span>
-                        </a>
-                        <ul class="nav nav-second-level">
                             <shiro:hasPermission name="公司动态:公司动态列表">
-                                <li><a a class="J_menuItem" href="<%=path%>/dynamic/page">公司动态列表</a></li>
+                                <li><a a class="J_menuItem" href="<%=path%>/dynamic/page">公司动态</a></li>
                             </shiro:hasPermission>
-                            <shiro:hasPermission name="公司动态:新增公司动态">
-                                <li><a a class="J_menuItem" href="<%=path%>/dynamic/initAdd">新增公司动态</a>
+                            <shiro:hasPermission name="首页信息:首页信息列表">
+                                <li><a a class="J_menuItem" href="<%=path%>/home/page">首页信息</a></li>
                             </shiro:hasPermission>
-                            </li>
                         </ul>
                     </li>
                 </shiro:hasRole><!--普通员工-->

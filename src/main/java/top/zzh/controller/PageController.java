@@ -418,13 +418,15 @@ public class PageController {
     }
 
     @RequestMapping("report/{pageNo}")
-    public String report(HttpServletRequest request,@PathVariable("pageNo")int pageNo) {
+    public ModelAndView report(HttpServletRequest request,@PathVariable("pageNo")int pageNo) {
+        ModelAndView mv = new ModelAndView();
         if(pageNo == 1){
            pageNo = 1;
         }
         Pager mediaPager = mediaService.listPager(pageNo,5);
-        request.setAttribute("mediaPager",mediaPager);
-        return "index/report";
+        mv.addObject("mediaPager",mediaPager);
+        mv.setViewName("index/report");
+        return mv;
     }
 
     @RequestMapping("dynamic/{pageNo}")

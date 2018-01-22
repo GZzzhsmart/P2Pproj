@@ -76,10 +76,6 @@
 <script type="text/javascript">
 
     UE.getEditor('myEditor',{initialFrameHeight:300,initialFrameWidth:800})
-
-
-
-
     function update() {
 
       var content =  UE.getEditor("myEditor").getContent();

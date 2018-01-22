@@ -35,4 +35,5 @@ public interface UserMoneyService extends BaseService {
 
     //将现金劵转入余额，改变用户可用余额
     void updateKymoney(Object object);
+
 }

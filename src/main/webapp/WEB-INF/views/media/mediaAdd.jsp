@@ -19,21 +19,7 @@
         <div class="ibox-title">
             <h5>媒体报道</h5>
             <div class="ibox-tools">
-                <a class="collapse-link">
-                    <i class="fa fa-chevron-up"></i>
-                </a>
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-wrench"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-user">
-                    <li><a href="#">选项1</a>
-                    </li>
-                    <li><a href="#">选项2</a>
-                    </li>
-                </ul>
-                <a class="close-link">
-                    <i class="fa fa-times"></i>
-                </a>
+                <h5><a  style="color: blue" href="<%=path%>/media/page">返回列表&nbsp;&nbsp;&nbsp;&nbsp;</a></h5>
             </div>
         </div>
         <div class="ibox-content">
@@ -47,7 +33,7 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">内容</label>
                     <div class="col-sm-10">
-                        <textarea id="editor" name="content" style="height: 250px;width: 825px"autofocus></textarea>
+                        <textarea id="editor" name="content" style="height: 250px;width: 825px" required autofocus></textarea>
                     </div>
                 </div>
                 <div class="form-group">
@@ -65,16 +51,16 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">报道日期</label>
+                    <label class="col-sm-2 control-label">报道地址</label>
                     <div class="col-sm-10">
-                        <input id="date" name="date" type="date" placeholder="请选择报道日期" class="form-control">
+                        <input type="url" id="url" name="url" placeholder="请输入报道地址"class="form-control">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">报道地址</label>
+                    <label class="col-sm-2 control-label">报道日期</label>
                     <div class="col-sm-10">
-                        <input type="text" id="url" name="url" placeholder="请输入报道地址" class="form-control">
+                        <input id="date" name="date" type="date" placeholder="请选择报道日期" class="form-control">
                     </div>
                 </div>
 

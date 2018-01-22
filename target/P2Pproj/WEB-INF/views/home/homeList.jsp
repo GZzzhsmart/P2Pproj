@@ -17,23 +17,6 @@
     <div class="ibox float-e-margins">
         <div class="ibox-title">
             <h5>媒体报道列表</h5>
-            <div class="ibox-tools">
-                <a class="collapse-link">
-                    <i class="fa fa-chevron-up"></i>
-                </a>
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-wrench"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-user">
-                    <li><a href="#">选项1</a>
-                    </li>
-                    <li><a href="#">选项2</a>
-                    </li>
-                </ul>
-                <a class="close-link">
-                    <i class="fa fa-times"></i>
-                </a>
-            </div>
         </div>
         <div class="ibox-content">
             <div class="panel panel-default">
@@ -74,6 +57,11 @@
 
                 </div>
             <table id="mytab" name="mytab" class="table table-hover"></table>
+            <div id="toolbar" class="btn-group pull-right" style="margin-right: 20px;">
+                <button id="btn_add" type="button" class="btn btn-default">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true" ></span><a a class="J_menuItem" style="color: white" href="<%=path%>/home/initAdd">新增首页信息</a>
+                </button>
+            </div>
         </div>
     </div>
 </div>
@@ -86,7 +74,7 @@
                     &times;
                 </button>
                 <h4 class="modal-title" id="myModalLabel">
-                    报道的更改
+                    首页信息的更改
                 </h4>
             </div>
             <div class="modal-body">

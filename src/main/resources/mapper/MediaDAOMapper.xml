@@ -57,7 +57,7 @@
         <include refid="media_query_criteria"/>
     </select>
 
-    <select id="listPager" resultType="media">
+    <select id="listPager" resultType="top.zzh.vo.MediaVO">
         <![CDATA[
           select * from t_media where state = 0
           order by date desc

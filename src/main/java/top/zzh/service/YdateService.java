@@ -37,8 +37,8 @@ public interface YdateService extends BaseService {
     //月贷款笔数
     Integer countMbApplyBaid();
 
-    public void setParames(HashMap params,Long yid);
-    public void setParamesPic(HashMap params,HttpServletRequest request);
+    public void setParames(HashMap params, Long yid);
+    public void setParamesPic(HashMap params, HttpServletRequest request);
     public void createSexChart(HashMap param);
     public void createAgeChart(HashMap param);
     public void createRingChart(HashMap param);

@@ -43,6 +43,7 @@ import java.util.HashMap;
 @Controller
 @RequestMapping("rundata")
 public class RunDataController {
+
     @Autowired
     private YdateService ydateService;
     private Logger logger= LoggerFactory.getLogger(RunDataController.class);

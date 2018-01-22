@@ -68,6 +68,7 @@
         </set>
         where kid = #{kid}
     </update>
+
     <update id="updateStatus">
         <![CDATA[
 			update t_ticket set status=#{status} where kid = #{kid}

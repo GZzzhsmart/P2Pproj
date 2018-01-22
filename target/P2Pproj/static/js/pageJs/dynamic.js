@@ -145,7 +145,22 @@ $('#search_btn').click(function () {
 function refush() {
     $('#mytab').bootstrapTable('refresh', {url: '/dynamic/pager_criteria'});
 }
+//查看详情
+function detail() {
+    var row = $.map($("#mytab").bootstrapTable('getSelections'), function (row) {
+        return row.dyid;
+    });
+    if (row == "") {
+        layer.msg('查看详情失败，请勾选数据!', {
+            icon: 2,
+            time: 2000
+        });
+        return;
+    }else {
+        window.location.href = "/dynamic/findDynamic/"+row;
+    }
 
+}
 //单个删除
 function del(dyid, state) {
     if (state == 0) {
@@ -170,41 +185,6 @@ function del(dyid, state) {
             },
         });
     });
-}
-//编辑
-function edit(dyid) {
-         $.post("/dynamic/findDynamic/" + dyid,
-            function (data) {
-                $("#updateForm").autofill(data);
-                $("#demo1").attr("src","/"+data.pic);
-            },
-            "json"
-        );
-}
-function update() {
-    var row = $.map($("#mytab").bootstrapTable('getSelections'), function (row) {
-        return row.dyid;
-    });
-    if (row == "") {
-        layer.msg('修改失败，请勾选数据!', {
-            icon: 2,
-            time: 2000
-        });
-        return ;
-
-    }else {
-        $.post("/dynamic/initUpadate/" + $("#dyid").val(),
-            function (data) {
-                if (data.result == "ok") {
-                    $("#updateForm").autofill(data);
-                } else {
-                    layer.msg(data.message, {icon: 2, time: 3000});
-                }
-
-            },
-            "json"
-        );
-    }
 }
 
 function updatestatus(dyid, state) {
@@ -286,6 +266,7 @@ $('#dynamicAdd').bootstrapValidator({
             } else {
                 layer.msg(data.message, {icon: 2, time: 3000});
             }
+            refush();
             $("#dynamicAdd").data('bootstrapValidator').resetForm();
             $("#title").val("");
             $("#date").val("");
@@ -294,7 +275,6 @@ $('#dynamicAdd').bootstrapValidator({
             $("#demoText").val("");
             $("#pic").val("");
             ue.setContent('');
-             refush();
         },
         "json"
     );
@@ -357,56 +337,13 @@ $('#updateForm').bootstrapValidator({
             } else {
                 layer.msg(data.message, {icon: 2, time: 3000});
             }
-            $("#dynamicUpdate").modal('hide');
+            refush();
             $("#title").val("");
             $("#pic").val("");
             $("#date").val("");
             ue.setContent('');
             $("#demo1").attr("src",'');
-             refush();
         },
         "json"
     );
 });
-function deleteMany() {
-    var isactivity = "";
-    var row = $.map($("#mytab").bootstrapTable('getSelections'), function (row) {
-        if (row.state == 0) {
-            isactivity += row.state;
-        }
-        return row.id;
-    });
-    if (row == "") {
-        layer.msg('删除失败，请勾选数据!', {
-            icon: 2,
-            time: 2000
-        });
-        return;
-    }
-    if (isactivity != "") {
-        layer.msg('删除失败，已经激活的不允许删除!', {
-            icon: 2,
-            time: 2000
-        });
-        return;
-
-    }
-    $("#deleteId").val(row);
-    layer.confirm('确认要执行批量删除媒体报道数据吗？', function (index) {
-        $.post(
-            "/dynamic/deleteMany",
-            {
-                "manyId": $("#deleteId").val()
-            },
-            function (data) {
-                if (data.result == "ok") {
-                    layer.msg("批量删除成功", {icon: 1, time: 3000});
-                    refush();
-                } else {
-                    layer.msg("批量删除失败", {icon: 2, time: 3000});
-                }
-                refush();
-            }, "json"
-        );
-    });
-}

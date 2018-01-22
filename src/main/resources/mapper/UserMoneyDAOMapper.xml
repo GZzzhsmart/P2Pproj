@@ -179,9 +179,9 @@
             from t_usermoney um,t_user u where um.uid = u.uid and u.uid =#{uid}
         ]]>
     </select>
-    
+
     <update id="updateKymoney" parameterType="top.zzh.vo.UserMoneyVO">
-      <![CDATA[
+        <![CDATA[
         update t_usermoney set zmoney = #{zmoney},kymoney = #{kymoney} where uid = #{uid}
       ]]>
     </update>
