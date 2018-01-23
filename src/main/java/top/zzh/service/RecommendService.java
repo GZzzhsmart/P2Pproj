@@ -1,6 +1,7 @@
 package top.zzh.service;
 
-import java.util.List;
+import java.math.BigDecimal;
+import java.util.Date;
 
 public interface RecommendService extends BaseService {
     int countTzm(String tjm);
@@ -11,7 +12,15 @@ public interface RecommendService extends BaseService {
 
     String getByUid(long uid);
 
-    Object listPagerUid(int pageNo, int pageSize,Object obj);
+    Object listPagerUid(int pageNo, int pageSize, Object obj);
 
     Long countByUid(Object obj);
+
+    Long countTicketByUid(long uid, long kid);
+
+    BigDecimal tzByUid(long uid);
+
+    void userTicketSave(long uid, long kid);
+
+    Date dateGet();
 }

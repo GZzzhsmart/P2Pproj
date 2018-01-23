@@ -178,8 +178,8 @@ public class PageController {
         return mv;
     }
 
-    @RequestMapping("hong/{kid}")
-    public ModelAndView hong(@PathVariable("kid") Long kid, HttpSession session){
+    @RequestMapping("hong1/{kid}")
+    public ModelAndView hong1(@PathVariable("kid") Long kid, HttpSession session){
         logger.info("红包现金劵转入余额");
         ModelAndView modelAndView = new ModelAndView();
         Long uid = (Long)session.getAttribute(Constants.USER_ID_SESSION);
@@ -197,7 +197,7 @@ public class PageController {
         userMoneyService.updateKymoney(userMoneyVO);
         userTicketService.updateState(userTicketVo);
         logMoneyService.save(logMoney);
-        modelAndView.setViewName("user/userindex");
+        modelAndView.setViewName("user/hongbao");
         return modelAndView;
     }
 

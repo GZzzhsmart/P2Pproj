@@ -61,7 +61,7 @@ public enum ControllerStatusEnum {
     CHECK_ERR_FAIL(118,"error","提现失败，请稍候再试"),
     USER_TZ_SUCCESS(119,"ok","恭喜你，投资成功！"),
     CHECK_TZ_FAIL(120,"error","投资失败，不能给自己投资"),
-    USER_TZ_FAIL(121,"error","投资失败，请稍候再试"),
+    USER_TZ_FAIL(121,"error","投资失败，不能投自己发布的标"),
     CHECK_TZ_SUCCESS(124,"ok","投资成功，欢迎您再次投标"),
     CHECK_TZ_FAILED(123,"error","未投满"),
     USER_MONEY_ENOUGH(122,"error","用户余额不足，请立即充值"),

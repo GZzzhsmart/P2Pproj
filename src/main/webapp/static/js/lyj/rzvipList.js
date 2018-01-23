@@ -91,15 +91,15 @@ $('#mytab').bootstrapTable({
         ,
         {
             title: '状态',
-            field: 'huid',
+            field: 'isok',
             align: 'center',
             formatter: function (value, row, index) {
-                if (value == null) {
+                if (value === 0) {
                     //表示激活状态
-                    return '<span style="color:red" >未审核</span>';
-                } else {
+                    return '<span style="color:green" >审核通过</span>';
+                } else if(value ===1){
                     //表示冻结状态
-                    return '<span style="color:green">已审核</span>';
+                    return '<span style="color:red">审核不通过</span>';
                 }
             }
         }

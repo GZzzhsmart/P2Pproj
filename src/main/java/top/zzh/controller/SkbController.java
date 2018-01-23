@@ -180,9 +180,9 @@ public class SkbController {
 
     @RequestMapping("pager")
     @ResponseBody
-    public Pager pager(int pageIndex, int pageSize, Long juid) {
-
-        return skbService.listPager(pageIndex,pageSize,juid);
+    public Pager pager(int pageIndex, int pageSize, Long juid,HttpSession session) {
+        Long userid = (Long)session.getAttribute(Constants.USER_ID_SESSION);
+        return skbService.listPager(pageIndex,pageSize,juid,userid);
     }
 
 
@@ -204,6 +204,7 @@ public class SkbController {
 
         //收款表
         SkbUpdate skbUpdate=new SkbUpdate();
+        skbUpdate.setUid(uid);
         skbUpdate.setJuid(juid);
         skbUpdate.setBaid(baid);
         skbUpdate.setDjq(djq);
@@ -216,7 +217,7 @@ public class SkbController {
         String time=format.format(date);
         skbUpdate.setDate(time);
         skbUpdate.setState(2);
-        skbService.updateSk(skbUpdate);
+        skbService.updateDsk(skbUpdate);
 
 
         UserMoneyVO userMoneyVO=userMoneyService.getByUid(uid);

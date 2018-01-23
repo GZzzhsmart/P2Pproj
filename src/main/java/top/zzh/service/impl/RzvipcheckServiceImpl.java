@@ -36,4 +36,5 @@ public class RzvipcheckServiceImpl  extends AbstractService implements Rzvipchec
     public RzVipCheck shResult(Long uid) {
         return rzvipcheckDAO.shResult(uid);
     }
+
 }

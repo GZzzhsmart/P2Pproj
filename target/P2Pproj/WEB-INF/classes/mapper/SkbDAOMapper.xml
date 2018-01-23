@@ -75,7 +75,7 @@
 
     <select id="listPager" resultType="top.zzh.vo.SkbVO">
         select skid,juid,ybx,rbx,ylx,baid,rlx,ybj,rbj,rnum,tnum,date,djq,state  from t_skb s
-        where juid =#{juid}
+        where juid =#{juid} and uid=#{uid}
         limit #{pager.beginIndex}, #{pager.pageSize}
     </select>
 
@@ -112,6 +112,35 @@
             </if>
         </set>
         where juid=#{juid} and djq=#{djq} and baid=#{baid}
+    </update>
+
+
+    <!--单个收款-->
+    <update id="updateDsk" parameterType="top.zzh.vo.SkbUpdate">
+        <![CDATA[
+          update t_skb
+        ]]>
+        <set>
+            <if test="rbx!=null and rbx!=''">
+                rbx =#{rbx},
+            </if>
+            <if test="rlx!=null and rlx!=''">
+                rlx=#{rlx},
+            </if>
+            <if test="rbj!=null and rbj!=''">
+                rbj=#{rbj},
+            </if>
+            <if test="rnum!=null and rnum!=''">
+                rnum=#{rnum},
+            </if>
+            <if test="date!=null and date!=''">
+                date=#{date},
+            </if>
+            <if test="state!=null and state!=''">
+                state=#{state},
+            </if>
+        </set>
+        where juid=#{juid} and djq=#{djq} and baid=#{baid} and uid=#{uid}
     </update>
 
     <!--收款人-->

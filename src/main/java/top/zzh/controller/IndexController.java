@@ -94,7 +94,6 @@ public class IndexController {
         modelAndView.addObject("borrow3",borrow3);
         modelAndView.addObject("borrow4",borrow4);
         modelAndView.addObject("noticeList",noticeList);
-
         modelAndView.addObject("friendList",friendList);
         modelAndView.setViewName("index");
         return modelAndView;

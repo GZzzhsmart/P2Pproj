@@ -43,13 +43,15 @@ public interface SkbDAO extends BaseDAO{
     Skb findSkb(@Param("uid")Long uid,@Param("juid") Long juid);
 
 
-    List <Object> listPager(@Param("pager") Pager pager,@Param("juid")Long juid);
+    List <Object> listPager(@Param("pager") Pager pager,@Param("juid")Long juid,@Param("uid") Long uid);
 
 
-    Long count(@Param("juid") Long juid);
+    Long count(@Param("juid") Long juid,@Param("uid") Long uid);
 
     void updateSk(SkbUpdate skbUpdate);
 
     Long findUid(@Param("juid")Long juid, @Param("djq")Integer djq);
 
+
+    void updateDsk(SkbUpdate skbUpdate);
 }

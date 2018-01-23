@@ -92,7 +92,7 @@ public class TzbController {
 
 
         //投资奖励的发放
-        Reward reward=rewardService.findTmoney(uid);
+        Reward reward=rewardService.findTmoney(userid);
         Timer timer=new Timer();
         Calendar calendar=Calendar.getInstance();
         calendar.set(calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH)+4,calendar.get(Calendar.DAY_OF_MONTH)
@@ -104,7 +104,7 @@ public class TzbController {
         if(reward==null){
             ymoney=BigDecimal.valueOf(0);
             tmoney=ymoney.add(xmoney);
-            reward1.setUid(uid);
+            reward1.setUid(userid);
             reward1.setMoney(jLff.jlj(xmoney));
             reward1.setState((byte) 1);
             reward1.setTmoney(tmoney);
@@ -114,14 +114,14 @@ public class TzbController {
 
         if(reward!=null){
             Reward reward3=new Reward();
-            reward3.setUid(uid);
+            reward3.setUid(userid);
             reward3.setState((byte)1);
             reward3.setDate(calendar.getTime());
             rewardService.updateState(reward3);
             ymoney=reward.getTmoney();
             tmoney= ymoney.add(xmoney);
             Reward reward2=new Reward();
-            reward2.setUid(uid);
+            reward2.setUid(userid);
             reward2.setTmoney(tmoney);
             BigDecimal jl=reward.getMoney();
             BigDecimal zjl=jl.add(jLff.jlj(xmoney));
@@ -135,15 +135,15 @@ public class TzbController {
             public void run() {
 
                 System.out.println("定时任务启动！");
-                Reward reward5=rewardService.findTmoney(uid);
+                Reward reward5=rewardService.findTmoney(userid);
                 if(reward5.getState()==1){
                     Reward reward4=new Reward();
-                    reward4.setUid(uid);
+                    reward4.setUid(userid);
                     reward4.setState((byte)2);
                     reward4.setDate(calendar.getTime());
                     rewardService.updateState(reward4);
 
-                    UserMoney userMoney=userMoneyService.findJlmoney(uid);
+                    UserMoney userMoney=userMoneyService.findJlmoney(userid);
                     BigDecimal xjlmoney=jLff.jlj(xmoney);
                     BigDecimal yjlmoney=null;
                     BigDecimal jlmoney=null;
@@ -157,11 +157,11 @@ public class TzbController {
                         jlmoney=yjlmoney.add(xjlmoney);
                     }
 
-                    userMoneyService.updateJlmoney(jlmoney,uid);
+                    userMoneyService.updateJlmoney(jlmoney,userid);
 
 
                     UserMoneyVO userMoneyVO =new UserMoneyVO();
-                    userMoneyVO.setUid(String.valueOf(uid));
+                    userMoneyVO.setUid(String.valueOf(userid));
                     userMoneyVO.setZmoney(jlmoney.add(userMoney.getZmoney()));
                     userMoneyVO.setKymoney(jlmoney.add(userMoney.getKymoney()));
                     userMoneyService.updateZmoney(userMoneyVO);

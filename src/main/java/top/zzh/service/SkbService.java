@@ -24,7 +24,7 @@ public interface SkbService extends BaseService{
     Skb findSkb(Long uid,Long juid);
 
 
-    Pager listPager(int pageNo, int pageSize, Long juid);
+    Pager listPager(int pageNo, int pageSize, Long juid, Long uid);
 
     void updateSk(SkbUpdate skbUpdate);
 
@@ -32,5 +32,7 @@ public interface SkbService extends BaseService{
 
     //后台查看收款表详情
     Pager find(int pageNo,int pageSize,Object object);
+
+    void updateDsk(SkbUpdate skbUpdate);
 
 }

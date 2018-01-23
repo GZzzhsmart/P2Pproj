@@ -49,27 +49,22 @@
                     </div>
                 </li>
                 <shiro:hasRole name="超级管理员">
-                    <shiro:hasRole name="普通管理员">
-                        <shiro:hasRole name="普通员工">
-                        <li>
-                            <a href="javascript:void(0);">
-                                <i class="glyphicon glyphicon-link"></i>
-                                <span class="nav-label">权限分配</span>
-                                <span class="fa arrow"></span>
-                            </a>
-                            <ul class="nav nav-second-level">
-                                <li><a class="J_menuItem" href="<%=path %>/permission/permissionPage">权限管理</a></li>
-                                <li><a a class="J_menuItem" href="<%=path %>/role/rolePage">角色管理</a></li>
-                                <li><a a class="J_menuItem" href="<%=path %>/rolePermission/rolePermissionPage">角色权限管理</a></li>
-                                <li><a a class="J_menuItem" href="<%=path %>/hUserRole/hUserRolePage">后台用户角色管理</a></li>
-                            </ul>
-                        </li>
-                        </shiro:hasRole>
-                    </shiro:hasRole>
+                    <li>
+                        <a href="javascript:void(0);">
+                            <i class="glyphicon glyphicon-link"></i>
+                            <span class="nav-label">权限分配</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level">
+                            <li><a class="J_menuItem" href="<%=path %>/permission/permissionPage">权限管理</a></li>
+                            <li><a a class="J_menuItem" href="<%=path %>/role/rolePage">角色管理</a></li>
+                            <li><a a class="J_menuItem" href="<%=path %>/rolePermission/rolePermissionPage">角色权限管理</a></li>
+                            <li><a a class="J_menuItem" href="<%=path %>/hUserRole/hUserRolePage">后台用户角色管理</a></li>
+                        </ul>
+                    </li>
                 </shiro:hasRole>
 
                 <shiro:hasRole name="普通管理员">
-                    <shiro:hasRole name="普通员工">
                     <li>
                         <a href="javascript:void(0);">
                             <i class="fa fa-th-large"></i>
@@ -145,7 +140,6 @@
 
                         </ul>
                     </li>
-                    </shiro:hasRole><!--普通员工-->
                 </shiro:hasRole><!--普通管理员-->
                 <shiro:hasRole name="普通员工">
                     <li>
@@ -155,13 +149,16 @@
                             <span class="fa arrow"></span>
                         </a>
                         <ul class="nav nav-second-level">
-                            <shiro:hasPermission name="媒体报道:媒体报道列表">
+
+                            <shiro:hasPermission name="宣传管理:媒体报道列表">
                                 <li><a a class="J_menuItem" href="<%=path%>/media/page">媒体报道</a></li>
                             </shiro:hasPermission>
-                            <shiro:hasPermission name="公司动态:公司动态列表">
+
+                            <shiro:hasPermission name="宣传管理:公司动态列表">
                                 <li><a a class="J_menuItem" href="<%=path%>/dynamic/page">公司动态</a></li>
                             </shiro:hasPermission>
-                            <shiro:hasPermission name="首页信息:首页信息列表">
+
+                            <shiro:hasPermission name="宣传管理:首页信息列表">
                                 <li><a a class="J_menuItem" href="<%=path%>/home/page">首页信息</a></li>
                             </shiro:hasPermission>
                         </ul>

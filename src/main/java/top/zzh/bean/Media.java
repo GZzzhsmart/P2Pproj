@@ -96,6 +96,7 @@ public class Media {
         this.state = state;
     }
 
+
     public void setContentToSub(String contentToSub) {
         this.contentToSub = contentToSub;
     }

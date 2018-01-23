@@ -7,7 +7,8 @@ import top.zzh.dao.RecommendDAO;
 import top.zzh.service.AbstractService;
 import top.zzh.service.RecommendService;
 
-import java.util.List;
+import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * Created by 谢学培 on 2017/12/21.
@@ -27,6 +28,7 @@ public class RecommendServiceImpl extends AbstractService implements RecommendSe
     public void save(Object obj) {
         recommendDAO.save(obj);
     }
+
     @Override
     public void remove(Object obj) {
         recommendDAO.remove(obj);
@@ -71,5 +73,25 @@ public class RecommendServiceImpl extends AbstractService implements RecommendSe
     @Override
     public Long countByUid(Object obj) {
         return recommendDAO.countByUid(obj);
+    }
+
+    @Override
+    public Long countTicketByUid(long uid,long kid) {
+        return recommendDAO.countTicketByUid(uid,kid);
+    }
+
+    @Override
+    public BigDecimal tzByUid(long uid) {
+        return recommendDAO.tzByUid(uid);
+    }
+
+    @Override
+    public void userTicketSave(long uid, long kid) {
+        recommendDAO.userTicketSave(uid, kid);
+    }
+
+    @Override
+    public Date dateGet() {
+        return recommendDAO.dateGet();
     }
 }

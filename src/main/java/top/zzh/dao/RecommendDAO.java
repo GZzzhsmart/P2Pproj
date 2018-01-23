@@ -4,8 +4,9 @@ package top.zzh.dao;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import top.zzh.common.Pager;
-import top.zzh.vo.RecommendViewVO;
 
+import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -24,11 +25,19 @@ public interface RecommendDAO extends BaseDAO {
 
     Object recommendRanking();
 
-    Object getByTzm(@Param("tzm")String tzm);
+    Object getByTzm(@Param("tzm") String tzm);
 
-    String getByUid(@Param("uid")long uid);
+    String getByUid(@Param("uid") long uid);
 
     List<Object> listPagerUid(@Param("pager") Pager pager, @Param("query") Object obj);
 
     Long countByUid(@Param("query") Object obj);
+
+    Long countTicketByUid(@Param("uid") long uid,@Param("kid") long kid);
+
+    BigDecimal tzByUid(@Param("uid") long uid);
+
+    void userTicketSave(@Param("uid")long uid,@Param("kid") long kid);
+
+    Date dateGet();
 }

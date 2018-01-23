@@ -12,4 +12,5 @@ public interface RzvipcheckDAO extends BaseDAO  {
     void add(RzVipCheck rzVipCheck);
     void examineAndverify(RzVipCheck rzVipCheck);
     RzVipCheck shResult(@Param("uid")Long uid);
+
 }

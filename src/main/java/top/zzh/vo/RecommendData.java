@@ -1,5 +1,6 @@
 package top.zzh.vo;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -17,12 +18,20 @@ public class RecommendData {
 
     private Date date;//推荐时间
     private String dateToStr;
+    private double money;
 
-    public String getDateToStr(){
-        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    public String getDateToStr() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return sdf.format(date);
     }
 
+    public double getMoney() {
+        return money;
+    }
+
+    public void setMoney(double money) {
+        this.money = money;
+    }
 
     public Date getDate() {
         return date;

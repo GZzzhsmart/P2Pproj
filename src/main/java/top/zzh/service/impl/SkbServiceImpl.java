@@ -62,11 +62,11 @@ public class SkbServiceImpl extends AbstractService implements SkbService{
     }
 
     @Override
-    public Pager listPager(int pageNo, int pageSize, Long juid) {
+    public Pager listPager(int pageNo, int pageSize, Long juid, Long uid) {
 
         Pager pager = new Pager(pageNo, pageSize);
-        pager.setRows(skbDAO.listPager(pager, juid));
-        pager.setTotal(skbDAO.count(juid));
+        pager.setRows(skbDAO.listPager(pager, juid,uid));
+        pager.setTotal(skbDAO.count(juid,uid));
         return pager;
     }
 
@@ -95,6 +95,11 @@ public class SkbServiceImpl extends AbstractService implements SkbService{
         pager.setTotal(skbDAO.countByUid(object));
         return pager;
 
+    }
+
+    @Override
+    public void updateDsk(SkbUpdate skbUpdate) {
+        skbDAO.updateDsk(skbUpdate);
     }
 
 

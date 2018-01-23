@@ -4,6 +4,7 @@
 <!--Created by 谢学培 on 2017/12/21.-->
 
 <mapper namespace="top.zzh.dao.RecommendDAO">
+    <!--查询推荐码是否重复-->
     <select id="countTzm" resultType="Integer">
       select count(uid) from t_user where tzm = #{tzm};
     </select>
@@ -11,51 +12,86 @@
     <select id="getByTzm" parameterType="string" resultType="user">
         select uid,uname from t_user where tzm = #{tzm};
     </select>
+
+    <!--查询推荐码用于后台显示-->
     <select id="getByUid" parameterType="long" resultType="string">
         select tzm from t_user where uid = #{uid};
     </select>
+    <!--新增推荐记录-->
     <insert id="save" parameterType="recommend">
         insert into t_recommend(tid,tname,uid,rname,date) values(#{tid},#{tname},#{uid},#{rname},now())
     </insert>
-    <!--条件查询【推荐人姓名或被推荐人姓名】-->
-    <sql id="cash_query_criteria">
-        <if test="query != null and query.tname != null and query.tname!=''">
-            and tname like concat('%', #{query.tname}, '%')
-        </if>
-        <if test="query != null and query.rname != null and query.rname!=''">
-            and rname like concat('%', #{query.rname}, '%')
-        </if>
-        <if test="query != null and query.startTime != null and query.startTime != ''">
-            and `date` <![CDATA[>=]]> #{query.startTime}
-        </if>
-        <if test="query != null and query.endTime != null and query.endTime != ''">
-            and `date`<![CDATA[<=]]> #{query.endTime}
-        </if>
-    </sql>
-    <select id="listPagerCriteria" resultType="recommend">
-        select id,tid,tname,uid,rname,`date` from t_recommend where 1=1
-        <include refid="cash_query_criteria"/>
-        order by `date` desc limit #{pager.beginIndex}, #{pager.pageSize}
-    </select>
-    <select id="countCriteria" resultType="long">
-        select count(id) from t_recommend where 1=1
-        <include refid="cash_query_criteria"/>
-    </select>
-
-    <select id="listPagerUid" resultType="top.zzh.vo.RecommendData">
-        select id,uid,rname,`date` from t_recommend where tid=#{query.uid}
-        <include refid="cash_query_criteria"/>
-        order by `date` desc limit #{pager.beginIndex}, #{pager.pageSize}
-    </select>
-    <select id="countByUid" resultType="long">
-        select count(id) from t_recommend where tid=#{query.uid}
-        <include refid="cash_query_criteria"/>
-    </select>
+    <!--推荐记录删除-->
     <delete id="remove" parameterType="recommend">
         <![CDATA[
           delete from t_recommend where id=#{id}
         ]]>
     </delete>
+
+    <!--被推荐人的投资总额-->
+    <select id="tzByUid" resultType="BigDecimal">
+      select sum(money) from t_tzb where uid=#{uid}
+    </select>
+    <!--推荐人发送多少推荐奖励现金劵-->
+    <select id="countTicketByUid" resultType="long">
+        select count(ukid) from t_userticket where uid=#{uid} and kid=#{kid}
+    </select>
+    <!--领取推荐奖励现金劵的新增-->
+    <insert id="userTicketSave" parameterType="long">
+        insert into t_userticket(uid,kid,tktime,usestatus) values(#{uid},#{kid},now(),1)
+    </insert>
+    <select id="dateGet" resultType="Date">
+        select tktime from t_ticket where kid=27
+    </select>
+    <!--后台查询条件-->
+    <sql id="cash_query_criteria">
+        from t_recommend r,t_user u
+        where r.tid=u.uid
+        <if test="query != null and query.tname != null and query.tname!=''">
+            and r.tname like concat('%', #{query.tname}, '%')
+        </if>
+        <if test="query != null and query.rname != null and query.rname!=''">
+            and r.rname like concat('%', #{query.rname}, '%')
+        </if>
+        <if test="query != null and query.tzm != null and query.tzm!=''">
+            and u.tzm like concat('%', #{query.tzm}, '%')
+        </if>
+        <if test="query != null and query.startTime != null and query.startTime != ''">
+            and r.date <![CDATA[>=]]> #{query.startTime}
+        </if>
+        <if test="query != null and query.endTime != null and query.endTime != ''">
+            and r.date <![CDATA[<=]]> #{query.endTime}
+        </if>
+    </sql>
+    <!--后台推荐分页-->
+    <select id="listPagerCriteria" resultType="top.zzh.vo.RecommendVO">
+        select r.id,r.tid,r.tname,r.uid,r.rname,r.date ,u.tzm
+        <include refid="cash_query_criteria"/>
+        order by r.date desc limit #{pager.beginIndex}, #{pager.pageSize}
+    </select>
+    <select id="countCriteria" resultType="long">
+        select count(r.id)
+        <include refid="cash_query_criteria"/>
+    </select>
+    <sql id="query_date">
+        <if test="query != null and query.byDate != null and query.byDate!=0">
+            <if test="query.byDate==2">and DATEDIFF(`date`,now())=0 </if>
+            <if test="query.byDate==3">and `date` between date_sub(now(), interval 7 day) and now() </if>
+            <if test="query.byDate==4">and `date` between date_sub(now(), interval 1 month) and now()</if>
+            <if test="query.byDate==5">and `date` between date_sub(now(), interval 6 month) and now() </if>
+        </if>
+    </sql>
+    <!--前台推荐分页-->
+    <select id="listPagerUid" resultType="top.zzh.vo.RecommendData">
+        select id,uid,rname,`date` from t_recommend where tid=#{query.uid}
+        <include refid="query_date"/>
+        order by `date` desc limit #{pager.beginIndex}, #{pager.pageSize}
+    </select>
+    <select id="countByUid" resultType="long">
+        select count(id) from t_recommend where tid=#{query.uid}
+        <include refid="query_date"/>
+    </select>
+
     <!--推荐排行榜-->
     <select id="recommendRanking" resultType="top.zzh.vo.RecommendVO">
      select tid,tname,count(tid) as ci from t_recommend

@@ -35,7 +35,7 @@
                             <a href="/recommend/tuijian/">推荐好友</a>
                         </span>
                     <span style="font-size:18px;padding-left: 15px;">
-                            <a href="/recommend/listByUid?pageNo=1">推荐列表</a>
+                            <a href="/recommend/listByUid/1/0">推荐列表</a>
                         </span>
                 </div>
                 <br/>
@@ -44,7 +44,7 @@
                     <p style="font-size: 18px;">尊敬的用户，你的推荐码是:
                         <span style="color:orange">${tzm}</span>
                     </p><br/>
-                    活动时间：2017年12月31日至2018年1月31日<br/>
+                    截止时间：${date}<br/>
                     活动对象：活动期间新注册用户的推荐人<br/>
                     活动说明：<br/>
                     <span style="padding-left: 50px">
@@ -93,6 +93,7 @@
         var ele = document.getElementById("text");
         ele.select();
         document.execCommand("Copy");
+        alert("复制成功！");
     }
 
     //全局变量，动态的文章ID

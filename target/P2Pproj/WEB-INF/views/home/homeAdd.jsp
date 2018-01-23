@@ -40,7 +40,7 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">链接1</label>
                     <div class="col-sm-10">
-                        <input type="text" name="l1" class="form-control">
+                        <input type="text" id="l1" name="l1" class="form-control">
                     </div>
                 </div>
                  <div class="form-group">
@@ -59,7 +59,7 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">链接2</label>
                     <div class="col-sm-10">
-                        <input type="text" name="l2" class="form-control">
+                        <input type="text" id="l2" name="l2" class="form-control">
                     </div>
                 </div>
                 <div class="form-group">
@@ -78,7 +78,7 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">链接3</label>
                     <div class="col-sm-10">
-                        <input type="text" name="l3" class="form-control">
+                        <input type="text" id="l3" name="l3" class="form-control">
                     </div>
                 </div>
                 <div class="form-group">
@@ -97,19 +97,19 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">链接4</label>
                     <div class="col-sm-10">
-                        <input type="text" name="l4" class="form-control">
+                        <input type="text" id="l4" name="l4" class="form-control">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">手机号码</label>
                     <div class="col-sm-10">
-                        <input type="text" name="phone" class="form-control">
+                        <input type="text" id="phone" name="phone" class="form-control">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">报道日期</label>
                     <div class="col-sm-10">
-                        <input name="date" type="date" class="form-control">
+                        <input name="date" id="date" type="date" class="form-control">
                     </div>
                 </div>
 

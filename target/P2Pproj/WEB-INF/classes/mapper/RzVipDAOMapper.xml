@@ -43,9 +43,11 @@
 
     <select id="listPagerCriteria" resultType="top.zzh.query.RzvipQuery">
         <![CDATA[
-         select rc.isok,rc.huid,r.rid,r.uid,u.uname,r.xl,r.ism,r.bschool,r.addr,r.work,r.age from t_user u,t_rzvip r,t_rzvipcheck rc where u.uid=r.uid and rc.uid=r.uid
+         select rc.isok,rc.huid,r.rid,r.uid,u.uname,r.xl,r.ism,r.bschool,r.addr,r.work,r.age
+from t_user u,t_rzvip r,t_rzvipcheck rc where u.uid=r.uid and rc.uid=r.uid
         ]]>
         <include refid="rzvipQuery_pager_common"/>
+        order by rc.isok  desc
         limit #{pager.beginIndex},#{pager.pageSize}
     </select>
 

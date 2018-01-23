@@ -46,20 +46,20 @@
                         <ul>
                             <li>
                                 <label >原登录密码</label>
-                                <input type="password" onblur="check()" class="pay-txt" id="upwd" name="upwd"  maxlength="6"  placeholder="请输入您的登录密码">
+                                <input type="password" onblur="check()" class="pay-txt" id="upwd" name="upwd"  maxlength="18"  placeholder="请输入您的登录密码">
 
                                 <font  color="#ff3300"   id="up">请输入您的原登录密码</font>
                             </li>
                             <li>
                                 <label >现登录密码</label>
-                                <input type="password" onblur="check()" class="pay-txt" id="xupwd" name="xupwd"  maxlength="6"  placeholder="请输入您的登录密码">
+                                <input type="password" onblur="check()" class="pay-txt" id="xupwd" name="xupwd"  maxlength="18"  placeholder="请输入您的登录密码">
 
                                 <font  color="#ff3300"   id="xup">请输入您的现登录密码</font>
                             </li>
 
                             <li>
                                 <label >确认密码</label>
-                                <input type="password" onblur="check()" class="pay-txt" id="qpwd" name="qpwd"  maxlength="6"  placeholder="请输入您的登录密码">
+                                <input type="password" onblur="check()" class="pay-txt" id="qpwd" name="qpwd"  maxlength="18"  placeholder="请输入您的登录密码">
 
                                 <font  color="#ff3300"   id="qup">请输入您的确认密码</font>
                                 <font  color="#ff3300"   id="qup2">密码与确认密码不一致</font>

@@ -310,7 +310,7 @@
                 function (data) {
                     if (data.result == "ok") {
 
-                        layer.msg(data.message, {icon: 2, time: 2000});
+                        layer.msg(data.message, {icon: 1, time: 2000});
 
                     }else if(data.result == "login"){
                         window.location.href ="/page/login";

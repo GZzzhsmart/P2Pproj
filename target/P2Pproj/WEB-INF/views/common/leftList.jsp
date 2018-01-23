@@ -13,7 +13,7 @@
         <li class=""><span><a href="${request.getContextPath}/page/tixian"><i class="dot dot04"></i>提现</a></span></li>
         <li style="position:relative;" class=""><span> <a href="${request.getContextPath}/page/hongbao"> <i class="dot dot06"></i> 我的红包 </a> </span></li>
         <li class=""><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="${request.getContextPath}/borrowapply/borrw">借款管理</a></span></li>
-        <li style="position:relative;"><span> <a href="${request.getContextPath}/page/xitong"><i class="dot dot08"></i>系统信息 </a> </span></li>
+        <li style="position:relative;"><span> <a href="${request.getContextPath}/letter/listByUid/1/3"><i class="dot dot08"></i>系统信息 </a> </span></li>
         <li><span><a href="${request.getContextPath}/page/zhanghu"><i class="dot dot09"></i>账户设置</a></span></li>
         <li><span><a href="${request.getContextPath}/page/feedBackAdd"><i class="dot dot09"></i>我要反馈</a></span></li>
         <br/><br/>

@@ -40,7 +40,7 @@
                                     <div class="par"><p>${unuse.tname}</p><sub class="sign">￥</sub><span>${unuse.tkmoney}</span><p>请及时转入余额</p></div>
                                     <div class="copy">
                                     现金券
-                                    <p>${unuse.uttime}<br>${unuse.tktime}</p><a href="<%=path%>/page/list?pageNo=0&kid=${unuse.kid}">转入余额</a>
+                                    <p>${unuse.uttime}<br>${unuse.tktime}</p><a href="<%=path%>/page/hong1&kid=${unuse.kid}">转入余额</a>
                                     </div>
                                     </div>
                                 </c:if>
@@ -49,7 +49,7 @@
                                     <div class="par"><p>${unuse.tname}</p><sub class="sign">￥</sub><span>${unuse.tkmoney}</span><p>${unuse.tintro}</p></div>
                                     <div class="copy">
                                     代金券
-                                    <p>${unuse.uttime}<br>${unuse.tktime}</p><a href="<%=path%>/page/list?pageNo=0&kid=${unuse.kid}">立即使用</a>
+                                    <p>${unuse.uttime}<br>${unuse.tktime}</p><a href="<%=path%>/page/list?pageNo=1&kid=${unuse.kid}">立即使用</a>
                                     </div>
                                     </div>
                                 </c:if>
@@ -58,7 +58,7 @@
                                     <div class="par"><p>${unuse.tname}</p><sub class="sign">￥</sub><span>${unuse.tkmoney}</span><p>${unuse.tintro}</p></div>
                                     <div class="copy">
                                     体验金
-                                    <p>自${unuse.uttime}<br>起三天有效期</p><a href="<%=path%>/page/list?pageNo=0&kid=${unuse.kid}">立即使用</a>
+                                    <p>自${unuse.uttime}<br>起三天有效期</p><a href="<%=path%>/page/list?pageNo=1&kid=${unuse.kid}">立即使用</a>
                                     </div>
                                     </div>
                                 </c:if>
@@ -67,7 +67,7 @@
                                     <div class="par"><p>${unuse.tname}</p><sub class="sign"></sub><span>${unuse.tkmoney.toString()}</span><sub class="sign">%</sub><p>${unuse.tintro}</p></div>
                                     <div class="copy">
                                     加息券
-                                    <p>自${unuse.uttime}<br>${unuse.tktime}</p><a href="<%=path%>/page/list?pageNo=0&kid=${unuse.kid}">立即使用</a>
+                                    <p>自${unuse.uttime}<br>${unuse.tktime}</p><a href="<%=path%>/page/list?pageNo=1&kid=${unuse.kid}">立即使用</a>
                                     </div>
                                     </div>
                                 </c:if>

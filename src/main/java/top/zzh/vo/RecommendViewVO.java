@@ -7,6 +7,15 @@ public class RecommendViewVO {
     private String startTime;
 
     private String endTime;
+    private int byDate;
+
+    public int getByDate() {
+        return byDate;
+    }
+
+    public void setByDate(int byDate) {
+        this.byDate = byDate;
+    }
 
     public String getTname() {
         return tname;

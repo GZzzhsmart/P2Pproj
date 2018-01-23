@@ -55,6 +55,8 @@ public class BorrowApplyController {
     private SwayService swayService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private RzvipcheckService rzvipcheckService;
 
     @RequestMapping("borrow_page")
     public ModelAndView borrowpage(HttpSession session, HttpServletRequest request){
