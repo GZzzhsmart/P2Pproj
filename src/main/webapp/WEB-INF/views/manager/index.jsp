@@ -301,10 +301,11 @@
         </div>
         <div class="row J_mainContent" id="content-main">
             <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="<%=path%>/page/managerindex"
-                    frameborder="0" data-id=""></iframe>
-            <div class="footer">
-                <div class="pull-right">&copy; 2017-2018 <a href="" target="_blank">亿人宝理财平台</a>
-                </div>
+                    frameborder="0" data-id="">
+            </iframe>
+        </div>
+        <div class="footer">
+            <div class="pull-right">&copy; 2017-2018 <a href="" target="_blank">亿人宝理财平台</a>
             </div>
         </div>
     </div>
