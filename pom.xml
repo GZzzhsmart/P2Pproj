@@ -67,7 +67,7 @@
     <javaee.version>7.0</javaee.version>
     <poi-version>3.17</poi-version>
     <taglibs-version>1.1.2</taglibs-version>
-    <quartz-version>2.3.0</quartz-version>
+    <quartz-version>2.3.2</quartz-version>
     <jasperreport-version>6.0.0</jasperreport-version>
     <jfreechart-version>1.0.12</jfreechart-version>
     <itextpdf-version>5.5.12</itextpdf-version>
