@@ -55,7 +55,7 @@
     <mybatis-spring.version>1.3.1</mybatis-spring.version>
     <logback.version>1.2.3</logback.version>
     <logback-spring.version>0.1.4</logback-spring.version>
-    <fasterxml.version>2.9.0</fasterxml.version>
+    <fasterxml.version>2.9.10.7</fasterxml.version>
     <spring.version>4.3.12.RELEASE</spring.version>
     <aspectj.version>1.8.13</aspectj.version>
     <druid.version>1.1.5</druid.version>
