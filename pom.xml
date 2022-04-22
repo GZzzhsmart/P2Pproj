@@ -56,7 +56,7 @@
     <logback.version>1.2.3</logback.version>
     <logback-spring.version>0.1.4</logback-spring.version>
     <fasterxml.version>2.9.0</fasterxml.version>
-    <spring.version>4.3.12.RELEASE</spring.version>
+    <spring.version>5.3.19</spring.version>
     <aspectj.version>1.8.13</aspectj.version>
     <druid.version>1.1.5</druid.version>
     <slf4j.version>1.7.25</slf4j.version>
