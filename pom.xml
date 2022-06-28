@@ -65,7 +65,7 @@
     <shiro-version>1.4.0</shiro-version>
     <fastjson-version>1.2.31</fastjson-version>
     <javaee.version>7.0</javaee.version>
-    <poi-version>3.17</poi-version>
+    <poi-version>4.1.1</poi-version>
     <taglibs-version>1.1.2</taglibs-version>
     <quartz-version>2.3.0</quartz-version>
     <jasperreport-version>6.0.0</jasperreport-version>
